@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Career document",
+  "description": "One row of the resume and job description table. Fields that do not apply to a document type are null.",
+  "type": "object",
+  "required": [
+    "id",
+    "document_type",
+    "text",
+    "work_experience",
+    "education",
+    "certifications",
+    "skills",
+    "responsibilities",
+    "requirements",
+    "qualifications",
+    "hard_skills",
+    "soft_skills",
+    "occupation",
+    "seniority_level",
+    "industry",
+    "resume_format",
+    "writing_style",
+    "source",
+    "collection_method",
+    "license",
+    "annotation_method",
+    "review_status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier for the row."
+    },
+    "document_type": {
+      "type": "string",
+      "enum": ["resume", "job_description"],
+      "description": "Kind of document in this row."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Full plain text of the document."
+    },
+    "work_experience": {
+      "type": ["array", "null"],
+      "description": "Resume only. Roles held.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "company"],
+        "properties": {
+          "title": { "type": "string" },
+          "company": { "type": ["string", "null"] },
+          "start_date": { "type": ["string", "null"], "description": "As written in the document." },
+          "end_date": { "type": ["string", "null"], "description": "As written in the document. Null if current." },
+          "description": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "education": {
+      "type": ["array", "null"],
+      "description": "Resume only. Qualifications studied.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["degree", "institution"],
+        "properties": {
+          "degree": { "type": "string" },
+          "institution": { "type": ["string", "null"] },
+          "field_of_study": { "type": ["string", "null"] },
+          "graduation_year": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "certifications": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Resume only. Certifications held."
+    },
+    "skills": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "All skills found in the document."
+    },
+    "responsibilities": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Job description only. Duties of the role."
+    },
+    "requirements": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Job description only. Must-have criteria."
+    },
+    "qualifications": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Job description only. Required or preferred qualifications."
+    },
+    "hard_skills": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Technical skills, such as SQL."
+    },
+    "soft_skills": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Interpersonal skills, such as communication."
+    },
+    "occupation": {
+      "type": ["string", "null"],
+      "description": "Occupation the document relates to."
+    },
+    "seniority_level": {
+      "type": ["string", "null"],
+      "enum": ["intern", "entry", "mid", "senior", "lead", "manager", "executive", null],
+      "description": "Seniority of the person or role."
+    },
+    "industry": {
+      "type": ["string", "null"],
+      "description": "Industry the document relates to."
+    },
+    "resume_format": {
+      "type": ["string", "null"],
+      "description": "Resume only. Layout, such as chronological or functional."
+    },
+    "writing_style": {
+      "type": ["string", "null"],
+      "description": "Tone or style of the writing."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Where the document came from."
+    },
+    "collection_method": {
+      "type": "string",
+      "minLength": 1,
+      "description": "How the document was collected, such as scraped or synthetic."
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "description": "License or terms the document can be used under."
+    },
+    "annotation_method": {
+      "type": ["string", "null"],
+      "description": "How the labels were produced, such as manual or model-generated."
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["pending", "in_review", "approved", "rejected"],
+      "description": "Quality review state of the row."
+    }
+  }
+}

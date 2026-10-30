@@ -1,17 +1,22 @@
 [project]
-name = "dac-internal-01"
+name = "mycareerai"
 version = "0.1.0"
 description = "Add your description here"
-readme = "README.md"
 authors = [
     { name = "yuhng", email = "yuhng1@hotmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
-
-[project.scripts]
-dac-internal-01 = "dac_internal_01:main"
+dependencies = [
+    "jsonschema>=4.26.0",
+    "pypdfium2>=5.14.0",
+    "pytesseract>=0.3.13",
+]
 
 [build-system]
 requires = ["uv_build>=0.12.1,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]

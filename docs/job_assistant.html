@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ApplyAssist Demo</title>
+<style>
+  :root {
+    --bg: #f6f7fb; --surface: #ffffff; --surface-2: #f1f3f8; --border: #e3e6ee;
+    --text: #161a26; --muted: #5d6578;
+    --primary: #4f46e5; --primary-hover: #4338ca; --primary-weak: #eef0ff; --on-primary: #ffffff;
+    --success: #15803d; --success-weak: #e7f6ec;
+    --warn: #b45309; --warn-weak: #fdf3e3;
+    --danger: #c62828; --danger-weak: #fdecec;
+    --radius: 12px; --radius-sm: 8px;
+    --shadow: 0 1px 2px rgba(16,24,40,.05), 0 1px 3px rgba(16,24,40,.06);
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117; --surface: #171a23; --surface-2: #1f2330; --border: #2b3040;
+      --text: #e8eaf0; --muted: #9aa3b5;
+      --primary: #818cf8; --primary-hover: #a5b4fc; --primary-weak: #23264a; --on-primary: #0f1117;
+      --success: #4ade80; --success-weak: #15301f;
+      --warn: #fbbf24; --warn-weak: #35290f;
+      --danger: #f87171; --danger-weak: #3a1a1a;
+      --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; }
+  h1, h2, h3, h4 { margin: 0; line-height: 1.25; }
+  h1 { font-size: 24px; font-weight: 650; }
+  h2 { font-size: 15px; font-weight: 600; }
+  h3 { font-size: 18px; font-weight: 600; }
+  h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 22px 0 10px; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+  .small { font-size: 13px; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+  /* Layout */
+  .app { display: grid; grid-template-columns: 236px 1fr; min-height: 100vh; }
+  .sidebar { background: var(--surface); border-right: 1px solid var(--border); padding: 20px 14px; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 22px; }
+  .brand { display: flex; align-items: center; gap: 10px; padding: 0 8px; font-weight: 700; font-size: 16px; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--primary); color: var(--on-primary); display: grid; place-items: center; font-size: 14px; }
+  .nav { display: flex; flex-direction: column; gap: 2px; }
+  .nav button { all: unset; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: var(--radius-sm); color: var(--muted); font-weight: 500; white-space: nowrap; }
+  .nav button:hover { background: var(--surface-2); color: var(--text); }
+  .nav button.active { background: var(--primary-weak); color: var(--primary); }
+  .nav button:focus-visible { outline: 2px solid var(--primary); }
+  .nav svg { width: 18px; height: 18px; flex: none; }
+  .sidebar-foot { margin-top: auto; padding: 12px; border-radius: var(--radius-sm); background: var(--surface-2); font-size: 12px; color: var(--muted); }
+  main { min-width: 0; }
+  .demo-banner { background: var(--warn-weak); color: var(--warn); font-size: 13px; padding: 8px 28px; border-bottom: 1px solid var(--border); }
+  .view { display: none; padding: 28px; max-width: 1280px; }
+  .view.active { display: block; }
+  .page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .page-head p { margin-top: 4px; }
+  .head-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .grid-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+  .card + .card { margin-top: 0; }
+  .stack > * + * { margin-top: 14px; }
+
+  /* Form controls */
+  label.field { display: block; }
+  label.field > span { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  input[type=text], select, textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 11px; }
+  textarea { resize: vertical; min-height: 120px; font-size: 14px; }
+  input[type=text]:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-weak); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .section-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .counter { font-size: 12px; color: var(--muted); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border); background: var(--surface); padding: 8px 14px; border-radius: var(--radius-sm); font-weight: 500; cursor: pointer; white-space: nowrap; text-decoration: none; }
+  .btn:hover { background: var(--surface-2); }
+  .btn-primary { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+  .btn-primary:hover { background: var(--primary-hover); }
+  .btn-sm { padding: 5px 10px; font-size: 13px; }
+  .btn-ghost { border-color: transparent; background: transparent; }
+  .btn:disabled { opacity: .55; cursor: not-allowed; }
+  .file-btn input { display: none; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-top: 18px; }
+  .alert { padding: 10px 12px; border-radius: var(--radius-sm); font-size: 14px; }
+  .alert-error { background: var(--danger-weak); color: var(--danger); }
+  .alert-warn { background: var(--warn-weak); color: var(--warn); }
+  .alert-info { background: var(--primary-weak); color: var(--primary); }
+
+  /* Badges & chips */
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 12px; font-weight: 600; }
+  .b-strong { background: var(--success-weak); color: var(--success); }
+  .b-good { background: var(--primary-weak); color: var(--primary); }
+  .b-fair { background: var(--warn-weak); color: var(--warn); }
+  .b-weak { background: var(--danger-weak); color: var(--danger); }
+  .b-sim { background: var(--surface-2); color: var(--muted); border: 1px dashed var(--border); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 13px; padding: 3px 10px; border-radius: 99px; border: 1px solid var(--border); }
+  .chip-ok { background: var(--success-weak); color: var(--success); border-color: transparent; }
+  .chip-miss { background: var(--warn-weak); color: var(--warn); border-color: transparent; }
+
+  /* Empty / loading */
+  .empty { text-align: center; padding: 48px 20px; color: var(--muted); }
+  .empty .icon { width: 48px; height: 48px; margin: 0 auto 12px; border-radius: 12px; background: var(--surface-2); display: grid; place-items: center; font-size: 22px; }
+  .empty h3 { color: var(--text); margin-bottom: 6px; font-size: 16px; }
+  .empty .btn { margin-top: 16px; }
+  .steps-list { list-style: none; padding: 0; margin: 20px auto 0; max-width: 300px; text-align: left; }
+  .steps-list li { padding: 6px 0; display: flex; gap: 10px; align-items: center; color: var(--muted); }
+  .steps-list li.done { color: var(--text); }
+  .steps-list li .dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--border); flex: none; }
+  .steps-list li.done .dot { background: var(--success); border-color: var(--success); }
+  .steps-list li.current .dot { border-color: var(--primary); border-top-color: transparent; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .steps-list li.current .dot { animation: none; } }
+
+  /* Score */
+  .result-head { display: flex; gap: 18px; align-items: center; }
+  .ring { --p: 0; --c: var(--primary); width: 108px; height: 108px; border-radius: 50%; flex: none; background: conic-gradient(var(--c) calc(var(--p) * 1%), var(--surface-2) 0); display: grid; place-items: center; }
+  .ring span { width: 84px; height: 84px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; font-size: 28px; font-weight: 700; }
+  .ring small { display: block; font-size: 11px; color: var(--muted); font-weight: 500; margin-top: -8px; }
+  .delta { font-size: 13px; font-weight: 600; color: var(--success); margin-top: 4px; }
+  .delta.neg { color: var(--danger); }
+  .bars { display: grid; gap: 12px; }
+  .bar-row { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; font-size: 14px; }
+  .bar-row .detail { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
+  .bar { grid-column: 1 / -1; height: 7px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--primary); border-radius: 99px; }
+  .recs { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .recs li { display: flex; gap: 10px; font-size: 14px; padding: 10px 12px; border-radius: var(--radius-sm); background: var(--surface-2); }
+  .recs .sev { flex: none; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; height: fit-content; }
+  .sev-high { background: var(--danger-weak); color: var(--danger); }
+  .sev-med { background: var(--warn-weak); color: var(--warn); }
+  .sev-low { background: var(--primary-weak); color: var(--primary); }
+  details.explain { margin-top: 18px; font-size: 13px; color: var(--muted); }
+  details.explain summary { cursor: pointer; color: var(--text); font-weight: 500; }
+  details.explain ul { padding-left: 18px; }
+
+  /* Improve */
+  .change { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; display: grid; grid-template-columns: auto 1fr; gap: 10px; }
+  .change + .change { margin-top: 10px; }
+  .change input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--primary); }
+  .change .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 6px; }
+  .diff-del, .diff-add { font-family: var(--mono); font-size: 12.5px; padding: 4px 8px; border-radius: 6px; white-space: pre-wrap; word-break: break-word; }
+  .diff-del { background: var(--danger-weak); color: var(--danger); text-decoration: line-through; }
+  .diff-add { background: var(--success-weak); color: var(--success); margin-top: 4px; }
+  .note { font-size: 12px; color: var(--warn); margin-top: 6px; }
+  .preview { font-family: var(--mono); font-size: 12.5px; background: var(--surface-2); border-radius: var(--radius-sm); padding: 14px; max-height: 620px; overflow: auto; white-space: pre-wrap; word-break: break-word; }
+  .preview .chg { background: var(--success-weak); color: var(--success); display: block; }
+  .sticky { position: sticky; top: 20px; }
+
+  /* Chat */
+  .chat { display: flex; flex-direction: column; height: calc(100vh - 190px); min-height: 460px; padding: 0; }
+  .chat-top { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px; }
+  .msgs { flex: 1; overflow-y: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; }
+  .msg { max-width: 78%; padding: 10px 14px; border-radius: 14px; font-size: 14px; }
+  .msg.bot { background: var(--surface-2); border-bottom-left-radius: 4px; }
+  .msg.user { background: var(--primary); color: var(--on-primary); align-self: flex-end; border-bottom-right-radius: 4px; white-space: pre-wrap; }
+  .msg ul, .msg ol { margin: 6px 0 0; padding-left: 18px; }
+  .msg.typing { color: var(--muted); font-style: italic; }
+  .suggest { padding: 0 16px 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .suggest button { all: unset; cursor: pointer; font-size: 13px; padding: 5px 11px; border-radius: 99px; border: 1px solid var(--border); color: var(--primary); }
+  .suggest button:hover { background: var(--primary-weak); }
+  .suggest button:focus-visible { outline: 2px solid var(--primary); }
+  .chat-form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+
+  /* Tracker */
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 20px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .stat b { display: block; font-size: 24px; }
+  .stat span { font-size: 13px; color: var(--muted); }
+  .add-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 8px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  td select { width: auto; padding: 5px 8px; }
+  .table-wrap { overflow-x: auto; }
+
+  /* Home */
+  .hero { padding: 28px; }
+  .hero h1 { font-size: 28px; max-width: 640px; }
+  .hero p { max-width: 640px; margin-top: 10px; font-size: 16px; }
+  .hero .actions { justify-content: flex-start; }
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 20px; }
+  .flow button { all: unset; cursor: pointer; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+  .flow button:hover { border-color: var(--primary); }
+  .flow button:focus-visible { outline: 2px solid var(--primary); }
+  .flow .n { width: 26px; height: 26px; border-radius: 50%; background: var(--primary-weak); color: var(--primary); display: grid; place-items: center; font-weight: 700; font-size: 13px; margin-bottom: 10px; }
+  .flow h2 { margin-bottom: 4px; }
+  .truth { margin-top: 20px; }
+  .truth table td:first-child { font-weight: 500; }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: var(--radius-sm); font-size: 14px; z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 1100px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .sticky { position: static; }
+    .flow { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { position: sticky; top: 0; z-index: 20; height: auto; flex-direction: row; align-items: center; padding: 10px 16px; gap: 12px; border-right: 0; border-bottom: 1px solid var(--border); }
+    .brand span:last-child { display: none; }
+    .nav { flex-direction: row; overflow-x: auto; }
+    .nav svg { display: none; }
+    .sidebar-foot { display: none; }
+    .view { padding: 20px 16px; }
+    .demo-banner { padding: 8px 16px; }
+    .stats { grid-template-columns: repeat(3, 1fr); }
+    .chat { height: calc(100vh - 220px); }
+  }
+  @media (max-width: 560px) {
+    .row, .add-form { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .result-head { flex-direction: column; align-items: flex-start; }
+    .msg { max-width: 92%; }
+    .hero { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">AA</span><span>ApplyAssist</span></div>
+    <nav class="nav" aria-label="Main">
+      <button data-nav="home" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Overview</button>
+      <button data-nav="score"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Score</button>
+      <button data-nav="improve"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>Improve CV</button>
+      <button data-nav="chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Assistant</button>
+      <button data-nav="tracker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg>Tracker</button>
+    </nav>
+    <div class="sidebar-foot"><b>Prototype v0.1</b><br>All analysis runs locally in your browser. No data leaves this page.</div>
+  </aside>
+
+  <main>
+    <div class="demo-banner" role="note"><b>Demo mode:</b> scores, rewrites and chat replies come from rule-based heuristics in your browser. No AI model or server is used.</div>
+
+    <!-- OVERVIEW -->
+    <section class="view active" id="view-home">
+      <div class="card hero">
+        <span class="badge b-good">For job applicants</span>
+        <h1 style="margin-top:12px">Know how well your application matches the job before you hit send.</h1>
+        <p class="muted">ApplyAssist scores your CV and cover letter against a job description, shows the skills you're missing, suggests specific fixes, and keeps track of every application.</p>
+        <div class="actions">
+          <button class="btn btn-primary" id="startSample">Try with sample data</button>
+          <button class="btn" id="startFresh">Start with my own CV</button>
+        </div>
+      </div>
+      <div class="flow">
+        <button data-nav="score"><div class="n">1</div><h2>Score</h2><p class="muted small">Paste a job description, CV and cover letter. Get a match score with a breakdown.</p></button>
+        <button data-nav="improve"><div class="n">2</div><h2>Improve</h2><p class="muted small">Review grammar fixes, stronger wording and keyword alignment. Accept what fits.</p></button>
+        <button data-nav="chat"><div class="n">3</div><h2>Ask</h2><p class="muted small">Ask the assistant about your gaps, cover letter openings or interview prep.</p></button>
+        <button data-nav="tracker"><div class="n">4</div><h2>Track</h2><p class="muted small">Save scored applications and move them through your pipeline.</p></button>
+      </div>
+      <div class="card truth">
+        <h2>What's real and what's simulated in this demo</h2>
+        <div class="table-wrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>Capability</th><th>In this demo</th><th>In production</th></tr></thead>
+            <tbody>
+              <tr><td>Match scoring</td><td>Keyword dictionary, term-overlap similarity and rule checks</td><td>Trained NLP / embedding model, validated against hiring outcomes</td></tr>
+              <tr><td>CV improvements</td><td>Regex grammar and wording rules, keyword insertion</td><td>LLM rewriting with a factual-consistency check</td></tr>
+              <tr><td>Assistant</td><td>Scripted intents using your latest analysis</td><td>LLM chat grounded in your documents</td></tr>
+              <tr><td>File upload</td><td>.txt only</td><td>PDF / DOCX parsing service</td></tr>
+              <tr><td>Tracker</td><td>Saved in this browser (localStorage)</td><td>User accounts and a database</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCORE -->
+    <section class="view" id="view-score">
+      <div class="page-head">
+        <div><h1>CV &amp; Cover Letter Scoring</h1><p class="muted">See how closely your application matches a specific job.</p></div>
+        <div class="head-actions">
+          <select id="sampleSelect" aria-label="Sample job" style="width:auto">
+            <option value="0">Sample: Data Analyst</option>
+            <option value="1">Sample: Frontend Engineer</option>
+          </select>
+          <button class="btn" id="loadSample">Load sample</button>
+        </div>
+      </div>
+      <div class="grid-2">
+        <form class="card stack" id="scoreForm" novalidate>
+          <div>
+            <h2 style="margin-bottom:10px">1. Target job</h2>
+            <div class="row">
+              <label class="field"><span>Job title</span><input type="text" id="jobTitle" placeholder="e.g. Data Analyst"></label>
+              <label class="field"><span>Company</span><input type="text" id="company" placeholder="e.g. Northwind Retail"></label>
+            </div>
+          </div>
+          <label class="field"><span>Job description <span class="counter" data-count="jd"></span></span>
+            <textarea id="jd" rows="7" placeholder="Paste the full job description, including responsibilities and requirements."></textarea></label>
+          <div>
+            <div class="section-head"><h2>2. Your CV <span class="counter" data-count="cv"></span></h2>
+              <label class="btn btn-sm file-btn">Upload .txt<input type="file" accept=".txt,text/plain" data-target="cv"></label></div>
+            <textarea id="cv" rows="10" placeholder="Paste your CV as plain text."></textarea>
+          </div>
+          <div>
+            <div class="section-head"><h2>3. Cover letter <span class="muted small">(optional)</span> <span class="counter" data-count="cl"></span></h2>
+              <label class="btn btn-sm file-btn">Upload .txt<input type="file" accept=".txt,text/plain" data-target="cl"></label></div>
+            <textarea id="cl" rows="6" placeholder="Paste your cover letter. Leave blank to score the CV only."></textarea>
+          </div>
+          <div class="alert alert-error" id="formError" role="alert" hidden></div>
+          <div class="actions">
+            <button type="button" class="btn" id="clearForm">Clear</button>
+            <button type="submit" class="btn btn-primary" id="analyzeBtn">Analyze match</button>
+          </div>
+        </form>
+        <div class="card sticky" id="resultPanel" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- IMPROVE -->
+    <section class="view" id="view-improve">
+      <div class="page-head">
+        <div><h1>Tailored CV Improvements</h1><p class="muted">Review suggested edits. Nothing changes until you apply it.</p></div>
+        <div class="head-actions" id="improveActions" hidden>
+          <button class="btn" id="acceptAll">Accept all</button>
+          <button class="btn" id="rejectAll">Reject all</button>
+        </div>
+      </div>
+      <div id="improveBody"></div>
+    </section>
+
+    <!-- CHAT -->
+    <section class="view" id="view-chat">
+      <div class="page-head">
+        <div><h1>Application Assistant</h1><p class="muted">Ask about your score, gaps, cover letter or interview prep.</p></div>
+        <div class="head-actions"><button class="btn" id="clearChat">Clear conversation</button></div>
+      </div>
+      <div class="card chat">
+        <div class="chat-top"><span id="chatContext"></span><span class="badge b-sim">Scripted responses</span></div>
+        <div class="msgs" id="msgs"></div>
+        <div class="suggest" id="suggest">
+          <button>Explain my score</button>
+          <button>Which keywords am I missing?</button>
+          <button>How can I improve my CV?</button>
+          <button>Draft a cover letter opening</button>
+          <button>Give me interview questions</button>
+        </div>
+        <form class="chat-form" id="chatForm">
+          <input type="text" id="chatInput" placeholder="Ask a question…" autocomplete="off" aria-label="Message">
+          <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- TRACKER -->
+    <section class="view" id="view-tracker">
+      <div class="page-head">
+        <div><h1>Application Tracker</h1><p class="muted">Keep every scored application in one place.</p></div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="card" style="margin-bottom:20px">
+        <form class="add-form" id="addForm" novalidate>
+          <label class="field"><span>Role</span><input type="text" id="addRole" placeholder="e.g. Product Analyst"></label>
+          <label class="field"><span>Company</span><input type="text" id="addCompany" placeholder="e.g. Acme Corp"></label>
+          <button class="btn" type="submit">Add manually</button>
+        </form>
+        <div class="alert alert-error" id="addError" role="alert" hidden style="margin-top:10px"></div>
+      </div>
+      <div class="card" id="trackerList"></div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---------- Mock data ---------- */
+const SAMPLES = [
+  {
+    title: 'Data Analyst', company: 'Northwind Retail',
+    jd: `We are looking for a Data Analyst to join our Commercial Insights team at Northwind Retail. You will turn sales and customer data into actionable insights for merchandising and marketing stakeholders.
+
+Responsibilities:
+- Build and maintain dashboards in Tableau or Power BI
+- Write efficient SQL queries to extract and transform data from our data warehouse
+- Run A/B testing and statistical analysis to evaluate campaigns
+- Automate recurring reports using Python (pandas)
+- Present findings clearly to non-technical stakeholders
+
+Requirements:
+- 2+ years of experience in data analysis
+- Strong SQL and Excel skills
+- Experience with Python, pandas and data visualization
+- Knowledge of statistics and A/B testing
+- Familiarity with ETL pipelines and cloud data warehouses (BigQuery or Snowflake) is a plus
+- Excellent communication and stakeholder management skills`,
+    cv: `ALEX TAN
+alex.tan@email.com | Singapore | linkedin.com/in/alextan
+
+SUMMARY
+Analytical graduate with 2 years experiance turning business data into insights. i enjoy  working with stakeholders to solve problems.
+
+EXPERIENCE
+Business Analyst, Harbourline Logistics (2023 – Present)
+- responsible for creating weekly sales reports in Excel for the regional managment team
+- Worked on a Power BI dashboard tracking delivery performance across 40 routes
+- Wrote SQL queries to pull shipment data, reducing report preparation time by 30%
+- helped with the migration of reports to a cloud data warehouse
+
+Data Intern, Brightside Marketing (2022 – 2023)
+- Was involved in analysing campaign results for 12 clients
+- Built Python scripts using pandas to clean survey data
+- Presented findings to account managers every month
+
+EDUCATION
+B.Sc. Business Analytics, National University of Singapore, 2022
+
+SKILLS
+Excel, SQL, Power BI, Python, pandas, Communication`,
+    cl: `Dear Hiring Manager,
+
+I am excited to apply for the Data Analyst role at Northwind Retail. In my current role at Harbourline Logistics I write SQL queries and build Power BI dashboards that help managers make faster decisions, and I recently cut report preparation time by 30%.
+
+I enjoy translating complex data into clear recommendations for non-technical stakeholders, and I am keen to deepen my experience in retail analytics and experimentation.
+
+Thank you for considering my application.
+Alex Tan`
+  },
+  {
+    title: 'Frontend Engineer', company: 'Lumen Health',
+    jd: `Lumen Health is hiring a Frontend Engineer to build the patient-facing web app used by over 200,000 people each month.
+
+What you'll do:
+- Build accessible, responsive interfaces with React and TypeScript
+- Work closely with designers to extend our design system in Figma and code
+- Integrate REST APIs and manage client-side state
+- Write unit tests with Jest and keep our CI/CD pipeline green
+- Improve web performance and Core Web Vitals
+
+What we're looking for:
+- 3+ years of professional experience with JavaScript, HTML and CSS
+- Strong React and TypeScript skills
+- Understanding of accessibility standards (WCAG)
+- Comfortable with Git and code review in an agile team
+- Experience in healthcare or regulated industries is a bonus`,
+    cv: `JORDAN LEE
+jordan.lee@email.com | Kuala Lumpur | github.com/jordanlee
+
+PROFILE
+Frontend developer with 3 years experiance building web apps for e-commerce clients.
+
+EXPERIENCE
+Frontend Developer, ShopWave (2022 – Present)
+- responsible for building the checkout flow in React used by 50,000 customers a month
+- Worked on migrating 30 components from JavaScript to TypeScript
+- Integrated REST APIs for payments and order tracking
+- helped with code reviews on GitHub using Git
+
+Junior Web Developer, Pixel Studio (2021 – 2022)
+- Built marketing websites with HTML, CSS and JavaScript
+- Was involved in improving page load speed by 40%
+
+EDUCATION
+B.Comp. Computer Science, Universiti Malaya, 2021
+
+SKILLS
+JavaScript, React, TypeScript, HTML, CSS, Git`,
+    cl: ''
+  }
+];
+
+const SKILLS = [
+  ['SQL','sql'], ['Excel','excel','spreadsheets'], ['Python','python'], ['pandas','pandas'], ['Tableau','tableau'],
+  ['Power BI','power bi'], ['Looker','looker'], ['Statistics','statistics','statistical'],
+  ['A/B testing','a/b testing','a/b test','ab testing','experimentation'], ['ETL','etl','data pipelines'],
+  ['BigQuery','bigquery'], ['Snowflake','snowflake'], ['Data warehouse','data warehouse','data warehouses'],
+  ['Data visualization','data visualization','data visualisation'], ['Dashboards','dashboard','dashboards'],
+  ['Machine learning','machine learning'], ['Communication','communication'],
+  ['Stakeholder management','stakeholder management','stakeholders'],
+  ['React','react'], ['TypeScript','typescript'], ['JavaScript','javascript'], ['HTML','html'], ['CSS','css'],
+  ['Accessibility','accessibility','accessible','wcag','a11y'], ['REST APIs','rest api','rest apis','restful'],
+  ['Jest','jest'], ['Unit testing','unit testing','unit tests','automated testing'], ['Git','git'],
+  ['CI/CD','ci/cd','continuous integration'], ['Web performance','web performance','core web vitals','page load speed','performance optimization'],
+  ['Design systems','design system','design systems'], ['Figma','figma'], ['Agile','agile','scrum'],
+  ['Node.js','node.js','nodejs'], ['AWS','aws'], ['Docker','docker'], ['Project management','project management'],
+  ['Leadership','leadership'], ['Java','java'], ['Spark','spark'], ['Salesforce','salesforce'], ['SEO','seo']
+];
+
+const STOP = new Set('a an the and or of to in for on with at by from as is are be been was were will you your we our us they their this that these those it its into over per can may must should have has had not but if than then so such who what which when where how all any each more most other some own same very also about using use used work working role team join years year plus strong excellent experience ability skills skill including within across etc'.split(' '));
+
+const SPELLING = { experiance:'experience', managment:'management', recieve:'receive', recieved:'received', sucessfully:'successfully', succesfully:'successfully', acheived:'achieved', acheive:'achieve', developped:'developed', enviroment:'environment', seperate:'separate', occured:'occurred', commited:'committed', teh:'the', definately:'definitely', accross:'across', begining:'beginning' };
+const PAST = { creating:'created', managing:'managed', developing:'developed', building:'built', leading:'led', maintaining:'maintained', preparing:'prepared', designing:'designed' };
+const WEAK = [
+  [/\bresponsible for (creating|managing|developing|building|leading|maintaining|preparing|designing)\b/gi, (m, v) => PAST[v.toLowerCase()], '“Responsible for…” → action verb'],
+  [/\bresponsible for\b/gi, 'owned', '“Responsible for” → “Owned”'],
+  [/\bworked on\b/gi, 'delivered', '“Worked on” → “Delivered”'],
+  [/\bhelped with\b/gi, 'supported', '“Helped with” → “Supported”'],
+  [/\b(was|were) involved in\b/gi, 'contributed to', '“Was involved in” → “Contributed to”'],
+  [/\bin charge of\b/gi, 'led', '“In charge of” → “Led”']
+];
+const STATUSES = ['Saved', 'Applied', 'Interview', 'Offer', 'Rejected'];
+
+/* ---------- State ---------- */
+const state = {
+  analysis: null,     // latest result of analyze()
+  prevScore: null,    // set when re-scoring an improved CV
+  loading: false,
+  stale: false,
+  changes: [],        // suggested edits for the Improve view
+  changesFor: null,   // analysis timestamp the changes were built from
+  chat: [],
+  tracker: loadTracker()
+};
+
+/* ---------- Helpers ---------- */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const words = t => (t.trim().match(/\S+/g) || []).length;
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\\/]/g, '\\$&');
+const hasTerm = (text, term) => new RegExp('(?:^|[^a-z0-9])' + reEsc(term) + '(?:$|[^a-z0-9])').test(text);
+const tokens = t => t.toLowerCase().split(/[^a-z0-9+#]+/).filter(w => w.length > 2 && !STOP.has(w) && !/^\d+$/.test(w));
+const listJoin = arr => arr.length < 2 ? arr.join('') : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast.timer); toast.timer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+function loadTracker() {
+  try { return JSON.parse(localStorage.getItem('applyassist.tracker')) || []; } catch { return []; }
+}
+function saveTracker() {
+  try { localStorage.setItem('applyassist.tracker', JSON.stringify(state.tracker)); } catch { /* storage unavailable: keep in memory */ }
+}
+
+/* ---------- Navigation ---------- */
+function go(view) {
+  $$('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + view));
+  $$('.nav button').forEach(b => b.classList.toggle('active', b.dataset.nav === view));
+  if (view === 'improve') renderImprove();
+  if (view === 'chat') renderChat();
+  if (view === 'tracker') renderTracker();
+  window.scrollTo(0, 0);
+}
+$$('[data-nav]').forEach(b => b.addEventListener('click', () => go(b.dataset.nav)));
+
+/* ---------- Scoring engine (heuristic, simulated NLP) ---------- */
+function findSkills(lowerText) {
+  return SKILLS.filter(s => s.slice(1).some(a => hasTerm(lowerText, a))).map(s => s[0]);
+}
+function matchesSkill(name, lowerText) {
+  const entry = SKILLS.find(s => s[0] === name);
+  return entry ? entry.slice(1).some(a => hasTerm(lowerText, a)) : hasTerm(lowerText, name.toLowerCase());
+}
+function topTerms(text, n) {
+  const f = {};
+  tokens(text).forEach(w => f[w] = (f[w] || 0) + 1);
+  return Object.entries(f).sort((a, b) => b[1] - a[1]).slice(0, n).map(e => e[0]);
+}
+function cosine(a, b) {
+  const fa = {}, fb = {};
+  tokens(a).forEach(w => fa[w] = (fa[w] || 0) + 1);
+  tokens(b).forEach(w => fb[w] = (fb[w] || 0) + 1);
+  let dot = 0, na = 0, nb = 0;
+  for (const k in fa) { na += fa[k] ** 2; if (fb[k]) dot += fa[k] * fb[k]; }
+  for (const k in fb) nb += fb[k] ** 2;
+  return na && nb ? dot / Math.sqrt(na * nb) : 0;
+}
+
+function computeLineChanges(text) {
+  const out = [];
+  text.split('\n').forEach((line, idx) => {
+    let cur = line, type = 'Grammar';
+    const labels = new Set();
+    const step = (re, rep, label, kind) => {
+      const next = cur.replace(re, rep);
+      if (next !== cur) { cur = next; labels.add(label); if (kind) type = kind; }
+    };
+    step(/(^|\s)i(?=[\s'’])/g, '$1I', 'Capitalise “I”');
+    step(/(\S) {2,}(?=\S)/g, '$1 ', 'Remove extra spaces');
+    for (const [bad, good] of Object.entries(SPELLING)) step(new RegExp('\\b' + bad + '\\b', 'gi'), good, 'Spelling: ' + good);
+    WEAK.forEach(([re, rep, label]) => step(re, rep, label, 'Wording'));
+    step(/^(\s*[-•*]\s*)([a-z])/, (m, p, c) => p + c.toUpperCase(), 'Capitalise bullet');
+    if (cur !== line) out.push({ idx, before: line, after: cur, labels: [...labels], type });
+  });
+  return out;
+}
+
+function analyze({ jd, cv, cl, title, company }) {
+  const jdL = jd.toLowerCase(), cvL = cv.toLowerCase(), clL = cl.toLowerCase();
+  let reqs = findSkills(jdL);
+  const usedFallback = reqs.length < 3;
+  if (usedFallback) reqs = topTerms(jd, 10);
+  const matched = reqs.filter(s => matchesSkill(s, cvL + '\n' + clL));
+  const missing = reqs.filter(s => !matched.includes(s));
+  const skillScore = Math.round(matched.length / reqs.length * 100);
+
+  const sim = cosine(jd, cv);
+  const overlapScore = Math.min(100, Math.round(sim / 0.45 * 100));
+
+  const bullets = cv.split('\n').filter(l => /^\s*[-•*]/.test(l));
+  const quantified = bullets.filter(l => /\d/.test(l));
+  const lineChanges = computeLineChanges(cv);
+  const weakCount = lineChanges.filter(c => c.type === 'Wording').length;
+  const grammarCount = lineChanges.reduce((n, c) => n + c.labels.filter(l => !l.startsWith('“')).length, 0);
+  const impactScore = bullets.length ? Math.max(0, Math.min(100, Math.round(quantified.length / bullets.length / 0.6 * 100)) - weakCount * 5) : 20;
+
+  const SECTIONS = [['Summary', /^(summary|profile|professional summary|objective)\b/im], ['Experience', /^(experience|work experience|employment|work history)\b/im],
+    ['Education', /^education\b/im], ['Skills', /^(skills|technical skills|core skills)\b/im], ['Projects / certifications', /^(projects|certifications|achievements|awards)\b/im]];
+  const missingSections = SECTIONS.filter(s => !s[1].test(cv)).map(s => s[0]);
+  const cvWords = words(cv);
+  let structureScore = Math.round((SECTIONS.length - missingSections.length) / SECTIONS.length * 100);
+  if (cvWords < 150 || cvWords > 1100) structureScore = Math.max(0, structureScore - 20);
+
+  let clScore = null, clDetail = 'Not provided — excluded from the overall score';
+  const clMentionsCompany = company && clL.includes(company.toLowerCase());
+  if (cl.trim()) {
+    const clSkills = reqs.filter(s => matchesSkill(s, clL));
+    const clWords = words(cl);
+    clScore = Math.round(Math.min(1, clSkills.length / Math.min(5, reqs.length)) * 50)
+      + (clMentionsCompany ? 20 : 0)
+      + (title && clL.includes(title.toLowerCase()) ? 15 : 0)
+      + (clWords >= 120 && clWords <= 450 ? 15 : clWords >= 60 ? 8 : 0);
+    clDetail = `${clSkills.length} job skills referenced · ${clWords} words · ${clMentionsCompany ? 'mentions' : 'does not mention'} the company`;
+  }
+
+  const parts = [
+    { label: 'Skills match', weight: 40, score: skillScore, detail: `${matched.length} of ${reqs.length} ${usedFallback ? 'key terms' : 'required skills'} found` },
+    { label: 'Content similarity', weight: 20, score: overlapScore, detail: `Term-overlap similarity ${sim.toFixed(2)} between CV and job description` },
+    { label: 'Cover letter alignment', weight: 15, score: clScore, detail: clDetail },
+    { label: 'Impact & wording', weight: 15, score: impactScore, detail: `${quantified.length} of ${bullets.length} bullet points quantified · ${weakCount} weak phrase${weakCount === 1 ? '' : 's'}` },
+    { label: 'Structure', weight: 10, score: structureScore, detail: missingSections.length ? 'Missing: ' + missingSections.join(', ') : 'All key sections present' }
+  ];
+  const scored = parts.filter(p => p.score !== null);
+  const overall = Math.round(scored.reduce((s, p) => s + p.score * p.weight, 0) / scored.reduce((s, p) => s + p.weight, 0));
+  const band = overall >= 80 ? ['Strong match', 'strong'] : overall >= 60 ? ['Good match', 'good'] : overall >= 40 ? ['Fair match', 'fair'] : ['Weak match', 'weak'];
+
+  const recs = [];
+  if (missing.length) recs.push(['high', `Add evidence of <b>${esc(listJoin(missing.slice(0, 4)))}</b> if you have it. These appear in the job description but not in your application.`]);
+  if (bullets.length && quantified.length / bullets.length < 0.6) recs.push(['med', `Quantify more achievements. Only ${quantified.length} of ${bullets.length} bullet points include a number, percentage or scale.`]);
+  if (weakCount) recs.push(['med', `Replace ${weakCount} passive phrase${weakCount === 1 ? '' : 's'} such as “responsible for” with action verbs.`]);
+  if (grammarCount) recs.push(['med', `Fix ${grammarCount} spelling or grammar issue${grammarCount === 1 ? '' : 's'}. See <b>Improve CV</b>.`]);
+  if (!cl.trim()) recs.push(['low', 'Add a cover letter. It contributes 15% of the score and lets you explain gaps directly.']);
+  else if (company && !clMentionsCompany) recs.push(['low', `Mention ${esc(company)} by name in your cover letter.`]);
+  if (missingSections.length) recs.push(['low', `Consider adding a ${esc(missingSections[0])} section.`]);
+  if (!recs.length) recs.push(['low', 'Your application is well aligned. Tailor your opening line to the company before sending.']);
+
+  return { overall, band, parts, matched, missing, recs, usedFallback, title, company, jd, cv, cl, ts: Date.now() };
+}
+
+/* ---------- Score view ---------- */
+const F = { jd: $('#jd'), cv: $('#cv'), cl: $('#cl'), title: $('#jobTitle'), company: $('#company') };
+
+function updateCounts() {
+  $$('[data-count]').forEach(el => { const n = words(F[el.dataset.count].value); el.textContent = n ? `· ${n} words` : ''; });
+}
+function showFormError(msg) { const e = $('#formError'); e.innerHTML = msg; e.hidden = !msg; }
+
+function fillSample(i) {
+  const s = SAMPLES[i];
+  F.title.value = s.title; F.company.value = s.company; F.jd.value = s.jd; F.cv.value = s.cv; F.cl.value = s.cl;
+  updateCounts(); showFormError('');
+  markStale();
+}
+function markStale() {
+  if (state.analysis && !state.loading) { state.stale = true; renderResult(); }
+}
+
+$('#loadSample').addEventListener('click', () => { fillSample(+$('#sampleSelect').value); toast('Sample loaded. Click “Analyze match”.'); });
+$('#clearForm').addEventListener('click', () => {
+  Object.values(F).forEach(f => f.value = '');
+  updateCounts(); showFormError('');
+  state.analysis = null; state.prevScore = null; state.stale = false; renderResult();
+});
+Object.values(F).forEach(f => f.addEventListener('input', () => { updateCounts(); if (!state.stale) markStale(); }));
+
+$$('input[type=file]').forEach(inp => inp.addEventListener('change', e => {
+  const file = e.target.files[0]; e.target.value = '';
+  if (!file) return;
+  if (!/\.txt$/i.test(file.name) && file.type !== 'text/plain') {
+    showFormError(`<b>${esc(file.name)}</b> can't be read in this demo. PDF and DOCX parsing needs a server-side parser. Paste the text instead, or upload a .txt file.`);
+    return;
+  }
+  if (file.size > 300000) { showFormError('That file is larger than 300 KB. Please upload a plain-text CV under 300 KB.'); return; }
+  const reader = new FileReader();
+  reader.onload = () => { F[inp.dataset.target].value = reader.result; updateCounts(); showFormError(''); markStale(); toast(`Loaded ${file.name}`); };
+  reader.onerror = () => showFormError('The file could not be read. Try pasting the text instead.');
+  reader.readAsText(file);
+}));
+
+$('#scoreForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (state.loading) return;
+  const input = { jd: F.jd.value.trim(), cv: F.cv.value.trim(), cl: F.cl.value.trim(), title: F.title.value.trim(), company: F.company.value.trim() };
+  const errs = [];
+  if (!input.jd) errs.push('Paste a job description.');
+  else if (words(input.jd) < 30) errs.push(`The job description is too short (${words(input.jd)} words). Paste at least 30 words so requirements can be extracted.`);
+  if (!input.cv) errs.push('Paste your CV or upload a .txt file.');
+  else if (words(input.cv) < 50) errs.push(`Your CV is too short to score (${words(input.cv)} words, minimum 50).`);
+  if (errs.length) { showFormError(errs.join('<br>')); return; }
+  showFormError('');
+  await runAnalysis(input);
+});
+
+async function runAnalysis(input, prevScore = null) {
+  state.loading = true; state.stale = false; state.prevScore = prevScore;
+  $('#analyzeBtn').disabled = true; $('#analyzeBtn').textContent = 'Analyzing…';
+  const steps = ['Parsing documents', 'Extracting job requirements', 'Matching skills and keywords', 'Scoring impact and structure'];
+  for (let i = 0; i <= steps.length; i++) {
+    $('#resultPanel').innerHTML = `<div class="empty"><h3>Analyzing your application</h3><p class="small">Running locally in your browser</p>
+      <ul class="steps-list">${steps.map((s, j) => `<li class="${j < i ? 'done' : j === i ? 'current' : ''}"><span class="dot"></span>${s}</li>`).join('')}</ul></div>`;
+    if (i < steps.length) await sleep(350);
+  }
+  try {
+    state.analysis = analyze(input);
+  } catch (err) {
+    state.analysis = null;
+    $('#resultPanel').innerHTML = `<div class="empty"><div class="icon">!</div><h3>Analysis failed</h3><p class="small">${esc(err.message)}</p><button class="btn" onclick="document.getElementById('analyzeBtn').click()">Try again</button></div>`;
+  }
+  state.loading = false;
+  $('#analyzeBtn').disabled = false; $('#analyzeBtn').textContent = 'Analyze match';
+  if (state.analysis) renderResult();
+}
+
+function renderResult() {
+  const a = state.analysis, panel = $('#resultPanel');
+  if (!a) {
+    panel.innerHTML = `<div class="empty"><div class="icon">◎</div><h3>No analysis yet</h3>
+      <p class="small">Add a job description and your CV, then click <b>Analyze match</b>.<br>No documents handy? Load a sample.</p>
+      <button class="btn" id="emptySample">Load sample data</button></div>`;
+    $('#emptySample').onclick = () => { fillSample(+$('#sampleSelect').value); toast('Sample loaded. Click “Analyze match”.'); };
+    return;
+  }
+  const ringColor = { strong: 'var(--success)', good: 'var(--primary)', fair: 'var(--warn)', weak: 'var(--danger)' }[a.band[1]];
+  const delta = state.prevScore !== null ? a.overall - state.prevScore : null;
+  panel.innerHTML = `
+    ${state.stale ? '<div class="alert alert-warn" style="margin-bottom:14px">Inputs have changed since this analysis. Click <b>Analyze match</b> to refresh.</div>' : ''}
+    <div class="result-head">
+      <div class="ring" style="--p:${a.overall};--c:${ringColor}" role="img" aria-label="Match score ${a.overall} out of 100"><span><div style="text-align:center">${a.overall}<small>/ 100</small></div></span></div>
+      <div>
+        <span class="badge b-${a.band[1]}">${a.band[0]}</span> <span class="badge b-sim">Heuristic score</span>
+        <h3 style="margin-top:8px">${esc(a.title || 'Untitled role')}${a.company ? ' · ' + esc(a.company) : ''}</h3>
+        ${delta !== null ? `<div class="delta ${delta < 0 ? 'neg' : ''}">${delta >= 0 ? '▲ +' : '▼ '}${delta} points vs. previous version</div>` : ''}
+        ${a.usedFallback ? '<p class="small muted" style="margin-top:4px">Few known skills were detected, so the most frequent job terms were used instead.</p>' : ''}
+      </div>
+    </div>
+    <h4>Score breakdown</h4>
+    <div class="bars">${a.parts.map(p => `
+      <div class="bar-row"><span>${p.label} <span class="muted small">(${p.weight}%)</span></span><b>${p.score === null ? '—' : p.score}</b>
+        <div class="bar"><i style="width:${p.score || 0}%"></i></div><span class="detail">${esc(p.detail)}</span></div>`).join('')}
+    </div>
+    <h4>Skills from the job description</h4>
+    <div class="chips">${a.matched.map(s => `<span class="chip chip-ok">✓ ${esc(s)}</span>`).join('')}${a.missing.map(s => `<span class="chip chip-miss">✕ ${esc(s)}</span>`).join('')}</div>
+    <h4>Recommendations</h4>
+    <ul class="recs">${a.recs.map(r => `<li><span class="sev sev-${r[0]}">${r[0] === 'med' ? 'Medium' : r[0] === 'high' ? 'High' : 'Low'}</span><span>${r[1]}</span></li>`).join('')}</ul>
+    <div class="actions">
+      <button class="btn" id="toTracker">Save to tracker</button>
+      <button class="btn" id="toChat">Ask assistant</button>
+      <button class="btn btn-primary" id="toImprove">Improve my CV →</button>
+    </div>
+    <details class="explain"><summary>How is this score calculated?</summary>
+      <ul>
+        <li><b>Skills match (40%)</b>: skills from a built-in dictionary of ${SKILLS.length} skills are found in the job description and checked against your CV and cover letter.</li>
+        <li><b>Content similarity (20%)</b>: cosine similarity of word frequencies between CV and job description.</li>
+        <li><b>Cover letter (15%)</b>: job skills referenced, company and title named, and length.</li>
+        <li><b>Impact (15%)</b>: share of bullet points with numbers, minus weak phrasing.</li>
+        <li><b>Structure (10%)</b>: presence of standard CV sections and sensible length.</li>
+      </ul>
+      These weights are placeholders. A production scoring method still needs to be defined and validated.
+    </details>`;
+  $('#toImprove').onclick = () => go('improve');
+  $('#toChat').onclick = () => go('chat');
+  $('#toTracker').onclick = () => {
+    state.tracker.unshift({ id: Date.now(), role: a.title || 'Untitled role', company: a.company || '—', score: a.overall, status: 'Saved', date: new Date().toISOString().slice(0, 10) });
+    saveTracker(); toast('Saved to tracker');
+  };
+}
+
+/* ---------- Improve view ---------- */
+function buildChanges(a) {
+  const lines = a.cv.split('\n');
+  const changes = computeLineChanges(a.cv).map((c, i) => ({ ...c, id: 'l' + i, accepted: true, apply: L => { L[c.idx] = c.after; } }));
+
+  const sumHead = lines.findIndex(l => /^\s*(summary|profile|professional summary|objective)\s*:?\s*$/i.test(l));
+  if (sumHead >= 0 && a.title) {
+    const s = lines.findIndex((l, i) => i > sumHead && l.trim());
+    if (s >= 0) {
+      const strengths = a.matched.slice(0, 2);
+      const sentence = `Seeking a ${a.title} role${a.company ? ' at ' + a.company : ''}${strengths.length ? ', bringing hands-on ' + listJoin(strengths) + ' experience' : ''}.`;
+      const lc = changes.find(c => c.idx === s);
+      const base = lc ? lc.after : lines[s];
+      changes.push({ id: 'sum', type: 'Alignment', labels: ['Tailor summary to the role'], before: base, after: base.trimEnd() + ' ' + sentence, accepted: true,
+        apply: L => { L[s] = L[s].trimEnd() + ' ' + sentence; } });
+    }
+  }
+
+  const add = a.missing.slice(0, 5);
+  if (add.length && !a.usedFallback) {
+    const head = lines.findIndex(l => /^\s*(skills|technical skills|core skills)\b/i.test(l));
+    const note = 'Only accept skills you genuinely have. Recruiters will ask about them.';
+    if (head >= 0) {
+      const target = /:\s*\S/.test(lines[head]) ? head : lines.findIndex((l, i) => i > head && l.trim());
+      if (target >= 0) {
+        changes.push({ id: 'skills', type: 'Alignment', labels: ['Add missing job keywords'], note, before: lines[target], after: lines[target].trimEnd() + ', ' + add.join(', '), accepted: false,
+          apply: L => { L[target] = L[target].trimEnd() + ', ' + add.join(', '); } });
+      }
+    } else {
+      changes.push({ id: 'skills', type: 'Alignment', labels: ['Add a Skills section with job keywords'], note, before: '(no Skills section)', after: 'SKILLS\n' + add.join(', '), accepted: false,
+        apply: L => { L.push('', 'SKILLS', add.join(', ')); } });
+    }
+  }
+  return changes;
+}
+function improvedText() {
+  const lines = state.analysis.cv.split('\n');
+  const order = { Grammar: 0, Wording: 0, Alignment: 1 };
+  [...state.changes].sort((x, y) => order[x.type] - order[y.type]).forEach(c => c.accepted && c.apply(lines));
+  return lines.join('\n');
+}
+
+function renderImprove() {
+  const body = $('#improveBody'), a = state.analysis;
+  $('#improveActions').hidden = true;
+  if (!a) {
+    body.innerHTML = `<div class="card empty"><div class="icon">✎</div><h3>Score a CV first</h3><p class="small">Improvements are tailored to a specific job description, so run an analysis before reviewing edits.</p><button class="btn btn-primary" id="gotoScore">Go to Score</button></div>`;
+    $('#gotoScore').onclick = () => go('score');
+    return;
+  }
+  if (state.changesFor !== a.ts) { state.changes = buildChanges(a); state.changesFor = a.ts; }
+  if (!state.changes.length) {
+    body.innerHTML = `<div class="card empty"><div class="icon">✓</div><h3>No suggested edits</h3><p class="small">No grammar, wording or alignment issues were detected for this job.</p><button class="btn" id="gotoScore">Back to score</button></div>`;
+    $('#gotoScore').onclick = () => go('score');
+    return;
+  }
+  $('#improveActions').hidden = false;
+  const typeBadge = { Grammar: 'b-good', Wording: 'b-fair', Alignment: 'b-strong' };
+  const accepted = state.changes.filter(c => c.accepted).length;
+  body.innerHTML = `
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-head"><h2>Suggested edits for ${esc(a.title || 'this role')}</h2><span class="counter">${accepted} of ${state.changes.length} selected</span></div>
+        <p class="small muted" style="margin-bottom:14px">Generated by rule-based checks (simulated AI rewriting).</p>
+        ${state.changes.map(c => `
+          <label class="change">
+            <input type="checkbox" data-change="${c.id}" ${c.accepted ? 'checked' : ''}>
+            <div>
+              <div class="meta"><span class="badge ${typeBadge[c.type]}">${c.type}</span><span class="small muted">${c.labels.map(esc).join(' · ')}</span></div>
+              <div class="diff-del">${esc(c.before.trim())}</div>
+              <div class="diff-add">${esc(c.after.trim())}</div>
+              ${c.note ? `<div class="note">⚠ ${c.note}</div>` : ''}
+            </div>
+          </label>`).join('')}
+      </div>
+      <div class="card sticky">
+        <div class="section-head"><h2>Improved CV preview</h2><span class="small muted">Highlighted lines changed</span></div>
+        <div class="preview" id="preview"></div>
+        <div class="actions">
+          <button class="btn" id="copyCv">Copy text</button>
+          <button class="btn" id="downloadCv">Download .txt</button>
+          <button class="btn btn-primary" id="rescore">Use this CV &amp; re-score</button>
+        </div>
+      </div>
+    </div>`;
+  renderPreview();
+  $$('[data-change]').forEach(cb => cb.addEventListener('change', () => {
+    state.changes.find(c => c.id === cb.dataset.change).accepted = cb.checked;
+    $('.counter', body).textContent = `${state.changes.filter(c => c.accepted).length} of ${state.changes.length} selected`;
+    renderPreview();
+  }));
+  $('#copyCv').onclick = copyCv;
+  $('#downloadCv').onclick = () => {
+    const blob = new Blob([improvedText()], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = (a.title ? a.title.replace(/\W+/g, '-').toLowerCase() + '-' : '') + 'cv.txt';
+    link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+    toast('Download started');
+  };
+  $('#rescore').onclick = async () => {
+    const text = improvedText();
+    if (text === a.cv) { toast('Select at least one edit first'); return; }
+    F.cv.value = text; updateCounts();
+    go('score');
+    await runAnalysis({ jd: a.jd, cv: text, cl: a.cl, title: a.title, company: a.company }, a.overall);
+  };
+}
+function renderPreview() {
+  const orig = state.analysis.cv.split('\n');
+  $('#preview').innerHTML = improvedText().split('\n').map((l, i) => l !== orig[i] ? `<span class="chg">${esc(l) || ' '}</span>` : esc(l)).join('\n');
+}
+async function copyCv() {
+  const text = improvedText();
+  try { await navigator.clipboard.writeText(text); toast('Copied to clipboard'); }
+  catch {
+    const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+    const ok = document.execCommand('copy'); ta.remove();
+    toast(ok ? 'Copied to clipboard' : 'Copy failed. Select the preview text manually.');
+  }
+}
+$('#acceptAll').onclick = () => { state.changes.forEach(c => c.accepted = true); renderImprove(); };
+$('#rejectAll').onclick = () => { state.changes.forEach(c => c.accepted = false); renderImprove(); };
+
+/* ---------- Chat (scripted intents) ---------- */
+const NEED = 'I don\'t have an analysis to work from yet. Run a score on the <b>Score</b> page and I\'ll tailor my answers to that job.';
+function botReply(q) {
+  const t = q.toLowerCase(), a = state.analysis;
+  const role = a ? esc(a.title || 'this role') : '';
+  if (/^(hi|hello|hey)\b|help|what can you/.test(t))
+    return 'Hi! I can explain your match score, list missing keywords, suggest CV fixes, draft a cover letter opening and generate practice interview questions. Try one of the suggestions below.';
+  if (/missing|keyword|gap|lack/.test(t)) {
+    if (!a) return NEED;
+    return a.missing.length
+      ? `For <b>${role}</b>, these skills appear in the job description but not in your application:<ul>${a.missing.map(s => `<li>${esc(s)}</li>`).join('')}</ul>Add them only where you have real experience, ideally in a bullet with a measurable result.`
+      : `Nice: every detected skill for <b>${role}</b> already appears in your application.`;
+  }
+  if (/cover|letter|opening/.test(t)) {
+    if (!a) return NEED;
+    const top = a.matched.slice(0, 2);
+    return `Here's a draft opening you can adapt:<br><br><i>“I'm applying for the ${role} position${a.company ? ' at ' + esc(a.company) : ''} because ${top.length ? 'it combines the ' + esc(listJoin(top)) + ' work I enjoy most' : 'it closely matches the work I want to grow in'} with problems that matter to your customers. In my most recent role I [one quantified achievement].”</i><br><br>Replace the bracket with a real result.`;
+  }
+  if (/interview|question|prepare|prep/.test(t)) {
+    if (!a) return NEED;
+    const qs = [];
+    if (a.matched[0]) qs.push(`Walk me through a project where you used ${esc(a.matched[0])}. What was the outcome?`);
+    if (a.missing[0]) qs.push(`This role uses ${esc(a.missing[0])}. How would you get up to speed in your first month?`);
+    qs.push(`Tell me about a time you explained a technical finding to a non-technical audience.`);
+    if (a.matched[1]) qs.push(`What's a mistake you've made with ${esc(a.matched[1])}, and what did you change afterwards?`);
+    qs.push(`Why ${a.company ? esc(a.company) : 'our company'}, and why now?`);
+    return `Practice questions for <b>${role}</b>:<ol>${qs.map(x => `<li>${x}</li>`).join('')}</ol>Answer each with the STAR format: Situation, Task, Action, Result.`;
+  }
+  if (/score|how did i|result|explain|why/.test(t)) {
+    if (!a) return NEED;
+    const sorted = a.parts.filter(p => p.score !== null).sort((x, y) => x.score - y.score);
+    return `You scored <b>${a.overall}/100</b> (${a.band[0].toLowerCase()}) for <b>${role}</b>. Your strongest area is <b>${sorted[sorted.length - 1].label.toLowerCase()}</b> (${sorted[sorted.length - 1].score}); the weakest is <b>${sorted[0].label.toLowerCase()}</b> (${sorted[0].score}). ${a.missing.length ? `The biggest lever is closing skill gaps: ${a.missing.length} required skill${a.missing.length === 1 ? ' is' : 's are'} missing.` : ''}`;
+  }
+  if (/improve|better|tip|fix|cv|resume|résumé/.test(t)) {
+    if (!a) return NEED;
+    return `Top actions for <b>${role}</b>:<ol>${a.recs.slice(0, 3).map(r => `<li>${r[1]}</li>`).join('')}</ol>Open <b>Improve CV</b> to apply grammar and wording fixes in one click.`;
+  }
+  if (/salary|pay|compensation|negotiat/.test(t))
+    return 'I don\'t have live salary data in this demo. A production version would pull market ranges from a salary data provider. For now, check local salary surveys and the job ad itself.';
+  if (/ats|applicant tracking/.test(t))
+    return 'Applicant tracking systems mostly parse plain structure. Use standard headings (Summary, Experience, Education, Skills), avoid tables and images, and mirror the exact skill names from the job description.';
+  return 'I\'m a scripted demo assistant, so I only understand a few topics: your <b>score</b>, <b>missing keywords</b>, <b>CV tips</b>, <b>cover letter</b> openings and <b>interview</b> questions. Try asking about one of those.';
+}
+function renderChat() {
+  const a = state.analysis;
+  $('#chatContext').innerHTML = a ? `Context: <b>${esc(a.title || 'Untitled role')}</b>${a.company ? ' at ' + esc(a.company) : ''} · score ${a.overall}` : '<span class="muted">No analysis loaded. Answers will be generic.</span>';
+  if (!state.chat.length) state.chat.push({ from: 'bot', html: botReply('hello') });
+  $('#msgs').innerHTML = state.chat.map(m => `<div class="msg ${m.from}">${m.from === 'user' ? esc(m.text) : m.html}</div>`).join('');
+  $('#msgs').scrollTop = $('#msgs').scrollHeight;
+}
+async function sendChat(text) {
+  text = text.trim();
+  if (!text || sendChat.busy) return;
+  sendChat.busy = true;
+  state.chat.push({ from: 'user', text });
+  renderChat();
+  $('#msgs').insertAdjacentHTML('beforeend', '<div class="msg bot typing">Assistant is typing…</div>');
+  $('#msgs').scrollTop = $('#msgs').scrollHeight;
+  await sleep(650);
+  state.chat.push({ from: 'bot', html: botReply(text) });
+  sendChat.busy = false;
+  renderChat();
+}
+$('#chatForm').addEventListener('submit', e => { e.preventDefault(); const v = $('#chatInput').value; $('#chatInput').value = ''; sendChat(v); });
+$$('#suggest button').forEach(b => b.addEventListener('click', () => sendChat(b.textContent)));
+$('#clearChat').onclick = () => { state.chat = []; renderChat(); };
+
+/* ---------- Tracker ---------- */
+function renderTracker() {
+  $('#stats').innerHTML = STATUSES.map(s => `<div class="stat"><b>${state.tracker.filter(t => t.status === s).length}</b><span>${s}</span></div>`).join('');
+  const list = $('#trackerList');
+  if (!state.tracker.length) {
+    list.innerHTML = `<div class="empty"><div class="icon">▤</div><h3>No applications yet</h3><p class="small">Score an application and click <b>Save to tracker</b>, or add one manually above.</p><button class="btn" id="trackScore">Score an application</button></div>`;
+    $('#trackScore').onclick = () => go('score');
+    return;
+  }
+  list.innerHTML = `<div class="table-wrap"><table>
+    <thead><tr><th>Role</th><th>Company</th><th>Match</th><th>Status</th><th>Added</th><th><span class="sr" hidden>Actions</span></th></tr></thead>
+    <tbody>${state.tracker.map(t => `<tr>
+      <td>${esc(t.role)}</td><td>${esc(t.company)}</td>
+      <td>${t.score === null ? '<span class="muted">Not scored</span>' : `<span class="badge ${t.score >= 80 ? 'b-strong' : t.score >= 60 ? 'b-good' : t.score >= 40 ? 'b-fair' : 'b-weak'}">${t.score}</span>`}</td>
+      <td><select data-status="${t.id}" aria-label="Status">${STATUSES.map(s => `<option ${s === t.status ? 'selected' : ''}>${s}</option>`).join('')}</select></td>
+      <td class="muted">${t.date}</td>
+      <td><button class="btn btn-sm btn-ghost" data-del="${t.id}" aria-label="Remove ${esc(t.role)}">Remove</button></td>
+    </tr>`).join('')}</tbody></table></div>`;
+  $$('[data-status]').forEach(s => s.addEventListener('change', () => {
+    state.tracker.find(t => t.id === +s.dataset.status).status = s.value; saveTracker(); renderTracker(); toast(`Status updated to ${s.value}`);
+  }));
+  $$('[data-del]').forEach(b => b.addEventListener('click', () => {
+    state.tracker = state.tracker.filter(t => t.id !== +b.dataset.del); saveTracker(); renderTracker(); toast('Application removed');
+  }));
+}
+$('#addForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const role = $('#addRole').value.trim(), company = $('#addCompany').value.trim();
+  const err = $('#addError');
+  if (!role || !company) { err.textContent = 'Enter both a role and a company.'; err.hidden = false; return; }
+  err.hidden = true;
+  state.tracker.unshift({ id: Date.now(), role, company, score: null, status: 'Saved', date: new Date().toISOString().slice(0, 10) });
+  saveTracker(); $('#addRole').value = ''; $('#addCompany').value = ''; renderTracker(); toast('Application added');
+});
+
+/* ---------- Overview actions ---------- */
+$('#startSample').onclick = () => { fillSample(0); $('#sampleSelect').value = '0'; go('score'); $('#analyzeBtn').focus(); toast('Sample loaded. Click “Analyze match”.'); };
+$('#startFresh').onclick = () => { go('score'); F.title.focus(); };
+
+renderResult();
+updateCounts();
+</script>
+</body>
+</html>

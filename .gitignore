@@ -1,1 +1,6 @@
+# Environments
 .venv
+.env
+
+# Folders
+data/*.pdf

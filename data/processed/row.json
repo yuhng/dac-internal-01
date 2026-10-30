@@ -1,0 +1,121 @@
+{
+  "id": "50a4ce8111ef2b3b79c4238b02e0b48b4c67dcea9697a3948dea765c6771599d",
+  "document_type": "resume",
+  "text": "Tan Yu Hng, Isaac\nMobile: (+65) 94391107 | Email: yuhng1@hotmail.com | LinkedIn: Tan Yu Hng\nWORK EXPERIENCE\nMunich Re | Data Science Intern Jun 2026 – Present\n- Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and\nimproving data quality for regional actuarial teams.\n- Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and\nLLM-based extraction across diverse claim types.\nPublicis Groupe | Data Intelligence Analyst Intern Jan 2026 – Jun 2026\n- Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign\nvisibility for Samsung and PepsiCo.\n- Optimize media spend through cross-channel Share of Voice analysis to improve budget allocation\nSchneider Electric | EA Data Analyst Intern Jun 2025 – Dec 2025\n- Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting\neffort by 80% across East Asia.\n- Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility\nacross regional business teams.\nAspial Corporation | Data Analyst Intern Jul 2024 – Nov 2024\n- Developed 20+ Tableau dashboards for real-time sales performance and fraud detection to monitor retail and brokerage\noperations.\n- Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting\ncontinuity.\nPROJECT EXPERIENCE\nFAWSURE Claims Assessment Platform (Munich Re) | Data Science Jun 2026 – Present\n- Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI\n- Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline\nverification\n- Developing a hybrid claims-validation pipeline combining RAG-based policy reasoning and deterministic checks to assess\nclaims exceeding benefits limits\n- Building an evaluation harness using LLM-as-Judge and deterministics checks to assess extraction accuracy for fraud, abuse,\nwaste, and claims-validity assessments\nVITALS Medical Classification Pipeline (Munich Re) | Data Science Jun 2026 – Present\n- Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta\nLake tables\n- Designed modular transformation frameworks to handle schema harmonization, lookup enrichment, date parsing, and\ncomplex premium & reinsurance calculations across disparate source formats.\nPAI BI Service Automation Pipeline (Publicis Groupe) | Data Intelligence Analyst Mar 2026 - Jun 2026\n- Developed a pipeline to automate social media extraction, supporting concurrent downloads and configurable media retrieval\n- Implemented parallelized video-to-GIF conversion and asynchronous download workflows using multiprocessing and\nasyncio to optimize efficiency.\nSales Incentive Program (SIP) Automation Pipeline (Schneider Electric) | EA Data Analyst Aug 2025 - Dec 2025\n- Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data\ninto a standardized workflow cutting manual processing time by 80% across East Asia.\n- Implemented validation, logging, exception handling, and reusable modules to improve reliability and maintainability.\nSKILLS\nProgramming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)\nCI/CD Tools: Docker, Github Actions\nAI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace\nCloud Platforms: AWS, GCP, Databricks\nCertification: dbt Fundamentals, Databricks GenAI Fundamentals, IBM AI Engineering, Google Advanced Data Analytics\nEDUCATION\nUOL BSc (Honours) Data Science and Business Analytics | Graduate Aug 2023 – Aug 2026\n- Relevant modules: Business Analytics, Advanced Statistics, Machine Learning, Statistical Methods for Market Research",
+  "work_experience": [
+    {
+      "title": "Data Science Intern",
+      "company": "Munich Re",
+      "start_date": "Jun 2026",
+      "end_date": null,
+      "description": "Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams.\nBuilding GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types."
+    },
+    {
+      "title": "Data Intelligence Analyst Intern",
+      "company": "Publicis Groupe",
+      "start_date": "Jan 2026",
+      "end_date": "Jun 2026",
+      "description": "Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo.\nOptimize media spend through cross-channel Share of Voice analysis to improve budget allocation"
+    },
+    {
+      "title": "EA Data Analyst Intern",
+      "company": "Schneider Electric",
+      "start_date": "Jun 2025",
+      "end_date": "Dec 2025",
+      "description": "Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia.\nDesigned 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams."
+    },
+    {
+      "title": "Data Analyst Intern",
+      "company": "Aspial Corporation",
+      "start_date": "Jul 2024",
+      "end_date": "Nov 2024",
+      "description": "Developed 20+ Tableau dashboards for real-time sales performance and fraud detection to monitor retail and brokerage operations.\nSupported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity."
+    }
+  ],
+  "education": [
+    {
+      "degree": "BSc (Honours)",
+      "institution": "UOL",
+      "field_of_study": "Data Science and Business Analytics",
+      "graduation_year": 2026
+    }
+  ],
+  "certifications": [
+    "dbt Fundamentals",
+    "Databricks GenAI Fundamentals",
+    "IBM AI Engineering",
+    "Google Advanced Data Analytics"
+  ],
+  "skills": [
+    "Python",
+    "Pandas",
+    "Polars",
+    "pySpark",
+    "SQL",
+    "Postgres",
+    "BigQuery",
+    "MySQL",
+    "Docker",
+    "Github Actions",
+    "Scikit-Learn",
+    "LangChain",
+    "HuggingFace",
+    "AWS",
+    "GCP",
+    "Databricks",
+    "Azure",
+    "CI/CD",
+    "dbt",
+    "ETL",
+    "FastAPI",
+    "Informatica",
+    "Looker",
+    "Machine Learning",
+    "Power BI",
+    "React",
+    "Tableau"
+  ],
+  "responsibilities": null,
+  "requirements": null,
+  "qualifications": null,
+  "hard_skills": [
+    "Python",
+    "Pandas",
+    "Polars",
+    "pySpark",
+    "SQL",
+    "Postgres",
+    "BigQuery",
+    "MySQL",
+    "Docker",
+    "Github Actions",
+    "Scikit-Learn",
+    "LangChain",
+    "HuggingFace",
+    "AWS",
+    "GCP",
+    "Databricks",
+    "Azure",
+    "CI/CD",
+    "dbt",
+    "ETL",
+    "FastAPI",
+    "Informatica",
+    "Looker",
+    "Machine Learning",
+    "Power BI",
+    "React",
+    "Tableau"
+  ],
+  "soft_skills": [],
+  "occupation": null,
+  "seniority_level": null,
+  "industry": null,
+  "resume_format": null,
+  "writing_style": null,
+  "source": "Isaac TanYuHng CV AIAP.pdf",
+  "collection_method": "pdf_text_layer",
+  "license": "unknown",
+  "annotation_method": "rule_based",
+  "review_status": "pending"
+}
