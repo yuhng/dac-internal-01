@@ -3,11 +3,10 @@ import { SAMPLES } from '../../lib/samples'
 import { analyze, computeLineChanges } from './scoring'
 
 describe('analyze', () => {
-  // Expected values come from running the original data/job_assistant.html engine.
   it.each([
-    [0, 73, [63, 100, 93, 51, 60], ['Tableau', 'Statistics', 'ETL', 'BigQuery', 'Snowflake', 'Data visualization']],
-    [1, 60, [53, 71, null, 63, 60], ['Accessibility', 'Jest', 'Unit testing', 'CI/CD', 'Design systems', 'Figma', 'Agile']],
-  ])('matches the prototype for sample %i', (index, overall, partScores, missing) => {
+    [0, 66, [56, 100, 51, 60], ['Tableau', 'Statistics', 'A/B testing', 'ETL', 'BigQuery', 'Snowflake', 'Data visualization']],
+    [1, 60, [53, 71, 63, 60], ['Accessibility', 'Jest', 'Unit testing', 'CI/CD', 'Design systems', 'Figma', 'Agile']],
+  ])('scores sample %i', (index, overall, partScores, missing) => {
     const result = analyze(SAMPLES[index])
     expect(result.overall).toBe(overall)
     expect(result.parts.map(p => p.score)).toEqual(partScores)
@@ -16,19 +15,27 @@ describe('analyze', () => {
 
   it('falls back to frequent job terms when few known skills are found', () => {
     const jd = 'Gardener needed to prune roses, plant hedges, water lawns and tend orchards daily.'
-    const result = analyze({ title: '', company: '', jd, cv: 'I prune roses.', cl: '' })
+    const result = analyze({ title: '', company: '', jd, cv: 'I prune roses.' })
     expect(result.usedFallback).toBe(true)
     expect(result.matched).toContain('prune')
   })
 
-  it('excludes a missing cover letter from the overall score', () => {
-    const result = analyze({ ...SAMPLES[0], cl: '' })
-    expect(result.parts.find(p => p.label === 'Cover letter alignment')?.score).toBeNull()
+  it('does not treat Java as matching JavaScript', () => {
+    const result = analyze({ title: '', company: '', jd: 'Java, SQL and Python developer wanted.', cv: 'JavaScript, SQL, Python' })
+    expect(result.missing).toContain('Java')
   })
 
-  it('does not treat Java as matching JavaScript', () => {
-    const result = analyze({ title: '', company: '', jd: 'Java, SQL and Python developer wanted.', cv: 'JavaScript, SQL, Python', cl: '' })
-    expect(result.missing).toContain('Java')
+  it('scores skills from the CV only', () => {
+    const result = analyze({
+      title: '',
+      company: '',
+      jd: 'Python, SQL, and Tableau skills are required for this analytics position.',
+      cv: 'Python and SQL experience',
+    })
+    expect(result.matched).toEqual(['SQL', 'Python'])
+    expect(result.parts.map(part => part.weight)).toEqual([47, 24, 18, 11])
+    expect(result.parts.every(part => part.score !== null)).toBe(true)
+    expect(result.recommendations.some(rec => /cover letter/i.test(rec.text))).toBe(false)
   })
 })
 

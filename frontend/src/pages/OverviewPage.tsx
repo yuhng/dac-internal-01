@@ -1,4 +1,9 @@
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { api } from '../api/client'
+import { ApiError } from '../api/types'
+import { ResumeDropzone } from '../components/ResumeDropzone'
+import { ErrorAlert } from '../components/ui'
 import { useTrackerEntries } from '../hooks/useTracker'
 import { SAMPLES } from '../lib/samples'
 import { useApplication } from '../state/useApplication'
@@ -6,7 +11,7 @@ import { useToast } from '../state/useToast'
 import type { ScoreFocus } from './ScorePage'
 
 const FLOW = [
-  { to: '/score', title: 'Score', text: 'Paste a job description, CV and cover letter. Get a match score with a breakdown.' },
+  { to: '/score', title: 'Score', text: 'Paste a job description and CV. Get a match score with a breakdown.' },
   { to: '/improve', title: 'Improve', text: 'Review grammar fixes, stronger wording and keyword alignment. Accept what fits.' },
   { to: '/assistant', title: 'Ask', text: 'Ask the assistant about your gaps, cover letter openings or interview prep.' },
   { to: '/tracker', title: 'Track', text: 'Save scored applications and move them through your pipeline.' },
@@ -16,7 +21,7 @@ const CAPABILITIES = [
   ['Match scoring', 'Keyword dictionary, term-overlap similarity and rule checks', 'Trained NLP / embedding model, validated against hiring outcomes'],
   ['CV improvements', 'Regex grammar and wording rules, keyword insertion', 'LLM rewriting with a factual-consistency check'],
   ['Assistant', 'Scripted intents using your latest analysis', 'LLM chat grounded in your documents'],
-  ['File upload', '.txt only', 'PDF / DOCX parsing service'],
+  ['File upload', 'PDF (with OCR for scans) and .txt', 'DOCX parsing and stored uploads'],
   ['Tracker', 'Saved in this browser (localStorage)', 'User accounts and a database'],
 ]
 
@@ -50,6 +55,8 @@ export function OverviewPage() {
   const { updateDraft } = useApplication()
   const toast = useToast()
   const navigate = useNavigate()
+  const [parsing, setParsing] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const goToScore = (focus: ScoreFocus) => navigate('/score', { state: { focus } })
   const startWithSample = () => {
@@ -58,17 +65,33 @@ export function OverviewPage() {
     toast('Sample loaded. Click “Analyze match”.')
   }
 
+  const parseResume = async (file: File) => {
+    if (!/\.pdf$/i.test(file.name)) {
+      setError(`${file.name} isn't a PDF. Upload a PDF, or paste your CV instead.`)
+      return
+    }
+    setParsing(true)
+    setError(null)
+    try {
+      updateDraft({ cv: await api.documents.extractText(file) })
+      goToScore('title')
+      toast(`Loaded ${file.name}. Now add the job you're targeting.`)
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'The file could not be read. Try pasting the text instead.')
+    } finally {
+      setParsing(false)
+    }
+  }
+
   return (
     <>
       <div className="card p-5! sm:p-7!">
-        <span className="inline-block rounded-full bg-primary-weak px-[9px] py-0.5 text-xs font-semibold text-primary">For job applicants</span>
-        <h1 className="mt-3 max-w-[640px] text-[28px] leading-tight font-[650]">Know how well your application matches the job before you hit send.</h1>
-        <p className="mt-2.5 max-w-[640px] text-base text-muted">
-          MyCareerAI scores your CV and cover letter against a job description, shows the skills you're missing, suggests specific fixes, and keeps track of every application.
-        </p>
-        <div className="mt-[18px] flex flex-wrap gap-2">
-          <button type="button" className="btn btn-primary" onClick={startWithSample}>Try with sample data</button>
-          <button type="button" className="btn" onClick={() => goToScore('title')}>Start with my own CV</button>
+        <h1 className="mb-4 text-[28px] leading-tight font-[650]">Know how well your application matches the job before you hit send.</h1>
+        <ResumeDropzone busy={parsing} onFile={parseResume} />
+        {error && <div className="mt-3"><ErrorAlert>{error}</ErrorAlert></div>}
+        <div className="mt-3 flex flex-wrap gap-2">
+          <button type="button" className="btn btn-sm" onClick={() => goToScore('title')}>Paste my CV instead</button>
+          <button type="button" className="btn btn-sm" onClick={startWithSample}>Try with sample data</button>
         </div>
       </div>
 

@@ -43,14 +43,6 @@ B.Sc. Business Analytics, National University of Singapore, 2022
 
 SKILLS
 Excel, SQL, Power BI, Python, pandas, Communication`,
-    cl: `Dear Hiring Manager,
-
-I am excited to apply for the Data Analyst role at Northwind Retail. In my current role at Harbourline Logistics I write SQL queries and build Power BI dashboards that help managers make faster decisions, and I recently cut report preparation time by 30%.
-
-I enjoy translating complex data into clear recommendations for non-technical stakeholders, and I am keen to deepen my experience in retail analytics and experimentation.
-
-Thank you for considering my application.
-Alex Tan`,
   },
   {
     title: 'Frontend Engineer',
@@ -92,6 +84,5 @@ B.Comp. Computer Science, Universiti Malaya, 2021
 
 SKILLS
 JavaScript, React, TypeScript, HTML, CSS, Git`,
-    cl: '',
   },
 ]

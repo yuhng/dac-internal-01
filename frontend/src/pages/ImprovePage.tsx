@@ -79,7 +79,7 @@ function Improvements({ analysis, changes }: { analysis: Analysis; changes: Chan
     }
     updateDraft({ cv: improved })
     navigate('/score')
-    runAnalysis({ title: analysis.title, company: analysis.company, jd: analysis.jd, cv: improved, cl: analysis.cl }, analysis.overall)
+    runAnalysis({ title: analysis.title, company: analysis.company, jd: analysis.jd, cv: improved }, analysis.overall)
   }
 
   return (

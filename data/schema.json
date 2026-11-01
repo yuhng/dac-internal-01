@@ -7,6 +7,8 @@
     "id",
     "document_type",
     "text",
+    "email",
+    "phone",
     "work_experience",
     "education",
     "certifications",
@@ -42,6 +44,14 @@
       "type": "string",
       "minLength": 1,
       "description": "Full plain text of the document."
+    },
+    "email": {
+      "type": ["string", "null"],
+      "description": "Resume only. Candidate's email address, as written in the document."
+    },
+    "phone": {
+      "type": ["string", "null"],
+      "description": "Resume only. Candidate's phone number, as written in the document."
     },
     "work_experience": {
       "type": ["array", "null"],

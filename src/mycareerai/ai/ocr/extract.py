@@ -40,6 +40,7 @@ class ExtractedDocument:
             return "mixed"
         return "ocr" if methods == {"ocr"} else "pdf_text_layer"
 
+# -------------------------------------- HELPERS -----------------------------------------------------------
 
 def _normalise(text: str) -> str:
     lines = (re.sub(r"[ \t\f]+", " ", line).strip() for line in text.splitlines())
@@ -55,6 +56,7 @@ def _ocr_page(page: pypdfium2.PdfPage) -> str:
     # Tesseract tends to read the gap after a bullet as a vertical bar.
     return re.sub(r"(?m)^\s*-\s*\|\s*", "- ", _normalise(text))
 
+# ------------------------------------- FUNCTIONS-----------------------------------------------------------
 
 def extract_text(path: Path, force_ocr: bool = False) -> ExtractedDocument:
     try:

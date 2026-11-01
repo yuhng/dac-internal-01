@@ -12,7 +12,7 @@ const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
 async function extractText(file: File) {
   if (!/\.txt$/i.test(file.name) && file.type !== 'text/plain') {
-    throw new ApiError(`${file.name} can't be read in this demo. PDF and DOCX parsing needs a server-side parser. Paste the text instead, or upload a .txt file.`)
+    throw new ApiError(`${file.name} can't be read. Upload a PDF or .txt file, or paste the text instead.`)
   }
   if (file.size > MAX_UPLOAD_BYTES) {
     throw new ApiError('That file is larger than 300 KB. Please upload a plain-text CV under 300 KB.')

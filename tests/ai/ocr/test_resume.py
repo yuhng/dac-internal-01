@@ -1,3 +1,5 @@
+import pytest
+
 from mycareerai.ai.ocr import parse_resume
 
 PIPE_STYLE = """Sam Example
@@ -74,9 +76,9 @@ def test_separates_skills_from_certifications():
     assert {"Python", "Pandas", "Polars", "SQL", "AWS", "GCP"} <= set(fields["hard_skills"])
 
 
-def test_keeps_listed_skill_order_and_first_spelling():
-    fields = parse_resume("SKILLS\nPython, pySpark, SQL\n")
-    assert fields["hard_skills"] == ["Python", "pySpark", "SQL"]
+def test_keeps_listed_skill_order_and_uses_known_spellings():
+    fields = parse_resume("SKILLS\nPython, pySpark, Polars, polars, SQL\n")
+    assert fields["hard_skills"] == ["Python", "PySpark", "Polars", "SQL"]
 
 
 def test_finds_skills_outside_the_skills_section():
@@ -98,6 +100,8 @@ def test_does_not_match_skills_inside_other_words():
 
 def test_missing_sections_return_empty_lists():
     assert parse_resume("Just some text with no headings") == {
+        "email": None,
+        "phone": None,
         "work_experience": [],
         "education": [],
         "certifications": [],
@@ -105,3 +109,29 @@ def test_missing_sections_return_empty_lists():
         "hard_skills": [],
         "soft_skills": [],
     }
+
+
+def test_finds_contact_details():
+    fields = parse_resume("Sam Example\nMobile: (+65) 9123 4567 | Email: sam.lee+cv@mail.example.com.\nEXPERIENCE\n")
+    assert fields["email"] == "sam.lee+cv@mail.example.com"
+    assert fields["phone"] == "(+65) 9123 4567"
+
+
+@pytest.mark.parametrize("phone", ["+1 (555) 123-4567", "555.123.4567", "91234567", "+44 20 7946 0958"])
+def test_finds_phone_formats(phone):
+    assert parse_resume(f"Sam Example | {phone} | sam@example.com")["phone"] == phone
+
+
+def test_missing_contact_details_are_null():
+    fields = parse_resume(COMMA_STYLE)
+    assert fields["email"] is None
+    assert fields["phone"] is None
+
+
+def test_does_not_mistake_dates_or_figures_for_a_phone_number():
+    text = "Analyst 2021-2024\nAnalyst 2019 - 2021\nAnalyst Jun 2024 – Present\nProcessed 3,000,000 rows\nGPA 3.85\nID 123456"
+    assert parse_resume(text)["phone"] is None
+
+
+def test_finds_phone_after_a_year_range():
+    assert parse_resume("Analyst 2021-2024\nContact: 9123 4567")["phone"] == "9123 4567"

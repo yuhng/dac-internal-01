@@ -1,0 +1,24 @@
+# Section name: the headings that start it. Matched against a whole line, ignoring case.
+experience:
+  - experience
+  - work experience
+  - professional experience
+  - employment
+  - work history
+projects:
+  - project experience
+  - projects
+education:
+  - education
+skills:
+  - skills
+  - technical skills
+  - core skills
+certifications:
+  - certifications
+  - certificates
+summary:
+  - summary
+  - profile
+  - professional summary
+  - objective

@@ -1,0 +1,44 @@
+# name: the value stored in a row.
+# aliases: other spellings, which are stored as name.
+# case_sensitive: set this when the term is also an ordinary word, such as "react to incidents".
+- name: A/B Testing
+- name: Airflow
+- name: AWS
+  aliases: [Amazon Web Services]
+- name: Azure
+- name: BigQuery
+- name: CI/CD
+- name: Databricks
+- name: dbt
+- name: Docker
+- name: ETL
+- name: Excel
+  aliases: [Microsoft Excel, MS Excel]
+  case_sensitive: true
+- name: FastAPI
+- name: GCP
+  aliases: [Google Cloud Platform, Google Cloud]
+- name: Git
+- name: Informatica
+- name: Java
+- name: JavaScript
+- name: Kubernetes
+  aliases: [K8s]
+- name: LangChain
+- name: Looker
+- name: Machine Learning
+- name: Pandas
+- name: Power BI
+  aliases: [PowerBI]
+- name: PySpark
+- name: Python
+- name: React
+  aliases: [React.js, ReactJS]
+  case_sensitive: true
+- name: Snowflake
+- name: Spark
+  aliases: [Apache Spark]
+  case_sensitive: true
+- name: SQL
+- name: Tableau
+- name: TypeScript

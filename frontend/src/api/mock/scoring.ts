@@ -91,24 +91,22 @@ const bandFor = (score: number): [Band, string] =>
         : ['weak', 'Weak match']
 
 const METHODOLOGY = [
-  `**Skills match (40%)**: skills from a built-in dictionary of ${SKILLS.length} skills are found in the job description and checked against your CV and cover letter.`,
-  '**Content similarity (20%)**: cosine similarity of word frequencies between CV and job description.',
-  '**Cover letter (15%)**: job skills referenced, company and title named, and length.',
-  '**Impact (15%)**: share of bullet points with numbers, minus weak phrasing.',
-  '**Structure (10%)**: presence of standard CV sections and sensible length.',
+  `**Skills match (47%)**: skills from a built-in dictionary of ${SKILLS.length} skills are found in the job description and checked against your CV.`,
+  '**Content similarity (24%)**: cosine similarity of word frequencies between CV and job description.',
+  '**Impact (18%)**: share of bullet points with numbers, minus weak phrasing.',
+  '**Structure (11%)**: presence of standard CV sections and sensible length.',
   'These weights are placeholders. A production scoring method still needs to be defined and validated.',
 ]
 
 export function analyze(input: ScoreInput): Analysis {
-  const { jd, cv, cl, title, company } = input
+  const { jd, cv } = input
   const jdLower = jd.toLowerCase()
   const cvLower = cv.toLowerCase()
-  const clLower = cl.toLowerCase()
 
   let requirements = findSkills(jdLower)
   const usedFallback = requirements.length < 3
   if (usedFallback) requirements = topTerms(jd, 10)
-  const matched = requirements.filter(s => matchesSkill(s, `${cvLower}\n${clLower}`))
+  const matched = requirements.filter(s => matchesSkill(s, cvLower))
   const missing = requirements.filter(s => !matched.includes(s))
   const skillScore = Math.round((matched.length / requirements.length) * 100)
 
@@ -129,29 +127,14 @@ export function analyze(input: ScoreInput): Analysis {
   let structureScore = Math.round(((SECTIONS.length - missingSections.length) / SECTIONS.length) * 100)
   if (cvWords < 150 || cvWords > 1100) structureScore = Math.max(0, structureScore - 20)
 
-  let clScore: number | null = null
-  let clDetail = 'Not provided — excluded from the overall score'
-  const clMentionsCompany = Boolean(company) && clLower.includes(company.toLowerCase())
-  if (cl.trim()) {
-    const clSkills = requirements.filter(s => matchesSkill(s, clLower))
-    const clWords = countWords(cl)
-    clScore = Math.round(Math.min(1, clSkills.length / Math.min(5, requirements.length)) * 50)
-      + (clMentionsCompany ? 20 : 0)
-      + (title && clLower.includes(title.toLowerCase()) ? 15 : 0)
-      + (clWords >= 120 && clWords <= 450 ? 15 : clWords >= 60 ? 8 : 0)
-    clDetail = `${clSkills.length} job skills referenced · ${clWords} words · ${clMentionsCompany ? 'mentions' : 'does not mention'} the company`
-  }
-
   const parts: ScorePart[] = [
-    { label: 'Skills match', weight: 40, score: skillScore, detail: `${matched.length} of ${requirements.length} ${usedFallback ? 'key terms' : 'required skills'} found` },
-    { label: 'Content similarity', weight: 20, score: overlapScore, detail: `Term-overlap similarity ${similarity.toFixed(2)} between CV and job description` },
-    { label: 'Cover letter alignment', weight: 15, score: clScore, detail: clDetail },
-    { label: 'Impact & wording', weight: 15, score: impactScore, detail: `${quantified.length} of ${bullets.length} bullet points quantified · ${weakCount} weak phrase${weakCount === 1 ? '' : 's'}` },
-    { label: 'Structure', weight: 10, score: structureScore, detail: missingSections.length ? `Missing: ${missingSections.join(', ')}` : 'All key sections present' },
+    { label: 'Skills match', weight: 47, score: skillScore, detail: `${matched.length} of ${requirements.length} ${usedFallback ? 'key terms' : 'required skills'} found` },
+    { label: 'Content similarity', weight: 24, score: overlapScore, detail: `Term-overlap similarity ${similarity.toFixed(2)} between CV and job description` },
+    { label: 'Impact & wording', weight: 18, score: impactScore, detail: `${quantified.length} of ${bullets.length} bullet points quantified · ${weakCount} weak phrase${weakCount === 1 ? '' : 's'}` },
+    { label: 'Structure', weight: 11, score: structureScore, detail: missingSections.length ? `Missing: ${missingSections.join(', ')}` : 'All key sections present' },
   ]
-  const scored = parts.filter(p => p.score !== null)
   const overall = Math.round(
-    scored.reduce((sum, p) => sum + p.score! * p.weight, 0) / scored.reduce((sum, p) => sum + p.weight, 0),
+    parts.reduce((sum, p) => sum + p.score * p.weight, 0) / parts.reduce((sum, p) => sum + p.weight, 0),
   )
   const [band, bandLabel] = bandFor(overall)
 
@@ -161,8 +144,6 @@ export function analyze(input: ScoreInput): Analysis {
   if (bullets.length && quantified.length / bullets.length < 0.6) recommend('med', `Quantify more achievements. Only ${quantified.length} of ${bullets.length} bullet points include a number, percentage or scale.`)
   if (weakCount) recommend('med', `Replace ${weakCount} passive phrase${weakCount === 1 ? '' : 's'} such as “responsible for” with action verbs.`)
   if (grammarCount) recommend('med', `Fix ${grammarCount} spelling or grammar issue${grammarCount === 1 ? '' : 's'}. See **Improve CV**.`)
-  if (!cl.trim()) recommend('low', 'Add a cover letter. It contributes 15% of the score and lets you explain gaps directly.')
-  else if (company && !clMentionsCompany) recommend('low', `Mention ${company} by name in your cover letter.`)
   if (missingSections.length) recommend('low', `Consider adding a ${missingSections[0]} section.`)
   if (!recommendations.length) recommend('low', 'Your application is well aligned. Tailor your opening line to the company before sending.')
 

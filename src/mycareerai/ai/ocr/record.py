@@ -28,10 +28,12 @@ def build_record(
     fields = parse_resume(document.text)
 
     record = {
-        # Hashing the file keeps the id stable when the same document is processed again.
+        # Primary Fields
         "id": hashlib.sha256(path.read_bytes()).hexdigest(),
         "document_type": "resume",
         "text": document.text,
+        "email": fields["email"],
+        "phone": fields["phone"],
         "work_experience": fields["work_experience"],
         "education": fields["education"],
         "certifications": fields["certifications"],
@@ -42,7 +44,7 @@ def build_record(
         "qualifications": None,
         "hard_skills": fields["hard_skills"],
         "soft_skills": fields["soft_skills"],
-        # These need judgement, so they stay null until a model or a reviewer fills them in.
+        # Classification fields
         "occupation": None,
         "seniority_level": None,
         "industry": None,

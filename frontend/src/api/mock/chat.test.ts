@@ -12,7 +12,7 @@ describe('reply', () => {
   })
 
   it.each([
-    ['Explain my score', '73/100'],
+    ['Explain my score', '66/100'],
     ['Which keywords am I missing?', 'Tableau'],
     ['How can I improve my CV?', 'Top actions'],
     ['Draft a cover letter opening', 'Northwind Retail'],

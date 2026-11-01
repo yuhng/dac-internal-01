@@ -3,36 +3,13 @@
 import re
 from typing import Any
 
-HEADINGS = {
-    "experience": "experience",
-    "work experience": "experience",
-    "professional experience": "experience",
-    "employment": "experience",
-    "work history": "experience",
-    "project experience": "projects",
-    "projects": "projects",
-    "education": "education",
-    "skills": "skills",
-    "technical skills": "skills",
-    "core skills": "skills",
-    "certifications": "certifications",
-    "certificates": "certifications",
-    "summary": "summary",
-    "profile": "summary",
-    "professional summary": "summary",
-    "objective": "summary",
-}
+from .terms_loader import Term, canonical_names, load_headings, load_terms
 
-HARD_SKILLS = (
-    "A/B Testing", "Airflow", "AWS", "Azure", "BigQuery", "CI/CD", "Databricks", "dbt", "Docker", "ETL", "Excel",
-    "FastAPI", "GCP", "Git", "Informatica", "Java", "JavaScript", "Kubernetes", "LangChain", "Looker",
-    "Machine Learning", "Pandas", "Power BI", "PySpark", "Python", "React", "Snowflake", "Spark", "SQL", "Tableau",
-    "TypeScript",
-)
-SOFT_SKILLS = (
-    "Collaboration", "Communication", "Leadership", "Negotiation", "Presentation", "Problem Solving",
-    "Project Management", "Stakeholder Management", "Teamwork",
-)
+HEADINGS = load_headings()
+HARD_SKILLS = load_terms("hard_skills.yaml")
+SOFT_SKILLS = load_terms("soft_skills.yaml")
+_HARD_NAMES = canonical_names(HARD_SKILLS)
+_SOFT_NAMES = canonical_names(SOFT_SKILLS)
 
 _MONTH = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?"
 _DATE = rf"(?:{_MONTH}\s+)?\d{{4}}"
@@ -45,13 +22,32 @@ _DEGREE = re.compile(
     r"|B\.?(?:Sc|A|Eng|Comp|Tech)\.?|M\.?(?:Sc|A|Eng|Tech)\.?)(?![\w])\.?(?:\s*\(Hons?\.?\)|\s*\(Honours\))?"
 )
 _TRAILING_YEAR = re.compile(r"[,\s]+(\d{4})$")
+_EMAIL = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
+_PHONE = re.compile(r"(?<![\w.])[+(]*\d[\d ().-]{6,}\d(?!\w)")
+_YEAR_RANGE = re.compile(r"(?:19|20)\d{2}\D+(?:19|20)\d{2}")
+MIN_PHONE_DIGITS = 8
+MAX_PHONE_DIGITS = 15
 
-
+# -------------------------------------- HELPERS -----------------------------------------------------------
 def _dedupe(items: list[str]) -> list[str]:
     unique: dict[str, str] = {}
     for item in items:
         unique.setdefault(item.casefold(), item)
     return list(unique.values())
+
+
+def _find_email(text: str) -> str | None:
+    match = _EMAIL.search(text)
+    return match[0] if match else None
+
+
+def _find_phone(text: str) -> str | None:
+    for match in _PHONE.finditer(text):
+        digits = sum(char.isdigit() for char in match[0])
+        # Two years in a row, as in `2021-2024`, have as many digits as a phone number.
+        if MIN_PHONE_DIGITS <= digits <= MAX_PHONE_DIGITS and not _YEAR_RANGE.fullmatch(match[0]):
+            return match[0]
+    return None
 
 
 def _split_sections(text: str) -> dict[str, list[str]]:
@@ -157,13 +153,10 @@ def _parse_skill_lines(lines: list[str]) -> tuple[list[str], list[str]]:
     return skills, certifications
 
 
-def _find_terms(text: str, terms: tuple[str, ...]) -> list[str]:
-    def pattern(term: str) -> str:
-        return rf"(?<![a-z0-9]){re.escape(term).replace(r'\ ', '[ -]')}(?![a-z0-9])"
+def _find_terms(text: str, terms: tuple[Term, ...]) -> list[str]:
+    return [term.name for term in terms if term.pattern.search(text)]
 
-    return [term for term in terms if re.search(pattern(term), text, re.IGNORECASE)]
-
-
+# ------------------------------------- FUNCTIONS-----------------------------------------------------------
 def parse_resume(text: str) -> dict[str, Any]:
     sections = _split_sections(text)
     listed_skills, skill_line_certifications = _parse_skill_lines(sections.get("skills", []))
@@ -174,12 +167,14 @@ def parse_resume(text: str) -> dict[str, Any]:
     ]
 
     soft_skills = _find_terms(text, SOFT_SKILLS)
-    soft_names = {skill.casefold() for skill in SOFT_SKILLS}
-    hard_skills = _dedupe(
-        [skill for skill in listed_skills if skill.casefold() not in soft_names] + _find_terms(text, HARD_SKILLS)
-    )
+    listed_hard_skills = [
+        _HARD_NAMES.get(skill.casefold(), skill) for skill in listed_skills if skill.casefold() not in _SOFT_NAMES
+    ]
+    hard_skills = _dedupe(listed_hard_skills + _find_terms(text, HARD_SKILLS))
 
     return {
+        "email": _find_email(text),
+        "phone": _find_phone(text),
         "work_experience": _parse_experience(sections.get("experience", [])),
         "education": _parse_education(sections.get("education", [])),
         "certifications": _dedupe(certifications + skill_line_certifications),

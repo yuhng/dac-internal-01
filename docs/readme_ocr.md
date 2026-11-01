@@ -105,6 +105,7 @@ Parsing uses rules, not a model. It splits the text at known headings such as `W
 | Education | Finds a degree such as `BSc` or `Diploma`, then takes the institution, field and year around it |
 | Skills | Splits comma-separated lists. `Python (Pandas, Polars)` becomes three skills |
 | Certifications | Reads a certifications section, or a `Certification:` line inside Skills |
+| Contact details | Takes the first email address and the first run of 8 to 15 digits that is not a year range, anywhere in the text |
 
 Two role header styles are supported:
 
@@ -113,17 +114,18 @@ Company | Job Title  Jun 2024 – Present
 Job Title, Company (2023 – Present)
 ```
 
-`hard_skills` combines the Skills section with terms from the `HARD_SKILLS` list found anywhere in the document. `soft_skills` comes from the `SOFT_SKILLS` list. `skills` is both combined, without duplicates.
+`hard_skills` combines the Skills section with terms from `terms/hard_skills.yaml` found anywhere in the document. `soft_skills` comes from `terms/soft_skills.yaml`. `skills` is both combined, without duplicates. An alias is stored under its term's `name`, so `Postgres` and `PostgreSQL` can't count as two skills if both are listed.
 
 ### 3. Build the row (`record.py`)
 
-`build_record` assembles all 22 columns and validates the row against `data/schema.json`. An invalid row raises `jsonschema.ValidationError` instead of being returned.
+`build_record` assembles all 24 columns and validates the row against `data/schema.json`. An invalid row raises `jsonschema.ValidationError` instead of being returned.
 
 | Column | Value |
 | --- | --- |
 | `id` | SHA-256 of the file, so the same file always gets the same id |
 | `document_type` | Always `resume` |
 | `text` | The full extracted text |
+| `email`, `phone` | First match in the text, as written. `null` if none was found |
 | `work_experience`, `education`, `certifications`, `skills`, `hard_skills`, `soft_skills` | Parsed values. Empty list if nothing was found |
 | `responsibilities`, `requirements`, `qualifications` | `null`, as these apply to job descriptions |
 | `occupation`, `seniority_level`, `industry`, `resume_format`, `writing_style` | `null`, as these need a model or reviewer |
@@ -149,13 +151,14 @@ The CLI prints `OcrError` messages and exits with status 1.
 - **PDFs only:** DOCX and image files are not supported.
 - **Layouts:** parsing is fitted to the heading and role styles above. Other layouts can produce empty or wrong structured fields, even when `text` is correct, so review rows before relying on them.
 - **Projects:** the schema has no projects column, so project experience stays in `text` only.
-- **Skills:** the term lists are short and fixed, so `soft_skills` is often empty.
+- **Contact details:** OCR can misread them. An address that no longer looks like an email becomes `null`, but a misread digit or a misread character that still looks valid is kept, so review these on OCR rows.
+- **Skills:** the term lists are short, so `soft_skills` is often empty. Case-sensitive terms still match an ordinary word at the start of a sentence, such as "Excel at...".
 - **OCR languages:** Tesseract uses its default language, English.
 - **Scans:** OCR has only been tested on a text-based CV rendered to an image, not on a real scan.
 
 ## Personal data
 
-Rows contain personal data. `text` keeps phone numbers and email addresses, and `source` defaults to the file name, which may include a name. Do not commit rows or sample CVs. `data/*.pdf` is already in `.gitignore`, but output files are not, so ignore your output folder as well.
+Rows contain personal data. `email` and `phone` hold contact details, `text` keeps them too, and `source` defaults to the file name, which may include a name. Do not commit rows or sample CVs. `data/*.pdf` and `data/processed/` are already in `.gitignore`, so keep output files there.
 
 ## Tests
 
@@ -169,8 +172,8 @@ Tests that need a real CV use the first PDF in `data/` and are skipped if there 
 
 | To change | Edit |
 | --- | --- |
-| Recognised section headings | `HEADINGS` in `resume.py` |
-| Skill terms | `HARD_SKILLS` and `SOFT_SKILLS` in `resume.py` |
+| Recognised section headings | `terms/headings.yaml` |
+| Skill terms | `terms/hard_skills.yaml` and `terms/soft_skills.yaml`. Add `aliases` for other spellings, and `case_sensitive: true` if the term is also an ordinary word. `tests/ai/ocr/test_terms.py` rejects duplicates |
 | Degree names | `_DEGREE` in `resume.py` |
 | When OCR is used, or its quality | `MIN_TEXT_LAYER_CHARS` and `OCR_DPI` in `extract.py` |
 | Table columns | `data/schema.json` and the row in `build_record`, in `record.py` |

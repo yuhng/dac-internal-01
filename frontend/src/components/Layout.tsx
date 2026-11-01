@@ -37,14 +37,11 @@ export function Layout() {
         <div className="mt-auto hidden rounded-lg bg-surface-2 p-3 text-xs text-muted md:block">
           <b>Prototype v0.1</b>
           <br />
-          All analysis runs locally in your browser. No data leaves this page.
+          Analysis runs in your browser. Uploaded PDFs are sent to the server, which saves their text and parsed details.
         </div>
       </aside>
 
       <main className="min-w-0">
-        <div role="note" className="border-b border-line bg-warn-weak px-4 py-2 text-[13px] text-warn md:px-7">
-          <b>Demo mode:</b> scores, rewrites and chat replies come from rule-based heuristics in your browser. No AI model or server is used.
-        </div>
         <div className="max-w-[1280px] px-4 py-5 md:p-7">
           <Outlet />
         </div>

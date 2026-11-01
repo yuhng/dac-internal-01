@@ -5,7 +5,6 @@ export interface ScoreInput {
   company: string
   jd: string
   cv: string
-  cl: string
 }
 
 export type Band = 'strong' | 'good' | 'fair' | 'weak'
@@ -14,8 +13,7 @@ export type Severity = 'high' | 'med' | 'low'
 export interface ScorePart {
   label: string
   weight: number
-  /** null when the part does not apply, e.g. no cover letter was provided. */
-  score: number | null
+  score: number
   detail: string
 }
 
