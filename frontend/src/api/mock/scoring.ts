@@ -159,5 +159,10 @@ export function analyze(input: ScoreInput): Analysis {
     recommendations,
     usedFallback,
     methodology: METHODOLOGY,
+    requirements: [],
+    quality: { score: Math.round((impactScore + structureScore) / 2), parts: parts.slice(2) },
+    confidence: { level: usedFallback ? 'low' : 'medium', reasons: [] },
+    cap: null,
+    engineVersion: 'mock',
   }
 }

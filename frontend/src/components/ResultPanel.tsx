@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import type { Analysis, Severity } from '../api/types'
+import type { Analysis, RequirementResult, Severity, Tier } from '../api/types'
 import { useAddTrackerEntry } from '../hooks/useTracker'
 import { BAND_BADGE } from '../lib/bands'
 import { useApplication } from '../state/useApplication'
@@ -15,6 +15,16 @@ const SEVERITY: Record<Severity, { label: string; className: string }> = {
   high: { label: 'High', className: 'bg-danger-weak text-danger' },
   med: { label: 'Medium', className: 'bg-warn-weak text-warn' },
   low: { label: 'Low', className: 'bg-primary-weak text-primary' },
+}
+
+const TIER: Record<Tier, { label: string; className: string }> = {
+  demonstrated: { label: 'Shown in your work', className: 'text-success' },
+  implied: { label: 'Implied by your work', className: 'text-success' },
+  listed: { label: 'Mentioned only', className: 'text-primary' },
+  related: { label: 'Related skill', className: 'text-warn' },
+  partial: { label: 'Partly met', className: 'text-warn' },
+  missing: { label: 'Not found', className: 'text-danger' },
+  unassessed: { label: 'Not assessed', className: 'text-muted' },
 }
 
 const RING_COLOR: Record<Analysis['band'], string> = {
@@ -37,7 +47,7 @@ function AnalyzingSteps() {
 
   return (
     <EmptyState title="Analyzing your application">
-      <p className="text-[13px]">Running locally in your browser</p>
+      <p className="text-[13px]">Comparing your CV with the job</p>
       <ul className="mx-auto mt-5 max-w-[300px] text-left">
         {STEPS.map((label, i) => (
           <li key={label} className={`flex items-center gap-2.5 py-1.5 ${i < step ? 'text-ink' : ''}`}>
@@ -74,6 +84,36 @@ function ScoreRing({ analysis }: { analysis: Analysis }) {
   )
 }
 
+function Parts({ parts }: { parts: Analysis['parts'] }) {
+  return (
+    <div className="grid gap-3">
+      {parts.map(part => (
+        <div key={part.label} className="grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 text-sm">
+          <span>{part.label} <span className="text-[13px] text-muted">({part.weight}%)</span></span>
+          <b>{part.score ?? '—'}</b>
+          <div className="col-span-full h-[7px] overflow-hidden rounded-full bg-surface-2">
+            <i className="block h-full rounded-full bg-primary" style={{ width: `${part.score ?? 0}%` }} />
+          </div>
+          <span className="col-span-full text-xs text-muted">{part.detail}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function RequirementRow({ requirement }: { requirement: RequirementResult }) {
+  const tier = TIER[requirement.tier]
+  return (
+    <li className="rounded-lg bg-surface-2 px-3 py-2.5 text-sm">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3">
+        <span>{requirement.text}{requirement.importance === 'must' && <span className="text-[13px] text-muted"> · must-have</span>}</span>
+        <span className={`text-[13px] font-medium ${tier.className}`}>{tier.label}</span>
+      </div>
+      {requirement.evidence && <p className="mt-1 text-[13px] text-muted">{requirement.evidence}</p>}
+    </li>
+  )
+}
+
 function Result({ analysis }: { analysis: Analysis }) {
   const { prevScore, stale } = useApplication()
   const toast = useToast()
@@ -96,7 +136,7 @@ function Result({ analysis }: { analysis: Analysis }) {
         <ScoreRing analysis={analysis} />
         <div>
           <Badge className={BAND_BADGE[analysis.band]}>{analysis.bandLabel}</Badge>{' '}
-          <SimulatedBadge>Heuristic score</SimulatedBadge>
+          <SimulatedBadge>Rule-based score</SimulatedBadge>
           <h3 className="mt-2 text-lg font-semibold">
             {analysis.title || 'Untitled role'}{analysis.company && ` · ${analysis.company}`}
           </h3>
@@ -105,25 +145,19 @@ function Result({ analysis }: { analysis: Analysis }) {
               {delta >= 0 ? `▲ +${delta}` : `▼ ${delta}`} points vs. previous version
             </div>
           )}
-          {analysis.usedFallback && (
-            <p className="mt-1 text-[13px] text-muted">Few known skills were detected, so the most frequent job terms were used instead.</p>
+          {analysis.cap !== null && (
+            <p className="mt-1 text-[13px] text-muted">Limited to {analysis.cap} because of missing must-haves.</p>
+          )}
+          {analysis.confidence.level !== 'high' && (
+            <p className="mt-1 text-[13px] text-muted">
+              <b className="font-medium capitalize">{analysis.confidence.level} confidence.</b> {analysis.confidence.reasons.join(' ')}
+            </p>
           )}
         </div>
       </div>
 
       <SectionTitle>Score breakdown</SectionTitle>
-      <div className="grid gap-3">
-        {analysis.parts.map(part => (
-          <div key={part.label} className="grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 text-sm">
-            <span>{part.label} <span className="text-[13px] text-muted">({part.weight}%)</span></span>
-            <b>{part.score ?? '—'}</b>
-            <div className="col-span-full h-[7px] overflow-hidden rounded-full bg-surface-2">
-              <i className="block h-full rounded-full bg-primary" style={{ width: `${part.score ?? 0}%` }} />
-            </div>
-            <span className="col-span-full text-xs text-muted">{part.detail}</span>
-          </div>
-        ))}
-      </div>
+      <Parts parts={analysis.parts} />
 
       <SectionTitle>Skills from the job description</SectionTitle>
       <div className="flex flex-wrap gap-1.5">
@@ -134,6 +168,14 @@ function Result({ analysis }: { analysis: Analysis }) {
           <span key={skill} className="rounded-full bg-warn-weak px-2.5 py-[3px] text-[13px] text-warn">✕ {skill}</span>
         ))}
       </div>
+
+      <SectionTitle>Evidence from your CV</SectionTitle>
+      <ul className="grid gap-2">
+        {analysis.requirements.map(requirement => <RequirementRow key={`${requirement.kind}:${requirement.text}`} requirement={requirement} />)}
+      </ul>
+
+      <SectionTitle>{`CV quality: ${analysis.quality.score} / 100`}</SectionTitle>
+      <Parts parts={analysis.quality.parts} />
 
       <SectionTitle>Recommendations</SectionTitle>
       <ul className="grid gap-2">

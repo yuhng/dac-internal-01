@@ -1,22 +1,24 @@
 """Document API: turns an uploaded resume into a row matching data/schema.json."""
 
-import json
+import logging
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
 
 import jsonschema
+import psycopg
 from fastapi import APIRouter, HTTPException, UploadFile, status
 
 from mycareerai.ai.ocr import OcrError, build_record
+from mycareerai.core.postgre.ingest import save_document
 
 MAX_UPLOAD_BYTES = 10_000_000
-ROW_PATH = Path(__file__).resolve().parents[3] / "data" / "processed" / "row.json"
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
 
-# Not async: OCR blocks, so FastAPI needs to run this in its thread pool.
+# OCR and Postgres Ingestion module
 @router.post("/extract")
 def extract(file: UploadFile) -> dict[str, Any]:
     if not (file.filename or "").lower().endswith(".pdf"):
@@ -37,6 +39,9 @@ def extract(file: UploadFile) -> dict[str, Any]:
         except jsonschema.ValidationError as err:
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "The resume could not be parsed.") from err
 
-    ROW_PATH.parent.mkdir(parents=True, exist_ok=True)
-    ROW_PATH.write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n")
+    try:
+        save_document(record)
+    except psycopg.Error as err:
+        logger.exception("Saving the document failed")
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "The resume could not be saved. Try again in a moment.") from err
     return record

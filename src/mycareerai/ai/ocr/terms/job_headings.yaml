@@ -1,0 +1,41 @@
+# Section name: the job description headings that start it. Matched against a whole line, ignoring case.
+required:
+  - about you
+  - basic qualifications
+  - minimum qualifications
+  - must have
+  - must haves
+  - must-have
+  - must-haves
+  - qualifications
+  - required
+  - required qualifications
+  - required skills
+  - requirements
+  - skills
+  - what we're looking for
+  - what you bring
+  - what you need
+  - what you'll need
+  - who you are
+  - you have
+preferred:
+  - bonus
+  - bonus points
+  - desirable
+  - desired skills
+  - good to have
+  - nice to have
+  - nice-to-have
+  - preferred
+  - preferred qualifications
+  - preferred skills
+responsibilities:
+  - day to day
+  - duties
+  - key responsibilities
+  - responsibilities
+  - the role
+  - what you will do
+  - what you'll do
+  - your role

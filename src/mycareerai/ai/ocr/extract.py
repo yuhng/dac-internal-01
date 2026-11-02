@@ -12,6 +12,9 @@ import pytesseract
 MIN_TEXT_LAYER_CHARS = 50
 OCR_DPI = 300
 PDF_POINTS_PER_INCH = 72
+# OCR takes seconds per page, and the render needs memory in proportion to the page area.
+MAX_PAGES = 5
+MAX_PAGE_POINTS = 20 * PDF_POINTS_PER_INCH
 
 
 class OcrError(Exception):
@@ -66,10 +69,14 @@ def extract_text(path: Path, force_ocr: bool = False) -> ExtractedDocument:
 
     pages = []
     try:
+        if len(document) > MAX_PAGES:
+            raise OcrError(f"{path.name} has more than {MAX_PAGES} pages. Upload a shorter CV.")
         for index in range(len(document)):
             page = document[index]
             text = _normalise(page.get_textpage().get_text_bounded())
             if force_ocr or len(text) < MIN_TEXT_LAYER_CHARS:
+                if max(page.get_size()) > MAX_PAGE_POINTS:
+                    raise OcrError(f"Page {index + 1} of {path.name} is too large to read.")
                 pages.append(Page(index + 1, _ocr_page(page), "ocr"))
             else:
                 pages.append(Page(index + 1, text, "text_layer"))

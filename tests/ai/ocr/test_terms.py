@@ -16,6 +16,11 @@ def test_every_spelling_belongs_to_one_term(terms):
     assert len(forms(terms)) == len(set(forms(terms)))
 
 
+def test_related_terms_exist():
+    names = {term.name for term in HARD_SKILLS}
+    assert {name for term in HARD_SKILLS for name in term.related} <= names
+
+
 def test_no_term_is_both_hard_and_soft():
     assert not set(forms(HARD_SKILLS)) & set(forms(SOFT_SKILLS))
 
@@ -28,7 +33,7 @@ def test_every_heading_belongs_to_one_section():
 @pytest.mark.parametrize("file_name", ["hard_skills.yaml", "soft_skills.yaml"])
 def test_terms_only_use_known_keys(file_name):
     for entry in yaml.safe_load((TERMS_DIR / file_name).read_text()):
-        assert set(entry) <= {"name", "aliases", "case_sensitive"}, entry
+        assert set(entry) <= {"name", "aliases", "case_sensitive", "related"}, entry
 
 
 @pytest.mark.parametrize(

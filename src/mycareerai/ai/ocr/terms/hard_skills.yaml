@@ -1,17 +1,22 @@
 # name: the value stored in a row.
 # aliases: other spellings, which are stored as name.
 # case_sensitive: set this when the term is also an ordinary word, such as "react to incidents".
+# related: names of similar terms, which earn partial credit when scoring. Listing a pair once is enough.
 - name: A/B Testing
 - name: Airflow
 - name: AWS
   aliases: [Amazon Web Services]
+  related: [Azure, GCP]
 - name: Azure
+  related: [GCP]
 - name: BigQuery
+  related: [Snowflake, Databricks]
 - name: CI/CD
 - name: Databricks
 - name: dbt
 - name: Docker
 - name: ETL
+  related: [dbt, Airflow, Informatica]
 - name: Excel
   aliases: [Microsoft Excel, MS Excel]
   case_sensitive: true
@@ -22,6 +27,7 @@
 - name: Informatica
 - name: Java
 - name: JavaScript
+  related: [TypeScript]
 - name: Kubernetes
   aliases: [K8s]
 - name: LangChain
@@ -30,15 +36,48 @@
 - name: Pandas
 - name: Power BI
   aliases: [PowerBI]
+  related: [Looker]
 - name: PySpark
+  related: [Spark]
 - name: Python
 - name: React
   aliases: [React.js, ReactJS]
   case_sensitive: true
 - name: Snowflake
+  related: [Databricks]
 - name: Spark
   aliases: [Apache Spark]
   case_sensitive: true
 - name: SQL
 - name: Tableau
+  related: [Power BI, Looker]
 - name: TypeScript
+- name: Accessibility
+  aliases: [WCAG, A11y]
+- name: Agile
+  aliases: [Scrum]
+- name: CSS
+- name: Data Visualization
+  aliases: [Data Visualisation]
+  related: [Tableau, Power BI, Looker]
+- name: Data Warehouse
+  aliases: [Data Warehouses, Data Warehousing]
+  related: [BigQuery, Snowflake, Databricks]
+- name: Design Systems
+  aliases: [Design System]
+- name: Figma
+- name: HTML
+- name: Jest
+  related: [Unit Testing]
+- name: Node.js
+  aliases: [NodeJS]
+- name: REST APIs
+  aliases: [REST API, RESTful]
+- name: Salesforce
+- name: SEO
+- name: Statistics
+  aliases: [Statistical Analysis]
+- name: Unit Testing
+  aliases: [Unit Tests]
+- name: Web Performance
+  aliases: [Core Web Vitals]

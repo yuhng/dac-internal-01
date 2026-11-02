@@ -142,6 +142,8 @@ The CLI prints `OcrError` messages and exits with status 1.
 | Message | Cause |
 | --- | --- |
 | `<file> could not be opened as a PDF.` | The file is missing, damaged, or not a PDF |
+| `<file> has more than 5 pages...` | The PDF has more than `MAX_PAGES` pages |
+| `Page <n> of <file> is too large to read.` | A page that needs OCR is wider or taller than 20 inches |
 | `No text was found in <file>.` | No text layer, and OCR found nothing |
 | `Tesseract is not installed...` | A page needed OCR and Tesseract is missing |
 

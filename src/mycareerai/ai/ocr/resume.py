@@ -50,7 +50,7 @@ def _find_phone(text: str) -> str | None:
     return None
 
 
-def _split_sections(text: str) -> dict[str, list[str]]:
+def split_sections(text: str) -> dict[str, list[str]]:
     sections: dict[str, list[str]] = {}
     current = None
     for line in text.splitlines():
@@ -157,8 +157,24 @@ def _find_terms(text: str, terms: tuple[Term, ...]) -> list[str]:
     return [term.name for term in terms if term.pattern.search(text)]
 
 # ------------------------------------- FUNCTIONS-----------------------------------------------------------
+def evidence_lines(text: str) -> list[str]:
+    """Returns the work and project lines, with bullets that wrapped onto several lines joined."""
+    sections = split_sections(text)
+    joined: list[str] = []
+    in_bullet = False
+    for line in sections.get("experience", []) + sections.get("projects", []):
+        if not line.strip():
+            in_bullet = False
+        elif in_bullet and not _BULLET.match(line) and not _DATE_RANGE.search(line):
+            joined[-1] += f" {line}"
+        else:
+            in_bullet = bool(_BULLET.match(line))
+            joined.append(_BULLET.sub("", line))
+    return joined
+
+
 def parse_resume(text: str) -> dict[str, Any]:
-    sections = _split_sections(text)
+    sections = split_sections(text)
     listed_skills, skill_line_certifications = _parse_skill_lines(sections.get("skills", []))
     certifications = [
         item.strip()

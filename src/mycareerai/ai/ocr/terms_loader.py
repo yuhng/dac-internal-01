@@ -15,6 +15,7 @@ class Term:
     name: str
     forms: tuple[str, ...]
     pattern: re.Pattern[str]
+    related: tuple[str, ...] = ()
 
 # -------------------------------------- HELPERS -----------------------------------------------------------
 
@@ -34,7 +35,8 @@ def load_terms(file_name: str) -> tuple[Term, ...]:
     terms = []
     for entry in _read(file_name):
         forms = (entry["name"], *entry.get("aliases", ()))
-        terms.append(Term(entry["name"], forms, _build_pattern(forms, entry.get("case_sensitive", False))))
+        pattern = _build_pattern(forms, entry.get("case_sensitive", False))
+        terms.append(Term(entry["name"], forms, pattern, tuple(entry.get("related", ()))))
     return tuple(terms)
 
 

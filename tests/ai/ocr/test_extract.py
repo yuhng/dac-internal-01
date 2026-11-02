@@ -37,6 +37,29 @@ def test_rejects_a_document_with_no_text(blank_pdf, monkeypatch):
         extract_text(blank_pdf)
 
 
+def test_rejects_too_many_pages_before_any_ocr(tmp_path, monkeypatch):
+    path = tmp_path / "long.pdf"
+    document = pypdfium2.PdfDocument.new()
+    for _ in range(extract_module.MAX_PAGES + 1):
+        document.new_page(612, 792)
+    document.save(path)
+    document.close()
+    monkeypatch.setattr(extract_module, "_ocr_page", lambda page: pytest.fail("OCR ran"))
+    with pytest.raises(OcrError, match="more than"):
+        extract_text(path)
+
+
+def test_rejects_an_oversized_page_before_rendering(tmp_path, monkeypatch):
+    path = tmp_path / "huge.pdf"
+    document = pypdfium2.PdfDocument.new()
+    document.new_page(extract_module.MAX_PAGE_POINTS + 1, 792)
+    document.save(path)
+    document.close()
+    monkeypatch.setattr(extract_module, "_ocr_page", lambda page: pytest.fail("OCR ran"))
+    with pytest.raises(OcrError, match="too large"):
+        extract_text(path)
+
+
 def test_rejects_a_file_that_is_not_a_pdf(tmp_path):
     path = tmp_path / "notes.pdf"
     path.write_text("not a pdf")

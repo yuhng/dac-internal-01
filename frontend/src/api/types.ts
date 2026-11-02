@@ -23,6 +23,20 @@ export interface Recommendation {
   text: string
 }
 
+export type Tier = 'demonstrated' | 'implied' | 'listed' | 'related' | 'partial' | 'missing' | 'unassessed'
+
+export interface RequirementResult {
+  text: string
+  kind: 'skill' | 'experience' | 'education'
+  importance: 'must' | 'preferred'
+  tier: Tier
+  /** Null when the requirement could not be assessed and was left out of the score. */
+  credit: number | null
+  /** The line of the CV that supports this result. */
+  evidence: string | null
+  method: 'exact' | 'semantic' | null
+}
+
 export interface Analysis extends ScoreInput {
   id: string
   overall: number
@@ -32,7 +46,15 @@ export interface Analysis extends ScoreInput {
   matched: string[]
   missing: string[]
   recommendations: Recommendation[]
-  usedFallback: boolean
+  /** Only the mock falls back to frequent job terms. */
+  usedFallback?: boolean
+  requirements: RequirementResult[]
+  /** How well the CV is written, separate from how well it fits the job. */
+  quality: { score: number; parts: ScorePart[] }
+  confidence: { level: 'high' | 'medium' | 'low'; reasons: string[] }
+  /** The limit that lowered the score, if one did. */
+  cap: number | null
+  engineVersion: string
   /** How the score was produced, shown to the user as inline rich text. */
   methodology: string[]
 }

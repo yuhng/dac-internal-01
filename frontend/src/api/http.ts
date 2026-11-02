@@ -1,7 +1,8 @@
 import { mockApi } from './mock'
-import { ApiError } from './types'
+import { ApiError, type Analysis, type ScoreInput } from './types'
 
 const UNREACHABLE = 'The document service could not be reached. Try again, or paste the text instead.'
+const SCORING_UNREACHABLE = 'The scoring service could not be reached. Try again in a moment.'
 
 /** PDFs go to the Document API. Plain text is read in the browser and needs no server. */
 async function extractText(file: File) {
@@ -23,4 +24,22 @@ async function extractText(file: File) {
   throw new ApiError(typeof result?.detail === 'string' ? result.detail : UNREACHABLE)
 }
 
+async function analyze(input: ScoreInput) {
+  let response: Response
+  try {
+    response = await fetch('/api/scoring/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(input),
+    })
+  } catch {
+    throw new ApiError(SCORING_UNREACHABLE)
+  }
+
+  const result: (Analysis & { detail?: unknown }) | null = await response.json().catch(() => null)
+  if (response.ok && result) return result
+  throw new ApiError(typeof result?.detail === 'string' ? result.detail : SCORING_UNREACHABLE)
+}
+
 export const httpDocuments = { extractText }
+export const httpScoring = { analyze }

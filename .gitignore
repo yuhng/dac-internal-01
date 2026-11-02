@@ -5,3 +5,5 @@
 # Folders
 data/*.pdf
 data/processed/
+
+__pycache__/
