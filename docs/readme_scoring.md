@@ -2,8 +2,8 @@
 
 Compares a CV with a job description and returns a match score with the evidence behind it.
 
-Code: `src/mycareerai/ai/scoring/`, `src/mycareerai/api/scoring.py`  
-Tests: `tests/ai/scoring/`
+Code: `src/mycareerai/module/scoring/`, `src/mycareerai/api/scoring.py`  
+Tests: `tests/module/scoring/`
 
 The score comes from rules, so the same text gives the same result. Scores can shift by a small amount over time for a CV with a current role, because its experience runs to today.
 

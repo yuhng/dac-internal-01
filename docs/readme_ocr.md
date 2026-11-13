@@ -1,9 +1,9 @@
 # OCR module
 
-Turns a resume PDF into one row matching `data/schema.json`.
+Turns a resume PDF into one row matching `data/schema.yaml`.
 
-Code: `src/mycareerai/ai/ocr/`  
-Tests: `tests/ai/ocr/`
+Code: `src/mycareerai/module/ocr/`  
+Tests: `tests/module/ocr/`
 
 Despite the name, the module only uses OCR when it has to. It reads a PDF's text layer first, because that is exact, while OCR can misread characters. Only pages with no usable text go to Tesseract.
 
@@ -30,14 +30,14 @@ Run these commands from the repo root.
 Print the row to the terminal:
 
 ```sh
-uv run python -m mycareerai.ai.ocr "data/resume.pdf"
+uv run python -m mycareerai.module.ocr "data/resume.pdf"
 ```
 
 Write the row to a file. The folder must already exist:
 
 ```sh
 mkdir -p data/processed
-uv run python -m mycareerai.ai.ocr "data/resume.pdf" --output data/processed/row.json
+uv run python -m mycareerai.module.ocr "data/resume.pdf" --output data/processed/row.json
 ```
 
 | Option | Default | Purpose |
@@ -52,7 +52,7 @@ From Python:
 ```python
 from pathlib import Path
 
-from mycareerai.ai.ocr import OcrError, build_record
+from mycareerai.module.ocr import OcrError, build_record
 
 try:
     row = build_record(Path("data/resume.pdf"), source="upload", license="user-provided")
@@ -72,7 +72,7 @@ extract.py    Read each page: text layer, or OCR if the page has too little text
 resume.py     Split the text into sections and parse each one with rules
  │
  ▼
-record.py     Build the row and validate it against data/schema.json
+record.py     Build the row and validate it against data/schema.yaml
  │
  ▼
 __main__.py   Print the row or write it to a file
@@ -114,11 +114,11 @@ Company | Job Title  Jun 2024 – Present
 Job Title, Company (2023 – Present)
 ```
 
-`hard_skills` combines the Skills section with terms from `terms/hard_skills.yaml` found anywhere in the document. `soft_skills` comes from `terms/soft_skills.yaml`. `skills` is both combined, without duplicates. An alias is stored under its term's `name`, so `Postgres` and `PostgreSQL` can't count as two skills if both are listed.
+`hard_skills` combines the Skills section with terms from `module/terms/hard_skills.yaml` found anywhere in the document. `soft_skills` comes from `module/terms/soft_skills.yaml`. `skills` is both combined, without duplicates. An alias is stored under its term's `name`, so `Postgres` and `PostgreSQL` can't count as two skills if both are listed.
 
 ### 3. Build the row (`record.py`)
 
-`build_record` assembles all 24 columns and validates the row against `data/schema.json`. An invalid row raises `jsonschema.ValidationError` instead of being returned.
+`build_record` assembles all 24 columns and validates the row against `data/schema.yaml`. An invalid row raises `jsonschema.ValidationError` instead of being returned.
 
 | Column | Value |
 | --- | --- |
@@ -165,7 +165,7 @@ Rows contain personal data. `email` and `phone` hold contact details, `text` kee
 ## Tests
 
 ```sh
-uv run pytest tests/ai/ocr
+uv run pytest tests/module/ocr
 ```
 
 Tests that need a real CV use the first PDF in `data/` and are skipped if there is none. The OCR comparison test is also skipped if Tesseract is not installed.
@@ -174,8 +174,8 @@ Tests that need a real CV use the first PDF in `data/` and are skipped if there 
 
 | To change | Edit |
 | --- | --- |
-| Recognised section headings | `terms/headings.yaml` |
-| Skill terms | `terms/hard_skills.yaml` and `terms/soft_skills.yaml`. Add `aliases` for other spellings, and `case_sensitive: true` if the term is also an ordinary word. `tests/ai/ocr/test_terms.py` rejects duplicates |
+| Recognised section headings | `module/terms/headings.yaml` |
+| Skill terms | `module/terms/hard_skills.yaml` and `module/terms/soft_skills.yaml`. Add `aliases` for other spellings, and `case_sensitive: true` if the term is also an ordinary word. `tests/module/ocr/test_terms.py` rejects duplicates |
 | Degree names | `_DEGREE` in `resume.py` |
 | When OCR is used, or its quality | `MIN_TEXT_LAYER_CHARS` and `OCR_DPI` in `extract.py` |
-| Table columns | `data/schema.json` and the row in `build_record`, in `record.py` |
+| Table columns | `data/schema.yaml` and the row in `build_record`, in `record.py` |

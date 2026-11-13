@@ -6,7 +6,7 @@ import pypdfium2
 import pytest
 from fastapi.testclient import TestClient
 
-from mycareerai.ai.ocr import OcrError, validate_record
+from mycareerai.module.ocr import OcrError, validate_record
 from mycareerai.api import documents
 from mycareerai.main import app
 
@@ -16,7 +16,7 @@ client = TestClient(app)
 @pytest.fixture(autouse=True)
 def saved(monkeypatch):
     rows = []
-    monkeypatch.setattr(documents, "save_document", rows.append)
+    monkeypatch.setattr(documents, "save_table", rows.append)
     return rows
 
 
@@ -42,7 +42,7 @@ def fail_with(monkeypatch, error: Exception, name: str = "build_record"):
 
 
 def test_saves_and_returns_a_valid_row(monkeypatch, saved, blank_pdf):
-    monkeypatch.setattr("mycareerai.ai.ocr.extract._ocr_page", lambda page: "Scanned text")
+    monkeypatch.setattr("mycareerai.module.ocr.extract._ocr_page", lambda page: "Scanned text")
 
     response = post("Scan.PDF", blank_pdf)
 
@@ -56,8 +56,8 @@ def test_saves_and_returns_a_valid_row(monkeypatch, saved, blank_pdf):
 
 
 def test_a_database_error_is_reported(monkeypatch, blank_pdf):
-    monkeypatch.setattr("mycareerai.ai.ocr.extract._ocr_page", lambda page: "Scanned text")
-    fail_with(monkeypatch, psycopg.OperationalError("down"), "save_document")
+    monkeypatch.setattr("mycareerai.module.ocr.extract._ocr_page", lambda page: "Scanned text")
+    fail_with(monkeypatch, psycopg.OperationalError("down"), "save_table")
 
     response = post("scan.pdf", blank_pdf)
 

@@ -1,0 +1,138 @@
+[
+  {
+    "requirement_id": "CHUNK_0009",
+    "requirement": "We are seeking a Data Engineer to develop scalable data infrastructure and support data-driven decision-making. The successful candidate will work with cross-functional teams to design, implement, and maintain reliable data pipelines.",
+    "fit_label": "potential_fit",
+    "status": "clarification_needed",
+    "improvement_action": "request_clarification",
+    "recommendations": [
+      {
+        "source_chunk_id": "CHUNK_0001",
+        "original_text": "Built Python ETL pipelines integrating East Asia sales, order, CPQ, WBS, and opportunity data, reducing manual processing time by approximately 80%. Developed reusable SQL queries in Amazon Redshift for recurring operational reporting across business functions. Created Tableau dashboards supporting Finance, Offer Marketing, and Customer stakeholders. Implemented logging and error-handling mechanisms to improve data pipeline traceability and maintainability.",
+        "improved_text": "Designed and implemented Python ETL pipelines to integrate East Asia sales, order, CPQ, WBS, and opportunity data, achieving an 80% reduction in manual processing time. Created reusable SQL queries in Amazon Redshift for consistent operational reporting across various business functions. Developed Tableau dashboards that facilitated data-driven decision-making for Finance, Offer Marketing, and Customer stakeholders. Established robust logging and error-handling mechanisms to enhance the traceability and maintainability of data pipelines.",
+        "explanation": "The improved wording focuses on design and implementation aspects, which aligns better with the JD's emphasis on these capabilities. It also highlights the outcomes more clearly, linking the work to data-driven decision-making. This makes the bullet points more impactful and relevant to the requirement.",
+        "evidence_ids": [
+          "CHUNK_0001"
+        ],
+        "clarification_question": null
+      },
+      {
+        "source_chunk_id": "CHUNK_0002",
+        "original_text": "Engineered PySpark ELT pipelines in Azure Databricks, transforming raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation. Built an LLM evaluation framework combining deterministic matching and LLM-as-Judge scoring. Migrated a local application to Databricks Apps and integrated React frontend components with FastAPI backend services.",
+        "improved_text": "Engineered scalable PySpark ELT pipelines in Azure Databricks to transform raw multi-client policy and claims data into production-ready Delta Lake tables, ensuring schema harmonization, lookup enrichment, and data validation. This involved developing modular data transformations that enhance the data infrastructure and support reliable data pipelines, as well as integrating React frontend components with FastAPI for seamless application deployment.",
+        "explanation": "This revision emphasizes scalability and the contributions to data infrastructure, making the connection to the job requirement clearer. It also integrates the idea of reliable data pipelines directly into the description, aligning the language with the JD more effectively.",
+        "evidence_ids": [
+          "CHUNK_0002"
+        ],
+        "clarification_question": null
+      },
+      {
+        "source_chunk_id": "CHUNK_0003",
+        "original_text": "Migrated Tableau dashboards to Power BI to support retail analytics operations. Developed daily sales tracking dashboards with year-over-year comparisons. Implemented reporting improvements and conducted user training to support dashboard adoption.",
+        "improved_text": "Transformed and migrated Tableau dashboards to Power BI, enhancing the analytics capabilities for retail operations. Created comprehensive daily sales tracking dashboards featuring year-over-year comparisons, thereby supporting data-driven decision-making. Led user training sessions to drive dashboard adoption and optimize reporting efficiencies.",
+        "explanation": "The improved version focuses on transformation and enhancement of analytical capabilities, aligning better with the role's emphasis on supporting data-driven decision-making. The inclusion of leadership in user training sessions adds another layer of proactivity and value-added contribution to the candidate's experience.",
+        "evidence_ids": [
+          "CHUNK_0003"
+        ],
+        "clarification_question": null
+      }
+    ]
+  },
+  {
+    "requirement_id": "CHUNK_0010",
+    "requirement": "Develop and maintain scalable ETL and ELT data pipelines using Python and SQL. Design and optimize data transformation workflows using distributed processing frameworks such as Apache Spark. Build and maintain cloud-based data warehouses and data lakes. Implement automated CI/CD workflows for data engineering applications. Collaborate with cross-functional stakeholders to deliver reliable analytical solutions.",
+    "fit_label": "potential_fit",
+    "status": "clarification_needed",
+    "improvement_action": "request_clarification",
+    "recommendations": [
+      {
+        "source_chunk_id": "CHUNK_0001",
+        "original_text": "Built Python ETL pipelines integrating East Asia sales, order, CPQ, WBS, and opportunity data, reducing manual processing time by approximately 80%. Developed reusable SQL queries in Amazon Redshift for recurring operational reporting across business functions. Created Tableau dashboards supporting Finance, Offer Marketing, and Customer stakeholders. Implemented logging and error-handling mechanisms to improve data pipeline traceability and maintainability.",
+        "improved_text": "Constructed scalable Python ETL pipelines to integrate East Asia sales, orders, CPQ, WBS, and opportunity data, achieving an 80% reduction in manual processing time. Crafted reusable SQL queries for operational reporting in Amazon Redshift, facilitating data accessibility across various business functions. Enhanced analytical capabilities by developing Tableau dashboards for Finance, Offer Marketing, and Customer stakeholders, while implementing robust logging and error-handling mechanisms to ensure data pipeline reliability and maintainability.",
+        "explanation": "The improved wording focuses more on scalability, emphasizes the achievement in processing efficiency, and articulates a stronger impact on business functions, which aligns well with the job requirements.",
+        "evidence_ids": [
+          "CHUNK_0001"
+        ],
+        "clarification_question": null
+      },
+      {
+        "source_chunk_id": "CHUNK_0002",
+        "original_text": "Engineered PySpark ELT pipelines in Azure Databricks, transforming raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation. Built an LLM evaluation framework combining deterministic matching and LLM-as-Judge scoring. Migrated a local application to Databricks Apps and integrated React frontend components with FastAPI backend services.",
+        "improved_text": "Designed and implemented PySpark ELT pipelines within Azure Databricks, successfully transforming raw multi-client policy and claims data into production-ready Delta Lake tables in Unity Catalog. Optimized data transformation workflows through modular data transformations for schema harmonization, lookup enrichment, and data validation. Additionally, built an LLM evaluation framework utilizing deterministic matching and integrated a local application with Databricks Apps and React frontend components using FastAPI.",
+        "explanation": "This rewrite enhances clarity by emphasizing the design and implementation aspect of the pipelines and optimizing workflows, which aligns directly with the JD requirement for designing data transformation workflows.",
+        "evidence_ids": [
+          "CHUNK_0002"
+        ],
+        "clarification_question": null
+      },
+      {
+        "source_chunk_id": "CHUNK_0003",
+        "original_text": "Migrated Tableau dashboards to Power BI to support retail analytics operations. Developed daily sales tracking dashboards with year-over-year comparisons. Implemented reporting improvements and conducted user training to support dashboard adoption.",
+        "improved_text": "Facilitated the transition of Tableau dashboards to Power BI to enhance retail analytics operations. Developed comprehensive daily sales tracking dashboards featuring year-over-year comparisons, significantly improving reporting capabilities. Conducted user training sessions to promote dashboard adoption and ensure effective utilization across cross-functional teams.",
+        "explanation": "This revision highlights the facilitation aspect, emphasizing the cross-functional collaboration and contribution to reporting improvements, aligning with the job's emphasis on delivering analytical solutions.",
+        "evidence_ids": [
+          "CHUNK_0003"
+        ],
+        "clarification_question": null
+      }
+    ]
+  },
+  {
+    "requirement_id": "CHUNK_0011",
+    "requirement": "Proficiency in Python and SQL for data manipulation and automation. Experience developing ETL or ELT pipelines. Familiarity with AWS cloud services and data warehousing technologies. Understanding of relational databases and data modelling principles. Strong analytical thinking and problem-solving abilities.",
+    "fit_label": "good_fit",
+    "status": "generated",
+    "improvement_action": "rewrite_existing_bullet",
+    "recommendations": [
+      {
+        "source_chunk_id": "CHUNK_0001",
+        "original_text": "Built Python ETL pipelines integrating East Asia sales, order, CPQ, WBS, and opportunity data, reducing manual processing time by approximately 80%. Developed reusable SQL queries in Amazon Redshift for recurring operational reporting across business functions. Created Tableau dashboards supporting Finance, Offer Marketing, and Customer stakeholders. Implemented logging and error-handling mechanisms to improve data pipeline traceability and maintainability.",
+        "improved_text": "Developed robust Python ETL pipelines that integrated sales, order, CPQ, and opportunity data from East Asia, resulting in an 80% reduction in manual processing time. Created reusable SQL queries in Amazon Redshift to automate operational reporting processes across various business functions. Designed interactive Tableau dashboards to support insights for Finance, Offer Marketing, and Customer stakeholders, and implemented comprehensive logging and error-handling strategies to enhance data pipeline traceability and maintainability.",
+        "explanation": "This revision emphasizes the candidate's role in developing ETL pipelines and SQL automation in a clearer manner, while also highlighting the impact and scope of their work. It maintains the original achievement while enhancing clarity and relevance to the required skills.",
+        "evidence_ids": [
+          "CHUNK_0001"
+        ],
+        "clarification_question": null
+      },
+      {
+        "source_chunk_id": "CHUNK_0002",
+        "original_text": "Engineered PySpark ELT pipelines in Azure Databricks, transforming raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation. Built an LLM evaluation framework combining deterministic matching and LLM-as-Judge scoring. Migrated a local application to Databricks Apps and integrated React frontend components with FastAPI backend services.",
+        "improved_text": "Engineered scalable PySpark ELT pipelines within Azure Databricks, transforming and optimizing raw multi-client policy and claims data into production-ready Delta Lake tables using Unity Catalog architecture. Developed modular data transformation processes focused on schema harmonization, lookup enrichment, and thorough data validation, ensuring high-quality output. Additionally, built an evaluation framework for large language models that integrates deterministic matching with LLM scoring, and successfully migrated local applications to Databricks Apps while integrating React frontend components with FastAPI backend services for enhanced functionality.",
+        "explanation": "This rewrite specifies the scalability and optimization aspects of the pipelines and emphasizes the modular approach to data transformations, which aligns well with data manipulation and automation skills. It also articulates the integration efforts, linking them more directly to cloud services and data management principles.",
+        "evidence_ids": [
+          "CHUNK_0002"
+        ],
+        "clarification_question": null
+      }
+    ]
+  },
+  {
+    "requirement_id": "CHUNK_0012",
+    "requirement": "Experience with Azure Databricks, Apache Spark, or PySpark. Familiarity with Docker, Terraform, and GitHub Actions. Knowledge of CI/CD principles and automated deployment workflows. Experience working with Delta Lake or similar lakehouse technologies.",
+    "fit_label": "potential_fit",
+    "status": "clarification_needed",
+    "improvement_action": "request_clarification",
+    "recommendations": [
+      {
+        "source_chunk_id": "CHUNK_0002",
+        "original_text": "Engineered PySpark ELT pipelines in Azure Databricks, transforming raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation. Built an LLM evaluation framework combining deterministic matching and LLM-as-Judge scoring. Migrated a local application to Databricks Apps and integrated React frontend components with FastAPI backend services.",
+        "improved_text": "Engineered PySpark ELT pipelines using Azure Databricks, processing raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation, enhancing data quality and accessibility. Additionally, implemented a robust LLM evaluation framework and successfully migrated a local application to Databricks Apps, integrating frontend and backend services.",
+        "explanation": "The improvement highlights the impact of the candidate's work and enhances clarity by emphasizing the outcomes of developing data transformations. It also provides a clearer picture of the integration work done, enhancing relevance to potential job responsibilities related to automated deployment workflows.",
+        "evidence_ids": [
+          "CHUNK_0002"
+        ],
+        "clarification_question": null
+      },
+      {
+        "source_chunk_id": "CHUNK_0004",
+        "original_text": "Programming: Python, SQL, R, JavaScript, TypeScript. Data Engineering: PySpark, Power Query, Informatica, ETL, ELT, Delta Lake. Cloud Platforms: Azure Databricks, AWS Redshift, Google Cloud Platform. Databases: PostgreSQL, Amazon Redshift, BigQuery, SQLite. Machine Learning: Scikit-learn, PyTorch, TensorFlow, Hugging Face Transformers, MLflow. Data Visualization: Tableau, Power BI.",
+        "improved_text": "Technical Skills: \n- Programming: Python, SQL, R, JavaScript, TypeScript\n- Data Engineering: PySpark, Power Query, Informatica, ETL, ELT, Delta Lake\n- Cloud Platforms: Azure Databricks, AWS Redshift, Google Cloud Platform\n- Databases: PostgreSQL, Amazon Redshift, BigQuery, SQLite\n- Machine Learning: Scikit-learn, PyTorch, TensorFlow, Hugging Face Transformers, MLflow\n- Data Visualization: Tableau, Power BI",
+        "explanation": "The Revised format of technical skills provides clearer organization for better readability, emphasizing the relevance of the skills to the job requirements. This structure makes it easier for potential employers to scan and identify qualifications.",
+        "evidence_ids": [
+          "CHUNK_0004"
+        ],
+        "clarification_question": null
+      }
+    ]
+  }
+]

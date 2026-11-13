@@ -60,7 +60,7 @@ ON CONFLICT (document_id) DO UPDATE SET
 """
 
 
-def SAVE_TABLE(record: dict[str, Any]) -> None:
+def save_table(record: dict[str, Any]) -> None:
     with psycopg.connect() as connection:
         connection.execute(CREATE_DOCUMENTS)
         connection.execute(CREATE_RESUMES)

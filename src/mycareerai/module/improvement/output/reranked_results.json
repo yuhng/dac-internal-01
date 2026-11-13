@@ -1,0 +1,666 @@
+[
+  {
+    "jd_chunk_id": "CHUNK_0009",
+    "jd_text": "We are seeking a Data Engineer to develop scalable data infrastructure and support data-driven decision-making. The successful candidate will work with cross-functional teams to design, implement, and maintain reliable data pipelines.",
+    "cv_evidence": [
+      {
+        "text": "Data Science and Business Analytics undergraduate with experience in data engineering, analytics, and AI/ML application development. Skilled in Python, SQL, PySpark, Databricks, and cloud data platforms. Experienced in developing data pipelines, building analytical solutions, and deploying AI-powered applications.",
+        "metadata": {
+          "target_role": "Data Engineer",
+          "chunk_id": "CHUNK_0000",
+          "section_id": "CV_SEC_001",
+          "section_name": "professional_summary",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume",
+          "candidate_id": "CANDIDATE_001",
+          "document_id": "CV_001"
+        },
+        "bi_encoder_score": 0.5863626599311829,
+        "cross_encoder_score": 0.8255051970481873,
+        "rank": 1
+      },
+      {
+        "text": "Programming: Python, SQL, R, JavaScript, TypeScript. Data Engineering: PySpark, Power Query, Informatica, ETL, ELT, Delta Lake. Cloud Platforms: Azure Databricks, AWS Redshift, Google Cloud Platform. Databases: PostgreSQL, Amazon Redshift, BigQuery, SQLite. Machine Learning: Scikit-learn, PyTorch, TensorFlow, Hugging Face Transformers, MLflow. Data Visualization: Tableau, Power BI.",
+        "metadata": {
+          "document_id": "CV_001",
+          "section_id": "CV_SEC_003",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "candidate_id": "CANDIDATE_001",
+          "document_type": "resume",
+          "section_name": "technical_skills",
+          "target_role": "Data Engineer",
+          "chunk_id": "CHUNK_0004"
+        },
+        "bi_encoder_score": 0.43580925464630127,
+        "cross_encoder_score": 0.1378190666437149,
+        "rank": 2
+      },
+      {
+        "text": "Built Python ETL pipelines integrating East Asia sales, order, CPQ, WBS, and opportunity data, reducing manual processing time by approximately 80%. Developed reusable SQL queries in Amazon Redshift for recurring operational reporting across business functions. Created Tableau dashboards supporting Finance, Offer Marketing, and Customer stakeholders. Implemented logging and error-handling mechanisms to improve data pipeline traceability and maintainability.",
+        "metadata": {
+          "target_role": "Data Engineer",
+          "company": "Schneider Electric",
+          "entry_id": "EXP_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "job_title": "Data Analyst Intern",
+          "candidate_id": "CANDIDATE_001",
+          "section_id": "CV_SEC_002",
+          "document_id": "CV_001",
+          "chunk_id": "CHUNK_0001",
+          "document_type": "resume",
+          "duration": "June 2025 - December 2025",
+          "section_name": "work_experience"
+        },
+        "bi_encoder_score": 0.503227949142456,
+        "cross_encoder_score": 0.017215099185705185,
+        "rank": 3
+      },
+      {
+        "text": "Engineered PySpark ELT pipelines in Azure Databricks, transforming raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation. Built an LLM evaluation framework combining deterministic matching and LLM-as-Judge scoring. Migrated a local application to Databricks Apps and integrated React frontend components with FastAPI backend services.",
+        "metadata": {
+          "company": "Munich Re",
+          "section_id": "CV_SEC_002",
+          "target_role": "Data Engineer",
+          "chunk_id": "CHUNK_0002",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "candidate_id": "CANDIDATE_001",
+          "section_name": "work_experience",
+          "document_id": "CV_001",
+          "duration": "June 2026 - Present",
+          "entry_id": "EXP_002",
+          "document_type": "resume",
+          "job_title": "Data Scientist"
+        },
+        "bi_encoder_score": 0.4451647996902466,
+        "cross_encoder_score": 0.0035591961350291967,
+        "rank": 4
+      },
+      {
+        "text": "Bachelor of Science (Honours) in Data Science and Business Analytics, University of London.",
+        "metadata": {
+          "section_id": "CV_SEC_005",
+          "target_role": "Data Engineer",
+          "chunk_id": "CHUNK_0007",
+          "candidate_id": "CANDIDATE_001",
+          "section_name": "education",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume",
+          "document_id": "CV_001"
+        },
+        "bi_encoder_score": 0.2955307364463806,
+        "cross_encoder_score": 0.002607736736536026,
+        "rank": 5
+      },
+      {
+        "text": "Google Advanced Data Analytics Professional Certificate. IBM AI Engineering Professional Certificate. Databricks Generative AI Fundamentals.",
+        "metadata": {
+          "section_id": "CV_SEC_006",
+          "document_type": "resume",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "candidate_id": "CANDIDATE_001",
+          "target_role": "Data Engineer",
+          "chunk_id": "CHUNK_0008",
+          "document_id": "CV_001",
+          "section_name": "certifications"
+        },
+        "bi_encoder_score": 0.346548855304718,
+        "cross_encoder_score": 0.002556856954470277,
+        "rank": 6
+      },
+      {
+        "text": "Led a data analytics project involving the collection and processing of over 1,000 healthcare job listings using Python, BeautifulSoup, and Selenium. Analyzed salary ranges, qualification requirements, and job market trends using pandas and visualization libraries.",
+        "metadata": {
+          "entry_id": "PROJ_001",
+          "project_name": "FDM Job Market Analysis",
+          "target_role": "Data Engineer",
+          "section_name": "projects",
+          "section_id": "CV_SEC_004",
+          "chunk_id": "CHUNK_0005",
+          "candidate_id": "CANDIDATE_001",
+          "document_id": "CV_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume"
+        },
+        "bi_encoder_score": 0.38297510147094727,
+        "cross_encoder_score": 0.0006466644117608666,
+        "rank": 7
+      },
+      {
+        "text": "Migrated Tableau dashboards to Power BI to support retail analytics operations. Developed daily sales tracking dashboards with year-over-year comparisons. Implemented reporting improvements and conducted user training to support dashboard adoption.",
+        "metadata": {
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "section_id": "CV_SEC_002",
+          "company": "Aspial Corporation",
+          "section_name": "work_experience",
+          "document_id": "CV_001",
+          "duration": "July 2024 - November 2024",
+          "candidate_id": "CANDIDATE_001",
+          "chunk_id": "CHUNK_0003",
+          "entry_id": "EXP_003",
+          "target_role": "Data Engineer",
+          "document_type": "resume",
+          "job_title": "Data Analyst Intern"
+        },
+        "bi_encoder_score": 0.27799665927886963,
+        "cross_encoder_score": 0.0001877617760328576,
+        "rank": 8
+      },
+      {
+        "text": "Developed machine learning classification models and geospatial optimization techniques to analyze traffic collision risk and prioritize ambulance station locations.",
+        "metadata": {
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "section_id": "CV_SEC_004",
+          "section_name": "projects",
+          "chunk_id": "CHUNK_0006",
+          "candidate_id": "CANDIDATE_001",
+          "entry_id": "PROJ_002",
+          "project_name": "NYC Emergency Response Optimization",
+          "document_type": "resume",
+          "target_role": "Data Engineer",
+          "document_id": "CV_001"
+        },
+        "bi_encoder_score": 0.15931648015975952,
+        "cross_encoder_score": 0.00018242174701299518,
+        "rank": 9
+      }
+    ]
+  },
+  {
+    "jd_chunk_id": "CHUNK_0010",
+    "jd_text": "Develop and maintain scalable ETL and ELT data pipelines using Python and SQL. Design and optimize data transformation workflows using distributed processing frameworks such as Apache Spark. Build and maintain cloud-based data warehouses and data lakes. Implement automated CI/CD workflows for data engineering applications. Collaborate with cross-functional stakeholders to deliver reliable analytical solutions.",
+    "cv_evidence": [
+      {
+        "text": "Built Python ETL pipelines integrating East Asia sales, order, CPQ, WBS, and opportunity data, reducing manual processing time by approximately 80%. Developed reusable SQL queries in Amazon Redshift for recurring operational reporting across business functions. Created Tableau dashboards supporting Finance, Offer Marketing, and Customer stakeholders. Implemented logging and error-handling mechanisms to improve data pipeline traceability and maintainability.",
+        "metadata": {
+          "company": "Schneider Electric",
+          "chunk_id": "CHUNK_0001",
+          "document_type": "resume",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "candidate_id": "CANDIDATE_001",
+          "entry_id": "EXP_001",
+          "section_id": "CV_SEC_002",
+          "section_name": "work_experience",
+          "job_title": "Data Analyst Intern",
+          "document_id": "CV_001",
+          "target_role": "Data Engineer",
+          "duration": "June 2025 - December 2025"
+        },
+        "bi_encoder_score": 0.6709895133972168,
+        "cross_encoder_score": 0.567859411239624,
+        "rank": 1
+      },
+      {
+        "text": "Programming: Python, SQL, R, JavaScript, TypeScript. Data Engineering: PySpark, Power Query, Informatica, ETL, ELT, Delta Lake. Cloud Platforms: Azure Databricks, AWS Redshift, Google Cloud Platform. Databases: PostgreSQL, Amazon Redshift, BigQuery, SQLite. Machine Learning: Scikit-learn, PyTorch, TensorFlow, Hugging Face Transformers, MLflow. Data Visualization: Tableau, Power BI.",
+        "metadata": {
+          "section_id": "CV_SEC_003",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume",
+          "target_role": "Data Engineer",
+          "section_name": "technical_skills",
+          "chunk_id": "CHUNK_0004",
+          "document_id": "CV_001",
+          "candidate_id": "CANDIDATE_001"
+        },
+        "bi_encoder_score": 0.6220992803573608,
+        "cross_encoder_score": 0.32329872250556946,
+        "rank": 2
+      },
+      {
+        "text": "Data Science and Business Analytics undergraduate with experience in data engineering, analytics, and AI/ML application development. Skilled in Python, SQL, PySpark, Databricks, and cloud data platforms. Experienced in developing data pipelines, building analytical solutions, and deploying AI-powered applications.",
+        "metadata": {
+          "document_id": "CV_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "target_role": "Data Engineer",
+          "section_id": "CV_SEC_001",
+          "candidate_id": "CANDIDATE_001",
+          "document_type": "resume",
+          "chunk_id": "CHUNK_0000",
+          "section_name": "professional_summary"
+        },
+        "bi_encoder_score": 0.6279374361038208,
+        "cross_encoder_score": 0.20705096423625946,
+        "rank": 3
+      },
+      {
+        "text": "Engineered PySpark ELT pipelines in Azure Databricks, transforming raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation. Built an LLM evaluation framework combining deterministic matching and LLM-as-Judge scoring. Migrated a local application to Databricks Apps and integrated React frontend components with FastAPI backend services.",
+        "metadata": {
+          "duration": "June 2026 - Present",
+          "company": "Munich Re",
+          "candidate_id": "CANDIDATE_001",
+          "document_id": "CV_001",
+          "section_name": "work_experience",
+          "chunk_id": "CHUNK_0002",
+          "section_id": "CV_SEC_002",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "target_role": "Data Engineer",
+          "entry_id": "EXP_002",
+          "job_title": "Data Scientist",
+          "document_type": "resume"
+        },
+        "bi_encoder_score": 0.6775768399238586,
+        "cross_encoder_score": 0.0385100431740284,
+        "rank": 4
+      },
+      {
+        "text": "Developed machine learning classification models and geospatial optimization techniques to analyze traffic collision risk and prioritize ambulance station locations.",
+        "metadata": {
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume",
+          "target_role": "Data Engineer",
+          "section_id": "CV_SEC_004",
+          "project_name": "NYC Emergency Response Optimization",
+          "document_id": "CV_001",
+          "chunk_id": "CHUNK_0006",
+          "entry_id": "PROJ_002",
+          "candidate_id": "CANDIDATE_001",
+          "section_name": "projects"
+        },
+        "bi_encoder_score": 0.16400569677352905,
+        "cross_encoder_score": 0.008078091777861118,
+        "rank": 5
+      },
+      {
+        "text": "Led a data analytics project involving the collection and processing of over 1,000 healthcare job listings using Python, BeautifulSoup, and Selenium. Analyzed salary ranges, qualification requirements, and job market trends using pandas and visualization libraries.",
+        "metadata": {
+          "chunk_id": "CHUNK_0005",
+          "document_type": "resume",
+          "target_role": "Data Engineer",
+          "section_id": "CV_SEC_004",
+          "document_id": "CV_001",
+          "entry_id": "PROJ_001",
+          "section_name": "projects",
+          "candidate_id": "CANDIDATE_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "project_name": "FDM Job Market Analysis"
+        },
+        "bi_encoder_score": 0.37746477127075195,
+        "cross_encoder_score": 0.0037489254027605057,
+        "rank": 6
+      },
+      {
+        "text": "Bachelor of Science (Honours) in Data Science and Business Analytics, University of London.",
+        "metadata": {
+          "candidate_id": "CANDIDATE_001",
+          "section_id": "CV_SEC_005",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume",
+          "section_name": "education",
+          "document_id": "CV_001",
+          "target_role": "Data Engineer",
+          "chunk_id": "CHUNK_0007"
+        },
+        "bi_encoder_score": 0.2890334725379944,
+        "cross_encoder_score": 0.002853931626304984,
+        "rank": 7
+      },
+      {
+        "text": "Migrated Tableau dashboards to Power BI to support retail analytics operations. Developed daily sales tracking dashboards with year-over-year comparisons. Implemented reporting improvements and conducted user training to support dashboard adoption.",
+        "metadata": {
+          "candidate_id": "CANDIDATE_001",
+          "chunk_id": "CHUNK_0003",
+          "job_title": "Data Analyst Intern",
+          "company": "Aspial Corporation",
+          "duration": "July 2024 - November 2024",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "entry_id": "EXP_003",
+          "document_id": "CV_001",
+          "section_id": "CV_SEC_002",
+          "target_role": "Data Engineer",
+          "section_name": "work_experience",
+          "document_type": "resume"
+        },
+        "bi_encoder_score": 0.37105894088745117,
+        "cross_encoder_score": 0.001611653482541442,
+        "rank": 8
+      },
+      {
+        "text": "Google Advanced Data Analytics Professional Certificate. IBM AI Engineering Professional Certificate. Databricks Generative AI Fundamentals.",
+        "metadata": {
+          "candidate_id": "CANDIDATE_001",
+          "section_id": "CV_SEC_006",
+          "document_id": "CV_001",
+          "section_name": "certifications",
+          "target_role": "Data Engineer",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "chunk_id": "CHUNK_0008",
+          "document_type": "resume"
+        },
+        "bi_encoder_score": 0.4331668019294739,
+        "cross_encoder_score": 0.0012142430059611797,
+        "rank": 9
+      }
+    ]
+  },
+  {
+    "jd_chunk_id": "CHUNK_0011",
+    "jd_text": "Proficiency in Python and SQL for data manipulation and automation. Experience developing ETL or ELT pipelines. Familiarity with AWS cloud services and data warehousing technologies. Understanding of relational databases and data modelling principles. Strong analytical thinking and problem-solving abilities.",
+    "cv_evidence": [
+      {
+        "text": "Data Science and Business Analytics undergraduate with experience in data engineering, analytics, and AI/ML application development. Skilled in Python, SQL, PySpark, Databricks, and cloud data platforms. Experienced in developing data pipelines, building analytical solutions, and deploying AI-powered applications.",
+        "metadata": {
+          "target_role": "Data Engineer",
+          "candidate_id": "CANDIDATE_001",
+          "document_id": "CV_001",
+          "section_name": "professional_summary",
+          "document_type": "resume",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "chunk_id": "CHUNK_0000",
+          "section_id": "CV_SEC_001"
+        },
+        "bi_encoder_score": 0.6235607266426086,
+        "cross_encoder_score": 0.5904476642608643,
+        "rank": 1
+      },
+      {
+        "text": "Programming: Python, SQL, R, JavaScript, TypeScript. Data Engineering: PySpark, Power Query, Informatica, ETL, ELT, Delta Lake. Cloud Platforms: Azure Databricks, AWS Redshift, Google Cloud Platform. Databases: PostgreSQL, Amazon Redshift, BigQuery, SQLite. Machine Learning: Scikit-learn, PyTorch, TensorFlow, Hugging Face Transformers, MLflow. Data Visualization: Tableau, Power BI.",
+        "metadata": {
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "target_role": "Data Engineer",
+          "candidate_id": "CANDIDATE_001",
+          "chunk_id": "CHUNK_0004",
+          "section_id": "CV_SEC_003",
+          "document_type": "resume",
+          "section_name": "technical_skills",
+          "document_id": "CV_001"
+        },
+        "bi_encoder_score": 0.582588791847229,
+        "cross_encoder_score": 0.3006093502044678,
+        "rank": 2
+      },
+      {
+        "text": "Built Python ETL pipelines integrating East Asia sales, order, CPQ, WBS, and opportunity data, reducing manual processing time by approximately 80%. Developed reusable SQL queries in Amazon Redshift for recurring operational reporting across business functions. Created Tableau dashboards supporting Finance, Offer Marketing, and Customer stakeholders. Implemented logging and error-handling mechanisms to improve data pipeline traceability and maintainability.",
+        "metadata": {
+          "entry_id": "EXP_001",
+          "document_id": "CV_001",
+          "company": "Schneider Electric",
+          "duration": "June 2025 - December 2025",
+          "document_type": "resume",
+          "target_role": "Data Engineer",
+          "job_title": "Data Analyst Intern",
+          "chunk_id": "CHUNK_0001",
+          "section_name": "work_experience",
+          "section_id": "CV_SEC_002",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "candidate_id": "CANDIDATE_001"
+        },
+        "bi_encoder_score": 0.647341251373291,
+        "cross_encoder_score": 0.04507985711097717,
+        "rank": 3
+      },
+      {
+        "text": "Bachelor of Science (Honours) in Data Science and Business Analytics, University of London.",
+        "metadata": {
+          "candidate_id": "CANDIDATE_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume",
+          "section_id": "CV_SEC_005",
+          "section_name": "education",
+          "chunk_id": "CHUNK_0007",
+          "target_role": "Data Engineer",
+          "document_id": "CV_001"
+        },
+        "bi_encoder_score": 0.34426236152648926,
+        "cross_encoder_score": 0.008695031516253948,
+        "rank": 4
+      },
+      {
+        "text": "Led a data analytics project involving the collection and processing of over 1,000 healthcare job listings using Python, BeautifulSoup, and Selenium. Analyzed salary ranges, qualification requirements, and job market trends using pandas and visualization libraries.",
+        "metadata": {
+          "document_type": "resume",
+          "project_name": "FDM Job Market Analysis",
+          "entry_id": "PROJ_001",
+          "target_role": "Data Engineer",
+          "section_name": "projects",
+          "document_id": "CV_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "section_id": "CV_SEC_004",
+          "chunk_id": "CHUNK_0005",
+          "candidate_id": "CANDIDATE_001"
+        },
+        "bi_encoder_score": 0.37448883056640625,
+        "cross_encoder_score": 0.007550370413810015,
+        "rank": 5
+      },
+      {
+        "text": "Engineered PySpark ELT pipelines in Azure Databricks, transforming raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation. Built an LLM evaluation framework combining deterministic matching and LLM-as-Judge scoring. Migrated a local application to Databricks Apps and integrated React frontend components with FastAPI backend services.",
+        "metadata": {
+          "chunk_id": "CHUNK_0002",
+          "target_role": "Data Engineer",
+          "company": "Munich Re",
+          "document_type": "resume",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "section_id": "CV_SEC_002",
+          "section_name": "work_experience",
+          "duration": "June 2026 - Present",
+          "document_id": "CV_001",
+          "entry_id": "EXP_002",
+          "candidate_id": "CANDIDATE_001",
+          "job_title": "Data Scientist"
+        },
+        "bi_encoder_score": 0.4934818148612976,
+        "cross_encoder_score": 0.0066747963428497314,
+        "rank": 6
+      },
+      {
+        "text": "Google Advanced Data Analytics Professional Certificate. IBM AI Engineering Professional Certificate. Databricks Generative AI Fundamentals.",
+        "metadata": {
+          "section_name": "certifications",
+          "document_type": "resume",
+          "target_role": "Data Engineer",
+          "document_id": "CV_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "candidate_id": "CANDIDATE_001",
+          "section_id": "CV_SEC_006",
+          "chunk_id": "CHUNK_0008"
+        },
+        "bi_encoder_score": 0.40640807151794434,
+        "cross_encoder_score": 0.0038227962795645,
+        "rank": 7
+      },
+      {
+        "text": "Developed machine learning classification models and geospatial optimization techniques to analyze traffic collision risk and prioritize ambulance station locations.",
+        "metadata": {
+          "document_id": "CV_001",
+          "document_type": "resume",
+          "section_name": "projects",
+          "candidate_id": "CANDIDATE_001",
+          "project_name": "NYC Emergency Response Optimization",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "target_role": "Data Engineer",
+          "chunk_id": "CHUNK_0006",
+          "entry_id": "PROJ_002",
+          "section_id": "CV_SEC_004"
+        },
+        "bi_encoder_score": 0.17621594667434692,
+        "cross_encoder_score": 0.003227794310078025,
+        "rank": 8
+      },
+      {
+        "text": "Migrated Tableau dashboards to Power BI to support retail analytics operations. Developed daily sales tracking dashboards with year-over-year comparisons. Implemented reporting improvements and conducted user training to support dashboard adoption.",
+        "metadata": {
+          "target_role": "Data Engineer",
+          "candidate_id": "CANDIDATE_001",
+          "section_name": "work_experience",
+          "company": "Aspial Corporation",
+          "duration": "July 2024 - November 2024",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume",
+          "chunk_id": "CHUNK_0003",
+          "job_title": "Data Analyst Intern",
+          "document_id": "CV_001",
+          "entry_id": "EXP_003",
+          "section_id": "CV_SEC_002"
+        },
+        "bi_encoder_score": 0.34340012073516846,
+        "cross_encoder_score": 0.0007361032767221332,
+        "rank": 9
+      }
+    ]
+  },
+  {
+    "jd_chunk_id": "CHUNK_0012",
+    "jd_text": "Experience with Azure Databricks, Apache Spark, or PySpark. Familiarity with Docker, Terraform, and GitHub Actions. Knowledge of CI/CD principles and automated deployment workflows. Experience working with Delta Lake or similar lakehouse technologies.",
+    "cv_evidence": [
+      {
+        "text": "Programming: Python, SQL, R, JavaScript, TypeScript. Data Engineering: PySpark, Power Query, Informatica, ETL, ELT, Delta Lake. Cloud Platforms: Azure Databricks, AWS Redshift, Google Cloud Platform. Databases: PostgreSQL, Amazon Redshift, BigQuery, SQLite. Machine Learning: Scikit-learn, PyTorch, TensorFlow, Hugging Face Transformers, MLflow. Data Visualization: Tableau, Power BI.",
+        "metadata": {
+          "candidate_id": "CANDIDATE_001",
+          "chunk_id": "CHUNK_0004",
+          "target_role": "Data Engineer",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_type": "resume",
+          "section_id": "CV_SEC_003",
+          "document_id": "CV_001",
+          "section_name": "technical_skills"
+        },
+        "bi_encoder_score": 0.502339243888855,
+        "cross_encoder_score": 0.39753738045692444,
+        "rank": 1
+      },
+      {
+        "text": "Data Science and Business Analytics undergraduate with experience in data engineering, analytics, and AI/ML application development. Skilled in Python, SQL, PySpark, Databricks, and cloud data platforms. Experienced in developing data pipelines, building analytical solutions, and deploying AI-powered applications.",
+        "metadata": {
+          "candidate_id": "CANDIDATE_001",
+          "target_role": "Data Engineer",
+          "document_type": "resume",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "document_id": "CV_001",
+          "chunk_id": "CHUNK_0000",
+          "section_id": "CV_SEC_001",
+          "section_name": "professional_summary"
+        },
+        "bi_encoder_score": 0.48763108253479004,
+        "cross_encoder_score": 0.32833966612815857,
+        "rank": 2
+      },
+      {
+        "text": "Engineered PySpark ELT pipelines in Azure Databricks, transforming raw multi-client policy and claims data into production-ready Delta Lake tables within Unity Catalog. Developed modular data transformations for schema harmonization, lookup enrichment, and data validation. Built an LLM evaluation framework combining deterministic matching and LLM-as-Judge scoring. Migrated a local application to Databricks Apps and integrated React frontend components with FastAPI backend services.",
+        "metadata": {
+          "target_role": "Data Engineer",
+          "candidate_id": "CANDIDATE_001",
+          "duration": "June 2026 - Present",
+          "document_id": "CV_001",
+          "document_type": "resume",
+          "job_title": "Data Scientist",
+          "company": "Munich Re",
+          "section_name": "work_experience",
+          "entry_id": "EXP_002",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "chunk_id": "CHUNK_0002",
+          "section_id": "CV_SEC_002"
+        },
+        "bi_encoder_score": 0.6887738108634949,
+        "cross_encoder_score": 0.05195139721035957,
+        "rank": 3
+      },
+      {
+        "text": "Google Advanced Data Analytics Professional Certificate. IBM AI Engineering Professional Certificate. Databricks Generative AI Fundamentals.",
+        "metadata": {
+          "document_id": "CV_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "target_role": "Data Engineer",
+          "section_id": "CV_SEC_006",
+          "section_name": "certifications",
+          "chunk_id": "CHUNK_0008",
+          "candidate_id": "CANDIDATE_001",
+          "document_type": "resume"
+        },
+        "bi_encoder_score": 0.3859868049621582,
+        "cross_encoder_score": 0.014866113662719727,
+        "rank": 4
+      },
+      {
+        "text": "Bachelor of Science (Honours) in Data Science and Business Analytics, University of London.",
+        "metadata": {
+          "section_name": "education",
+          "target_role": "Data Engineer",
+          "document_type": "resume",
+          "document_id": "CV_001",
+          "section_id": "CV_SEC_005",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "candidate_id": "CANDIDATE_001",
+          "chunk_id": "CHUNK_0007"
+        },
+        "bi_encoder_score": 0.14016616344451904,
+        "cross_encoder_score": 0.003947415854781866,
+        "rank": 5
+      },
+      {
+        "text": "Developed machine learning classification models and geospatial optimization techniques to analyze traffic collision risk and prioritize ambulance station locations.",
+        "metadata": {
+          "target_role": "Data Engineer",
+          "document_type": "resume",
+          "entry_id": "PROJ_002",
+          "section_id": "CV_SEC_004",
+          "candidate_id": "CANDIDATE_001",
+          "chunk_id": "CHUNK_0006",
+          "document_id": "CV_001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "project_name": "NYC Emergency Response Optimization",
+          "section_name": "projects"
+        },
+        "bi_encoder_score": 0.13647496700286865,
+        "cross_encoder_score": 0.001708589494228363,
+        "rank": 6
+      },
+      {
+        "text": "Led a data analytics project involving the collection and processing of over 1,000 healthcare job listings using Python, BeautifulSoup, and Selenium. Analyzed salary ranges, qualification requirements, and job market trends using pandas and visualization libraries.",
+        "metadata": {
+          "section_id": "CV_SEC_004",
+          "document_id": "CV_001",
+          "entry_id": "PROJ_001",
+          "chunk_id": "CHUNK_0005",
+          "project_name": "FDM Job Market Analysis",
+          "candidate_id": "CANDIDATE_001",
+          "target_role": "Data Engineer",
+          "document_type": "resume",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "section_name": "projects"
+        },
+        "bi_encoder_score": 0.13592040538787842,
+        "cross_encoder_score": 0.0007234400254674256,
+        "rank": 7
+      },
+      {
+        "text": "Migrated Tableau dashboards to Power BI to support retail analytics operations. Developed daily sales tracking dashboards with year-over-year comparisons. Implemented reporting improvements and conducted user training to support dashboard adoption.",
+        "metadata": {
+          "company": "Aspial Corporation",
+          "target_role": "Data Engineer",
+          "section_name": "work_experience",
+          "chunk_id": "CHUNK_0003",
+          "job_title": "Data Analyst Intern",
+          "document_type": "resume",
+          "entry_id": "EXP_003",
+          "duration": "July 2024 - November 2024",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "candidate_id": "CANDIDATE_001",
+          "document_id": "CV_001",
+          "section_id": "CV_SEC_002"
+        },
+        "bi_encoder_score": 0.27559101581573486,
+        "cross_encoder_score": 0.0003342757117934525,
+        "rank": 8
+      },
+      {
+        "text": "Built Python ETL pipelines integrating East Asia sales, order, CPQ, WBS, and opportunity data, reducing manual processing time by approximately 80%. Developed reusable SQL queries in Amazon Redshift for recurring operational reporting across business functions. Created Tableau dashboards supporting Finance, Offer Marketing, and Customer stakeholders. Implemented logging and error-handling mechanisms to improve data pipeline traceability and maintainability.",
+        "metadata": {
+          "entry_id": "EXP_001",
+          "document_type": "resume",
+          "section_id": "CV_SEC_002",
+          "chunk_id": "CHUNK_0001",
+          "source": "/Users/yuhngtan/sandbox/improvement/data/cv.json",
+          "section_name": "work_experience",
+          "candidate_id": "CANDIDATE_001",
+          "document_id": "CV_001",
+          "target_role": "Data Engineer",
+          "job_title": "Data Analyst Intern",
+          "duration": "June 2025 - December 2025",
+          "company": "Schneider Electric"
+        },
+        "bi_encoder_score": 0.3862215280532837,
+        "cross_encoder_score": 0.00024812386254779994,
+        "rank": 9
+      }
+    ]
+  }
+]

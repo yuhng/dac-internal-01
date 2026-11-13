@@ -16,7 +16,7 @@ Vite dev server :5173  ── proxies /api ──►  FastAPI :8000
   ▼
 api/documents.py  extract()
   1. Rejects anything that is not a .pdf (415) or is over 10 MB (413)
-  2. Writes the file to a temp folder and runs the OCR module → one record matching data/schema.json
+  2. Writes the file to a temp folder and runs the OCR module → one record matching data/schema.yaml
   3. Saves the record to Postgres
   4. Returns the record as JSON to the browser
   │
@@ -105,7 +105,7 @@ docker compose exec db psql -U dac -d mycareerai_dev -c 'select document_id, occ
 |--------------------|-------|
 | 415 "Only PDF files can be read." | The file is not a `.pdf` |
 | 413 "That file is larger than 10 MB." | The upload is too big |
-| 422 | OCR failed, or the record did not match `data/schema.json` |
+| 422 | OCR failed, or the record did not match `data/schema.yaml` |
 | 503 "The resume could not be saved…" | Postgres is unreachable or the insert failed. The full error is in the backend log |
 
 The data volume `postgres_data` keeps the data when the container is stopped. `docker compose down -v` deletes it.

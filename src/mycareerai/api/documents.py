@@ -1,4 +1,4 @@
-"""Document API: turns an uploaded resume into a row matching data/schema.json."""
+"""Document API: turns an uploaded resume into a row matching data/schema.yaml."""
 
 import logging
 from pathlib import Path
@@ -9,8 +9,8 @@ import jsonschema
 import psycopg
 from fastapi import APIRouter, HTTPException, UploadFile, status
 
-from mycareerai.ai.ocr import OcrError, build_record
-from mycareerai.core.postgre.ingest import save_document
+from mycareerai.module.ocr import OcrError, build_record
+from mycareerai.core.postgre.ingest import save_table
 
 MAX_UPLOAD_BYTES = 10_000_000
 logger = logging.getLogger(__name__)
@@ -40,7 +40,7 @@ def extract(file: UploadFile) -> dict[str, Any]:
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "The resume could not be parsed.") from err
 
     try:
-        save_document(record)
+        save_table(record)
     except psycopg.Error as err:
         logger.exception("Saving the document failed")
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "The resume could not be saved. Try again in a moment.") from err

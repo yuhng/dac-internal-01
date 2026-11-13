@@ -38,6 +38,15 @@ async function analyze(input: ScoreInput) {
 
   const result: (Analysis & { detail?: unknown }) | null = await response.json().catch(() => null)
   if (response.ok && result) return result
+  if (response.status === 422 && Array.isArray(result?.detail)) {
+    const labels: Record<string, string> = { title: 'Job title', company: 'Company', jd: 'Job description', cv: 'CV' }
+    const messages = result.detail.flatMap(issue => {
+      if (!issue || typeof issue.msg !== 'string') return []
+      const field = Array.isArray(issue.loc) ? issue.loc[1] : undefined
+      return [`${labels[field] ?? 'Request'}: ${issue.msg}`]
+    })
+    throw new ApiError(messages.join('\n') || 'Check your job description and CV, then try again.')
+  }
   throw new ApiError(typeof result?.detail === 'string' ? result.detail : SCORING_UNREACHABLE)
 }
 
