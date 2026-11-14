@@ -7,3 +7,7 @@ data/*.pdf
 data/processed/
 
 __pycache__/
+data
+docs
+notebooks
+tests
