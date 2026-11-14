@@ -1,6 +1,6 @@
 # OCR module
 
-Turns a resume PDF into one row matching `data/schema.yaml`.
+Turns a resume PDF into one row matching `data/schema.yaml`, including sections compatible with the improvement loader.
 
 Code: `src/mycareerai/module/ocr/`  
 Tests: `tests/module/ocr/`
@@ -118,7 +118,17 @@ Job Title, Company (2023 – Present)
 
 ### 3. Build the row (`record.py`)
 
-`build_record` assembles all 24 columns and validates the row against `data/schema.yaml`. An invalid row raises `jsonschema.ValidationError` instead of being returned.
+`build_record` assembles the existing 24 fields plus `document_id`, `metadata` and `sections`, then validates the row against `data/schema.yaml`. An invalid row raises `jsonschema.ValidationError` instead of being returned.
+
+### Improvement document adapter (`adapter.py`)
+
+The CLI and document API include the section representation automatically. `document_id` equals the existing file-hash `id`; `metadata` carries `collection_method` and `review_status`.
+
+Each section has a deterministic `section_id`, a `section_name` and its original `content`, including headings, bullets and line breaks. Summary, experience and skills map to `professional_summary`, `work_experience` and `technical_skills`; projects, education and certifications retain their names. Repeated sections remain separate. Text before any recognized heading, or a document without recognized headings, becomes `unclassified`. Unknown headings within a section remain in that section's content.
+
+Sections use `content` rather than parsed role entries, so unfamiliar role layouts cannot discard evidence. Skills content comes from the actual skills section, not the terms detected elsewhere in the CV. The full `text` and existing parsed fields remain available to scoring and database ingestion. The JSONB document row stores the new fields without a database migration.
+
+For an older OCR record, call `to_improvement_document(record)` from `mycareerai.module.ocr` to obtain just the improvement document representation. Section IDs are deterministic for the same document text and order; they are not edit locations across revised CVs. Document versioning and scoring-to-improvement orchestration are separate work.
 
 | Column | Value |
 | --- | --- |
@@ -152,7 +162,7 @@ The CLI prints `OcrError` messages and exits with status 1.
 - **Resumes only:** job descriptions are not parsed.
 - **PDFs only:** DOCX and image files are not supported.
 - **Layouts:** parsing is fitted to the heading and role styles above. Other layouts can produce empty or wrong structured fields, even when `text` is correct, so review rows before relying on them.
-- **Projects:** the schema has no projects column, so project experience stays in `text` only.
+- **Projects:** project experience is retained in `text` and the `projects` section; individual project entries are not parsed.
 - **Contact details:** OCR can misread them. An address that no longer looks like an email becomes `null`, but a misread digit or a misread character that still looks valid is kept, so review these on OCR rows.
 - **Skills:** the term lists are short, so `soft_skills` is often empty. Case-sensitive terms still match an ordinary word at the start of a sentence, such as "Excel at...".
 - **OCR languages:** Tesseract uses its default language, English.

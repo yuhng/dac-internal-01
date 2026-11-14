@@ -9,6 +9,7 @@ import yaml
 
 from .extract import extract_text
 from .resume import parse_resume
+from .adapter import to_improvement_document
 
 SCHEMA_PATH = Path(__file__).resolve().parents[4] / "data" / "schema.yaml"
 
@@ -56,5 +57,6 @@ def build_record(
         "annotation_method": "rule_based",
         "review_status": "pending",
     }
+    record.update(to_improvement_document(record))
     validate_record(record)
     return record
