@@ -60,6 +60,13 @@ ON CONFLICT (document_id) DO UPDATE SET
 """
 
 
+def save_document(record: dict[str, Any]) -> None:
+    """Store the v2 document contract without the legacy resume projection."""
+    with psycopg.connect() as connection:
+        connection.execute(CREATE_DOCUMENTS)
+        connection.execute(UPSERT_DOCUMENT, (record["document_id"], Jsonb(record)))
+
+
 def save_table(record: dict[str, Any]) -> None:
     with psycopg.connect() as connection:
         connection.execute(CREATE_DOCUMENTS)

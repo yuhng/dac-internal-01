@@ -8,7 +8,8 @@ from openai import OpenAI
 from pydantic import BaseModel
 from langchain_core.documents import Document
 
-from improvement.src.usage import record as record_usage
+from .usage import record as record_usage
+from backend.app.core.llm.llm import create_llm_client
 
 logger = logging.getLogger(__name__)
 
@@ -108,7 +109,7 @@ evidence-grounded recommendation can be made.
 """
 
     def __init__(self, model_name: str = "gpt-4o-mini", client: Optional[OpenAI] = None):
-        self.client = client or OpenAI()
+        self.client = client if client is not None else create_llm_client()
         self.model_name = model_name
 
     def generate(self, requirement: str, fit_label: str, gap_analysis: dict, cv_evidence: list[dict]) -> LLMImprovementResponse:

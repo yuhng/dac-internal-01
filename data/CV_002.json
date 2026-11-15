@@ -1,0 +1,102 @@
+{
+  "schema_version": "1",
+  "document_id": "CV_002",
+  "document_version": 1,
+  "document_type": "resume",
+  "text": "Wang Ming Feng\nSingapore | Mobile: +65 9228 4535 | Email: wang2042@e.ntu.edu.sg\nlinkedin.com/in/wang-ming-feng-161233265 | github.com/mfwang0906-bit\n\nWORK EXPERIENCE\nC22 × NTU veNTUre Programme | Data Analyst                                                                             Jul 2026 – Oct 2026\n  – Engineered 17 pre-trade behavioural features from 46,500+ trades across 34 campaigns in a two-person industry project, preventing data leakage through automated recompute-after-truncation tests.\n  – Backtested logistic regression and rule-based models using Python, pandas and scikit-learn; applied account-clustered bootstrap resampling and Bonferroni correction, translating validated findings into trading decision rules for C22.\nGotion High Tech, Shanghai | Electrical Engineer Intern                                                             Jul 2025 – Dec 2025\n  – Supported three battery-system projects through component selection, two CATIA 3D wire-harness designs and reviews of 20+ ZWCAD electrical schematics; documented biweekly laboratory validation and safety tests.\n\nPROJECT EXPERIENCE\nCombinational Logic Circuits Learning Platform | Final Year Project                                                  Aug 2026 – May 2027\n  – Designing a JavaScript simulation engine with parameterised decoders, encoders, multiplexers and demultiplexers, evaluating circuits across all input combinations.\n  – Implementing procedural question generation, automatic answer verification and worked truth tables; deployed the static web application on Firebase Hosting with Git/GitHub version control.\nTCG Price Tracker                                                                                                       May 2026 – Present\n  – Built a Python scraper using Requests and BeautifulSoup4 to extract current e-commerce card prices, parsing nested HTML to distinguish multiple rarity and print variants.\nSelf-Hosted LLM Platform Odysseus                                                                                        Jun 2026\n  – Deployed an open-source Python/FastAPI AI platform locally using Docker Compose on Windows 11 and WSL2, with Ollama serving LLMs through REST APIs; compared Qwen, Llama and Gemma models on an 8GB RTX 5060 GPU.\nBiochip Biocomponent Characterisation | ML Engineer                                                                  Jan 2026 – May 2026\n  – Applied KNN classification and regression to 500+ EIS impedance spectra across 20 biochips and four materials, achieving\n  – approximately 60–70% classification accuracy.\n  – Combined KNN with equivalent-circuit modelling to automate dimensionality reduction and remove manual feature extraction; fabricated 36 biochips and collaborated with the measurement team on source data quality.\nMean-Variance Portfolio Optimiser                                                                                    Jan 2026 – Apr 2026\n – Built a Python allocation model using Yahoo Finance historical data and 10,000 Monte Carlo simulations to map the efficient frontier and identify Sharpe-optimal portfolio weights.\n\nSKILLS\nProgramming: Python (pandas, NumPy, scikit-learn, Plotly, Matplotlib, BeautifulSoup4, NLTK, spaCy), C++, MATLAB, JavaScript, HTML\nAI and Deployment: Docker, WSL2, Ollama, local LLM deployment, FastAPI, Firebase Hosting\nTools: Git/GitHub, Jupyter Notebook, LTspice, CATIA, ZWCAD | Languages: English, Chinese\n\nEDUCATION\nNanyang Technological University | BEng Electrical and Electronic Engineering                                          Aug 2023 – Jun 2027\nSecond Class Honours | Data Analytics and Machine Learning | Expected graduation: Jun 2027\nRelevant modules: Natural Language Processing, AI and Data Mining, Image Processing and Computer Vision, Data Structures and Algorithms, Computer Communications, Digital Signal Processing\nShanghai Jiao Tong University | Semester Exchange                                                                       Jun 2025 – Jan 2026\n\nCOMMUNITY INVOLVEMENT\nNTU Student Union | Orientation Group Leader | Aug 2023 – Aug 2024: Led a 20-member committee and 33 participants for a week-long freshman orientation camp.\nNTU Hall 8 | Business Manager | Aug 2023 – May 2024: Coordinated logistics, budgets and sponsorship for three events serving 200–300 residents.\n",
+  "metadata": {
+    "collection_method": "gpt4o_pdf",
+    "review_status": "pending"
+  },
+  "sections": [
+    {
+      "section_id": "CV_002:contact",
+      "section_name": "contact",
+      "content": "Wang Ming Feng\nSingapore | Mobile: +65 9228 4535 | Email: wang2042@e.ntu.edu.sg\nlinkedin.com/in/wang-ming-feng-161233265 | github.com/mfwang0906-bit"
+    },
+    {
+      "section_id": "CV_002:work_experience",
+      "section_name": "work_experience",
+      "entries": [
+        {
+          "entry_id": "CV_002:work_experience:001",
+          "job_title": "Data Analyst",
+          "company": "C22 × NTU veNTUre Programme",
+          "start_date": "Jul 2026",
+          "end_date": "Oct 2026",
+          "content": "– Engineered 17 pre-trade behavioural features from 46,500+ trades across 34 campaigns in a two-person industry project, preventing data leakage through automated recompute-after-truncation tests.\n– Backtested logistic regression and rule-based models using Python, pandas and scikit-learn; applied account-clustered bootstrap resampling and Bonferroni correction, translating validated findings into trading decision rules for C22."
+        },
+        {
+          "entry_id": "CV_002:work_experience:002",
+          "job_title": "Electrical Engineer Intern",
+          "company": "Gotion High Tech, Shanghai",
+          "start_date": "Jul 2025",
+          "end_date": "Dec 2025",
+          "content": "– Supported three battery-system projects through component selection, two CATIA 3D wire-harness designs and reviews of 20+ ZWCAD electrical schematics; documented biweekly laboratory validation and safety tests."
+        }
+      ]
+    },
+    {
+      "section_id": "CV_002:project_experience",
+      "section_name": "project_experience",
+      "entries": [
+        {
+          "entry_id": "CV_002:project_experience:001",
+          "job_title": "Combinational Logic Circuits Learning Platform | Final Year Project",
+          "company": null,
+          "start_date": "Aug 2026",
+          "end_date": "May 2027",
+          "content": "– Designing a JavaScript simulation engine with parameterised decoders, encoders, multiplexers and demultiplexers, evaluating circuits across all input combinations.\n– Implementing procedural question generation, automatic answer verification and worked truth tables; deployed the static web application on Firebase Hosting with Git/GitHub version control."
+        },
+        {
+          "entry_id": "CV_002:project_experience:002",
+          "job_title": "TCG Price Tracker",
+          "company": null,
+          "start_date": "May 2026",
+          "end_date": "Present",
+          "content": "– Built a Python scraper using Requests and BeautifulSoup4 to extract current e-commerce card prices, parsing nested HTML to distinguish multiple rarity and print variants."
+        },
+        {
+          "entry_id": "CV_002:project_experience:003",
+          "job_title": "Self-Hosted LLM Platform Odysseus",
+          "company": null,
+          "start_date": "Jun 2026",
+          "end_date": null,
+          "content": "– Deployed an open-source Python/FastAPI AI platform locally using Docker Compose on Windows 11 and WSL2, with Ollama serving LLMs through REST APIs; compared Qwen, Llama and Gemma models on an 8GB RTX 5060 GPU."
+        },
+        {
+          "entry_id": "CV_002:project_experience:004",
+          "job_title": "Biochip Biocomponent Characterisation | ML Engineer",
+          "company": null,
+          "start_date": "Jan 2026",
+          "end_date": "May 2026",
+          "content": "– Applied KNN classification and regression to 500+ EIS impedance spectra across 20 biochips and four materials, achieving approximately 60–70% classification accuracy.\n– Combined KNN with equivalent-circuit modelling to automate dimensionality reduction and remove manual feature extraction; fabricated 36 biochips and collaborated with the measurement team on source data quality."
+        },
+        {
+          "entry_id": "CV_002:project_experience:005",
+          "job_title": "Mean-Variance Portfolio Optimiser",
+          "company": null,
+          "start_date": "Jan 2026",
+          "end_date": "Apr 2026",
+          "content": "– Built a Python allocation model using Yahoo Finance historical data and 10,000 Monte Carlo simulations to map the efficient frontier and identify Sharpe-optimal portfolio weights."
+        }
+      ]
+    },
+    {
+      "section_id": "CV_002:technical_skills",
+      "section_name": "technical_skills",
+      "content": "Programming: Python (pandas, NumPy, scikit-learn, Plotly, Matplotlib, BeautifulSoup4, NLTK, spaCy), C++, MATLAB, JavaScript, HTML\nAI and Deployment: Docker, WSL2, Ollama, local LLM deployment, FastAPI, Firebase Hosting\nTools: Git/GitHub, Jupyter Notebook, LTspice, CATIA, ZWCAD | Languages: English, Chinese"
+    },
+    {
+      "section_id": "CV_002:education",
+      "section_name": "education",
+      "content": "Nanyang Technological University | BEng Electrical and Electronic Engineering                                          Aug 2023 – Jun 2027\nSecond Class Honours | Data Analytics and Machine Learning | Expected graduation: Jun 2027\nRelevant modules: Natural Language Processing, AI and Data Mining, Image Processing and Computer Vision, Data Structures and Algorithms, Computer Communications, Digital Signal Processing\nShanghai Jiao Tong University | Semester Exchange                                                                       Jun 2025 – Jan 2026"
+    },
+    {
+      "section_id": "CV_002:other",
+      "section_name": "other",
+      "content": "COMMUNITY INVOLVEMENT\nNTU Student Union | Orientation Group Leader | Aug 2023 – Aug 2024: Led a 20-member committee and 33 participants for a week-long freshman orientation camp.\nNTU Hall 8 | Business Manager | Aug 2023 – May 2024: Coordinated logistics, budgets and sponsorship for three events serving 200–300 residents."
+    }
+  ],
+  "parsing_warnings": []
+}

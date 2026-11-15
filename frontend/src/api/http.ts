@@ -4,7 +4,7 @@ import { ApiError, type Analysis, type ScoreInput } from './types'
 const UNREACHABLE = 'The document service could not be reached. Try again, or paste the text instead.'
 const SCORING_UNREACHABLE = 'The scoring service could not be reached. Try again in a moment.'
 
-/** PDFs go to the Document API. Plain text is read in the browser and needs no server. */
+/** PDFs use OCR v2 via the Document API; scoring consumes its full text. */
 async function extractText(file: File) {
   if (!/\.pdf$/i.test(file.name)) return mockApi.documents.extractText(file)
 

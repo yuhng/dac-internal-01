@@ -6,7 +6,8 @@ from typing import Literal, Optional
 from openai import OpenAI
 from pydantic import BaseModel, Field
 
-from improvement.src.usage import record as record_usage
+from .usage import record as record_usage
+from backend.app.core.llm.llm import create_llm_client
 
 logger = logging.getLogger(__name__)
 
@@ -104,7 +105,7 @@ Return the required structured assessment.
 """
 
     def __init__(self, model_name: str = "gpt-4o-mini", client: Optional[OpenAI] = None):
-        self.client = client or OpenAI()
+        self.client = client if client is not None else create_llm_client()
         self.model_name = model_name
 
     def assess(self, requirement: str, evidence: list[dict]) -> LLMAssessment:

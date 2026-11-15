@@ -1,16 +1,18 @@
-"""Document API: turns an uploaded resume into a row matching data/schema.yaml."""
+"""Document API: extract and store the OCR v2 resume contract."""
 
 import logging
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Any
 
-import jsonschema
 import psycopg
 from fastapi import APIRouter, HTTPException, UploadFile, status
+from openai import OpenAIError
+from uuid import uuid4
 
-from mycareerai.module.ocr import OcrError, build_record
-from mycareerai.core.postgre.ingest import save_table
+from app.module.ocr_v2.extractor import extract_resume
+from backend.app.schema.schema import ResumeDocument
+from app.core.postgre.ingest import save_document
 
 MAX_UPLOAD_BYTES = 10_000_000
 logger = logging.getLogger(__name__)
@@ -19,7 +21,7 @@ router = APIRouter(prefix="/documents", tags=["documents"])
 
 
 # OCR and Postgres Ingestion module
-@router.post("/extract")
+@router.post("/extract", response_model=ResumeDocument)
 def extract(file: UploadFile) -> dict[str, Any]:
     if not (file.filename or "").lower().endswith(".pdf"):
         raise HTTPException(status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, "Only PDF files can be read.")
@@ -28,19 +30,21 @@ def extract(file: UploadFile) -> dict[str, Any]:
     if len(content) > MAX_UPLOAD_BYTES:
         raise HTTPException(status.HTTP_413_CONTENT_TOO_LARGE, "That file is larger than 10 MB.")
 
-    # A fixed name keeps the client's file name out of the path, and it appears in OcrError messages.
+    # A fixed name keeps the client's file name out of the path.
     with TemporaryDirectory() as directory:
         path = Path(directory) / "document.pdf"
         path.write_bytes(content)
         try:
-            record = build_record(path, source=file.filename, license="user-provided")
-        except OcrError as err:
-            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, str(err)) from err
-        except jsonschema.ValidationError as err:
-            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "The resume could not be parsed.") from err
+            document = extract_resume(path, document_id=f"CV_{uuid4().hex}")
+            record = document.model_dump()
+        except ValueError as err:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "The resume could not be read. Upload a readable resume PDF and try again.") from err
+        except (OpenAIError, RuntimeError) as err:
+            logger.exception("Resume extraction service failed")
+            raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "The resume extraction service is unavailable. Try again in a moment.") from err
 
     try:
-        save_table(record)
+        save_document(record)
     except psycopg.Error as err:
         logger.exception("Saving the document failed")
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "The resume could not be saved. Try again in a moment.") from err

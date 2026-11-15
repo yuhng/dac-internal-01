@@ -1,0 +1,1034 @@
+{
+  "evidence": {
+    "document_id": "CV_001",
+    "document_version": 1,
+    "review_status": "pending",
+    "bullets": [
+      {
+        "bullet_id": "CV_001:work_experience:001:bullet:001",
+        "entry_id": "CV_001:work_experience:001",
+        "section_id": "CV_001:work_experience",
+        "project_name": null,
+        "job_title": "Data Science Intern",
+        "company": "Munich Re",
+        "source_line": 1,
+        "original_text": "-​ Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams.",
+        "text": "Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams."
+      },
+      {
+        "bullet_id": "CV_001:work_experience:001:bullet:002",
+        "entry_id": "CV_001:work_experience:001",
+        "section_id": "CV_001:work_experience",
+        "project_name": null,
+        "job_title": "Data Science Intern",
+        "company": "Munich Re",
+        "source_line": 2,
+        "original_text": "-​ Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types.",
+        "text": "Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types."
+      },
+      {
+        "bullet_id": "CV_001:work_experience:002:bullet:001",
+        "entry_id": "CV_001:work_experience:002",
+        "section_id": "CV_001:work_experience",
+        "project_name": null,
+        "job_title": "Data Intelligence Analyst Intern",
+        "company": "Publicis Groupe",
+        "source_line": 1,
+        "original_text": "-​ Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo.",
+        "text": "Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo."
+      },
+      {
+        "bullet_id": "CV_001:work_experience:002:bullet:002",
+        "entry_id": "CV_001:work_experience:002",
+        "section_id": "CV_001:work_experience",
+        "project_name": null,
+        "job_title": "Data Intelligence Analyst Intern",
+        "company": "Publicis Groupe",
+        "source_line": 2,
+        "original_text": "-​ Optimize media spend through cross-channel Share of Voice analysis to improve budget allocation",
+        "text": "Optimize media spend through cross-channel Share of Voice analysis to improve budget allocation"
+      },
+      {
+        "bullet_id": "CV_001:work_experience:003:bullet:001",
+        "entry_id": "CV_001:work_experience:003",
+        "section_id": "CV_001:work_experience",
+        "project_name": null,
+        "job_title": "EA Data Analyst Intern",
+        "company": "Schneider Electric",
+        "source_line": 1,
+        "original_text": "-​ Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia.",
+        "text": "Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia."
+      },
+      {
+        "bullet_id": "CV_001:work_experience:003:bullet:002",
+        "entry_id": "CV_001:work_experience:003",
+        "section_id": "CV_001:work_experience",
+        "project_name": null,
+        "job_title": "EA Data Analyst Intern",
+        "company": "Schneider Electric",
+        "source_line": 2,
+        "original_text": "-​ Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams.",
+        "text": "Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams."
+      },
+      {
+        "bullet_id": "CV_001:work_experience:004:bullet:001",
+        "entry_id": "CV_001:work_experience:004",
+        "section_id": "CV_001:work_experience",
+        "project_name": null,
+        "job_title": "Data Analyst Intern",
+        "company": "Aspial Corporation",
+        "source_line": 1,
+        "original_text": "-​ Developed 20+ Tableau dashboards for real-time sales performance and fraud detection to monitor retail and brokerage operations.",
+        "text": "Developed 20+ Tableau dashboards for real-time sales performance and fraud detection to monitor retail and brokerage operations."
+      },
+      {
+        "bullet_id": "CV_001:work_experience:004:bullet:002",
+        "entry_id": "CV_001:work_experience:004",
+        "section_id": "CV_001:work_experience",
+        "project_name": null,
+        "job_title": "Data Analyst Intern",
+        "company": "Aspial Corporation",
+        "source_line": 2,
+        "original_text": "-​ Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity.",
+        "text": "Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity."
+      },
+      {
+        "bullet_id": "CV_001:project_experience:001:bullet:001",
+        "entry_id": "CV_001:project_experience:001",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "FAWSURE Claims Assessment Platform (Munich Re)",
+        "company": null,
+        "source_line": 1,
+        "original_text": "-​ Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI",
+        "text": "Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI"
+      },
+      {
+        "bullet_id": "CV_001:project_experience:001:bullet:002",
+        "entry_id": "CV_001:project_experience:001",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "FAWSURE Claims Assessment Platform (Munich Re)",
+        "company": null,
+        "source_line": 2,
+        "original_text": "-​ Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline verification",
+        "text": "Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline verification"
+      },
+      {
+        "bullet_id": "CV_001:project_experience:001:bullet:003",
+        "entry_id": "CV_001:project_experience:001",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "FAWSURE Claims Assessment Platform (Munich Re)",
+        "company": null,
+        "source_line": 3,
+        "original_text": "-​ Developing a hybrid claims-validation pipeline combining RAG-based policy reasoning and deterministic checks to assess claims exceeding benefits limits",
+        "text": "Developing a hybrid claims-validation pipeline combining RAG-based policy reasoning and deterministic checks to assess claims exceeding benefits limits"
+      },
+      {
+        "bullet_id": "CV_001:project_experience:001:bullet:004",
+        "entry_id": "CV_001:project_experience:001",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "FAWSURE Claims Assessment Platform (Munich Re)",
+        "company": null,
+        "source_line": 4,
+        "original_text": "-​ Building an evaluation harness using LLM-as-Judge and deterministics checks to assess extraction accuracy for fraud, abuse, waste, and claims-validity assessments",
+        "text": "Building an evaluation harness using LLM-as-Judge and deterministics checks to assess extraction accuracy for fraud, abuse, waste, and claims-validity assessments"
+      },
+      {
+        "bullet_id": "CV_001:project_experience:002:bullet:001",
+        "entry_id": "CV_001:project_experience:002",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "VITALS Medical Classification Pipeline (Munich Re)",
+        "company": null,
+        "source_line": 1,
+        "original_text": "-​ Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables",
+        "text": "Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables"
+      },
+      {
+        "bullet_id": "CV_001:project_experience:002:bullet:002",
+        "entry_id": "CV_001:project_experience:002",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "VITALS Medical Classification Pipeline (Munich Re)",
+        "company": null,
+        "source_line": 2,
+        "original_text": "-​ Designed modular transformation frameworks to handle schema harmonization, lookup enrichment, date parsing, and complex premium & reinsurance calculations across disparate source formats.",
+        "text": "Designed modular transformation frameworks to handle schema harmonization, lookup enrichment, date parsing, and complex premium & reinsurance calculations across disparate source formats."
+      },
+      {
+        "bullet_id": "CV_001:project_experience:003:bullet:001",
+        "entry_id": "CV_001:project_experience:003",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "PAI BI Service Automation Pipeline (Publicis Groupe)",
+        "company": null,
+        "source_line": 1,
+        "original_text": "-​ Developed a pipeline to automate social media extraction, supporting concurrent downloads and configurable media retrieval",
+        "text": "Developed a pipeline to automate social media extraction, supporting concurrent downloads and configurable media retrieval"
+      },
+      {
+        "bullet_id": "CV_001:project_experience:003:bullet:002",
+        "entry_id": "CV_001:project_experience:003",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "PAI BI Service Automation Pipeline (Publicis Groupe)",
+        "company": null,
+        "source_line": 2,
+        "original_text": "-​ Implemented parallelized video-to-GIF conversion and asynchronous download workflows using multiprocessing and asyncio to optimize efficiency.",
+        "text": "Implemented parallelized video-to-GIF conversion and asynchronous download workflows using multiprocessing and asyncio to optimize efficiency."
+      },
+      {
+        "bullet_id": "CV_001:project_experience:004:bullet:001",
+        "entry_id": "CV_001:project_experience:004",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "Sales Incentive Program (SIP) Automation Pipeline (Schneider Electric)",
+        "company": null,
+        "source_line": 1,
+        "original_text": "-​ Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data into a standardized workflow cutting manual processing time by 80% across East Asia.",
+        "text": "Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data into a standardized workflow cutting manual processing time by 80% across East Asia."
+      },
+      {
+        "bullet_id": "CV_001:project_experience:004:bullet:002",
+        "entry_id": "CV_001:project_experience:004",
+        "section_id": "CV_001:project_experience",
+        "project_name": null,
+        "job_title": "Sales Incentive Program (SIP) Automation Pipeline (Schneider Electric)",
+        "company": null,
+        "source_line": 2,
+        "original_text": "-​ Implemented validation, logging, exception handling, and reusable modules to improve reliability and maintainability.",
+        "text": "Implemented validation, logging, exception handling, and reusable modules to improve reliability and maintainability."
+      }
+    ],
+    "skill_mentions": [
+      {
+        "skill": "PySpark",
+        "mention": "PySpark",
+        "start": 12,
+        "end": 19,
+        "evidence_id": "CV_001:work_experience:001:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams.",
+        "text": "Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams."
+      },
+      {
+        "skill": "Azure",
+        "mention": "Azure",
+        "start": 33,
+        "end": 38,
+        "evidence_id": "CV_001:work_experience:001:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams.",
+        "text": "Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams."
+      },
+      {
+        "skill": "Databricks",
+        "mention": "Azure Databricks",
+        "start": 33,
+        "end": 49,
+        "evidence_id": "CV_001:work_experience:001:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams.",
+        "text": "Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams."
+      },
+      {
+        "skill": "RAG",
+        "mention": "RAG",
+        "start": 110,
+        "end": 113,
+        "evidence_id": "CV_001:work_experience:001:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types.",
+        "text": "Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types."
+      },
+      {
+        "skill": "OCR",
+        "mention": "OCR",
+        "start": 105,
+        "end": 108,
+        "evidence_id": "CV_001:work_experience:001:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types.",
+        "text": "Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types."
+      },
+      {
+        "skill": "BigQuery",
+        "mention": "BigQuery",
+        "start": 11,
+        "end": 19,
+        "evidence_id": "CV_001:work_experience:002:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo.",
+        "text": "Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo."
+      },
+      {
+        "skill": "Looker Studio",
+        "mention": "Looker Studio",
+        "start": 66,
+        "end": 79,
+        "evidence_id": "CV_001:work_experience:002:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo.",
+        "text": "Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo."
+      },
+      {
+        "skill": "Python",
+        "mention": "Python",
+        "start": 6,
+        "end": 12,
+        "evidence_id": "CV_001:work_experience:003:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia.",
+        "text": "Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia."
+      },
+      {
+        "skill": "SQL",
+        "mention": "SQL",
+        "start": 31,
+        "end": 34,
+        "evidence_id": "CV_001:work_experience:003:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia.",
+        "text": "Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia."
+      },
+      {
+        "skill": "Informatica",
+        "mention": "Informatica",
+        "start": 14,
+        "end": 25,
+        "evidence_id": "CV_001:work_experience:003:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia.",
+        "text": "Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia."
+      },
+      {
+        "skill": "SQL",
+        "mention": "SQL",
+        "start": 45,
+        "end": 48,
+        "evidence_id": "CV_001:work_experience:003:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams.",
+        "text": "Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams."
+      },
+      {
+        "skill": "Tableau",
+        "mention": "Tableau",
+        "start": 13,
+        "end": 20,
+        "evidence_id": "CV_001:work_experience:003:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams.",
+        "text": "Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams."
+      },
+      {
+        "skill": "Tableau",
+        "mention": "Tableau",
+        "start": 14,
+        "end": 21,
+        "evidence_id": "CV_001:work_experience:004:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Developed 20+ Tableau dashboards for real-time sales performance and fraud detection to monitor retail and brokerage operations.",
+        "text": "Developed 20+ Tableau dashboards for real-time sales performance and fraud detection to monitor retail and brokerage operations."
+      },
+      {
+        "skill": "Tableau",
+        "mention": "Tableau",
+        "start": 36,
+        "end": 43,
+        "evidence_id": "CV_001:work_experience:004:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity.",
+        "text": "Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity."
+      },
+      {
+        "skill": "Power BI",
+        "mention": "Power BI",
+        "start": 47,
+        "end": 55,
+        "evidence_id": "CV_001:work_experience:004:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity.",
+        "text": "Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity."
+      },
+      {
+        "skill": "Databricks",
+        "mention": "Databricks",
+        "start": 45,
+        "end": 55,
+        "evidence_id": "CV_001:project_experience:001:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI",
+        "text": "Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI"
+      },
+      {
+        "skill": "FastAPI",
+        "mention": "FastAPI",
+        "start": 112,
+        "end": 119,
+        "evidence_id": "CV_001:project_experience:001:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI",
+        "text": "Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI"
+      },
+      {
+        "skill": "React",
+        "mention": "React",
+        "start": 11,
+        "end": 16,
+        "evidence_id": "CV_001:project_experience:001:bullet:002",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline verification",
+        "text": "Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline verification"
+      },
+      {
+        "skill": "RAG",
+        "mention": "RAG",
+        "start": 66,
+        "end": 69,
+        "evidence_id": "CV_001:project_experience:001:bullet:002",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline verification",
+        "text": "Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline verification"
+      },
+      {
+        "skill": "RAG",
+        "mention": "RAG",
+        "start": 57,
+        "end": 60,
+        "evidence_id": "CV_001:project_experience:001:bullet:003",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Developing a hybrid claims-validation pipeline combining RAG-based policy reasoning and deterministic checks to assess claims exceeding benefits limits",
+        "text": "Developing a hybrid claims-validation pipeline combining RAG-based policy reasoning and deterministic checks to assess claims exceeding benefits limits"
+      },
+      {
+        "skill": "PySpark",
+        "mention": "PySpark",
+        "start": 12,
+        "end": 19,
+        "evidence_id": "CV_001:project_experience:002:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables",
+        "text": "Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables"
+      },
+      {
+        "skill": "Databricks",
+        "mention": "Databricks",
+        "start": 37,
+        "end": 47,
+        "evidence_id": "CV_001:project_experience:002:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables",
+        "text": "Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables"
+      },
+      {
+        "skill": "Delta Lake",
+        "mention": "Delta Lake",
+        "start": 118,
+        "end": 128,
+        "evidence_id": "CV_001:project_experience:002:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables",
+        "text": "Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables"
+      },
+      {
+        "skill": "asyncio",
+        "mention": "asyncio",
+        "start": 111,
+        "end": 118,
+        "evidence_id": "CV_001:project_experience:003:bullet:002",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Implemented parallelized video-to-GIF conversion and asynchronous download workflows using multiprocessing and asyncio to optimize efficiency.",
+        "text": "Implemented parallelized video-to-GIF conversion and asynchronous download workflows using multiprocessing and asyncio to optimize efficiency."
+      },
+      {
+        "skill": "Python",
+        "mention": "Python",
+        "start": 20,
+        "end": 26,
+        "evidence_id": "CV_001:project_experience:004:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data into a standardized workflow cutting manual processing time by 80% across East Asia.",
+        "text": "Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data into a standardized workflow cutting manual processing time by 80% across East Asia."
+      },
+      {
+        "skill": "Python",
+        "mention": "Python",
+        "start": 13,
+        "end": 19,
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "skill": "SQL",
+        "mention": "SQL",
+        "start": 47,
+        "end": 50,
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "skill": "PySpark",
+        "mention": "pySpark",
+        "start": 37,
+        "end": 44,
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "skill": "pandas",
+        "mention": "Pandas",
+        "start": 21,
+        "end": 27,
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "skill": "Polars",
+        "mention": "Polars",
+        "start": 29,
+        "end": 35,
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "skill": "PostgreSQL",
+        "mention": "Postgres",
+        "start": 52,
+        "end": 60,
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "skill": "MySQL",
+        "mention": "MySQL",
+        "start": 72,
+        "end": 77,
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "skill": "BigQuery",
+        "mention": "BigQuery",
+        "start": 62,
+        "end": 70,
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "skill": "Docker",
+        "mention": "Docker",
+        "start": 13,
+        "end": 19,
+        "evidence_id": "CV_001:technical_skills:line:002",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "CI/CD Tools: Docker, Github Actions",
+        "text": "CI/CD Tools: Docker, Github Actions"
+      },
+      {
+        "skill": "GitHub Actions",
+        "mention": "Github Actions",
+        "start": 21,
+        "end": 35,
+        "evidence_id": "CV_001:technical_skills:line:002",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "CI/CD Tools: Docker, Github Actions",
+        "text": "CI/CD Tools: Docker, Github Actions"
+      },
+      {
+        "skill": "scikit-learn",
+        "mention": "Scikit-Learn",
+        "start": 18,
+        "end": 30,
+        "evidence_id": "CV_001:technical_skills:line:003",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace",
+        "text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace"
+      },
+      {
+        "skill": "LangChain",
+        "mention": "LangChain",
+        "start": 32,
+        "end": 41,
+        "evidence_id": "CV_001:technical_skills:line:003",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace",
+        "text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace"
+      },
+      {
+        "skill": "Hugging Face",
+        "mention": "HuggingFace",
+        "start": 43,
+        "end": 54,
+        "evidence_id": "CV_001:technical_skills:line:003",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace",
+        "text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace"
+      },
+      {
+        "skill": "AWS",
+        "mention": "AWS",
+        "start": 17,
+        "end": 20,
+        "evidence_id": "CV_001:technical_skills:line:004",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Cloud Platforms: AWS, GCP, Databricks",
+        "text": "Cloud Platforms: AWS, GCP, Databricks"
+      },
+      {
+        "skill": "GCP",
+        "mention": "GCP",
+        "start": 22,
+        "end": 25,
+        "evidence_id": "CV_001:technical_skills:line:004",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Cloud Platforms: AWS, GCP, Databricks",
+        "text": "Cloud Platforms: AWS, GCP, Databricks"
+      },
+      {
+        "skill": "Databricks",
+        "mention": "Databricks",
+        "start": 27,
+        "end": 37,
+        "evidence_id": "CV_001:technical_skills:line:004",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Cloud Platforms: AWS, GCP, Databricks",
+        "text": "Cloud Platforms: AWS, GCP, Databricks"
+      }
+    ],
+    "skill_sources": [
+      {
+        "evidence_id": "CV_001:work_experience:001:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams.",
+        "text": "Engineering PySpark pipelines on Azure Databricks using Medallion architecture, automating health insurance reporting and improving data quality for regional actuarial teams."
+      },
+      {
+        "evidence_id": "CV_001:work_experience:001:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types.",
+        "text": "Building GenAI-enabled claims assessment and fraud detection pipelines for health insurance, integrating OCR, RAG and LLM-based extraction across diverse claim types."
+      },
+      {
+        "evidence_id": "CV_001:work_experience:002:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo.",
+        "text": "Engineered BigQuery pipelines processing 3TB+ Ad data, developing Looker Studio dashboards to improve APAC campaign visibility for Samsung and PepsiCo."
+      },
+      {
+        "evidence_id": "CV_001:work_experience:002:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Optimize media spend through cross-channel Share of Voice analysis to improve budget allocation",
+        "text": "Optimize media spend through cross-channel Share of Voice analysis to improve budget allocation"
+      },
+      {
+        "evidence_id": "CV_001:work_experience:003:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia.",
+        "text": "Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia."
+      },
+      {
+        "evidence_id": "CV_001:work_experience:003:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams.",
+        "text": "Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams."
+      },
+      {
+        "evidence_id": "CV_001:work_experience:004:bullet:001",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Developed 20+ Tableau dashboards for real-time sales performance and fraud detection to monitor retail and brokerage operations.",
+        "text": "Developed 20+ Tableau dashboards for real-time sales performance and fraud detection to monitor retail and brokerage operations."
+      },
+      {
+        "evidence_id": "CV_001:work_experience:004:bullet:002",
+        "section_id": "CV_001:work_experience",
+        "original_text": "-​ Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity.",
+        "text": "Supported enterprise migration from Tableau to Power BI by mapping data models and row-level security to ensure reporting continuity."
+      },
+      {
+        "evidence_id": "CV_001:project_experience:001:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI",
+        "text": "Migrating and deploying local application to Databricks Apps, integrating frontend and backend services through FastAPI"
+      },
+      {
+        "evidence_id": "CV_001:project_experience:001:bullet:002",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline verification",
+        "text": "Developing React features for drag-and-drop claims ingestions and RAG search with scanned-PDF citations to streamline verification"
+      },
+      {
+        "evidence_id": "CV_001:project_experience:001:bullet:003",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Developing a hybrid claims-validation pipeline combining RAG-based policy reasoning and deterministic checks to assess claims exceeding benefits limits",
+        "text": "Developing a hybrid claims-validation pipeline combining RAG-based policy reasoning and deterministic checks to assess claims exceeding benefits limits"
+      },
+      {
+        "evidence_id": "CV_001:project_experience:001:bullet:004",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Building an evaluation harness using LLM-as-Judge and deterministics checks to assess extraction accuracy for fraud, abuse, waste, and claims-validity assessments",
+        "text": "Building an evaluation harness using LLM-as-Judge and deterministics checks to assess extraction accuracy for fraud, abuse, waste, and claims-validity assessments"
+      },
+      {
+        "evidence_id": "CV_001:project_experience:002:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables",
+        "text": "Engineering PySpark ELT pipelines in Databricks to transform multi-client policy and claims data into analytics-ready Delta Lake tables"
+      },
+      {
+        "evidence_id": "CV_001:project_experience:002:bullet:002",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Designed modular transformation frameworks to handle schema harmonization, lookup enrichment, date parsing, and complex premium & reinsurance calculations across disparate source formats.",
+        "text": "Designed modular transformation frameworks to handle schema harmonization, lookup enrichment, date parsing, and complex premium & reinsurance calculations across disparate source formats."
+      },
+      {
+        "evidence_id": "CV_001:project_experience:003:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Developed a pipeline to automate social media extraction, supporting concurrent downloads and configurable media retrieval",
+        "text": "Developed a pipeline to automate social media extraction, supporting concurrent downloads and configurable media retrieval"
+      },
+      {
+        "evidence_id": "CV_001:project_experience:003:bullet:002",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Implemented parallelized video-to-GIF conversion and asynchronous download workflows using multiprocessing and asyncio to optimize efficiency.",
+        "text": "Implemented parallelized video-to-GIF conversion and asynchronous download workflows using multiprocessing and asyncio to optimize efficiency."
+      },
+      {
+        "evidence_id": "CV_001:project_experience:004:bullet:001",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data into a standardized workflow cutting manual processing time by 80% across East Asia.",
+        "text": "Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data into a standardized workflow cutting manual processing time by 80% across East Asia."
+      },
+      {
+        "evidence_id": "CV_001:project_experience:004:bullet:002",
+        "section_id": "CV_001:project_experience",
+        "original_text": "-​ Implemented validation, logging, exception handling, and reusable modules to improve reliability and maintainability.",
+        "text": "Implemented validation, logging, exception handling, and reusable modules to improve reliability and maintainability."
+      },
+      {
+        "evidence_id": "CV_001:technical_skills:line:001",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+        "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+      },
+      {
+        "evidence_id": "CV_001:technical_skills:line:002",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "CI/CD Tools: Docker, Github Actions",
+        "text": "CI/CD Tools: Docker, Github Actions"
+      },
+      {
+        "evidence_id": "CV_001:technical_skills:line:003",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace",
+        "text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace"
+      },
+      {
+        "evidence_id": "CV_001:technical_skills:line:004",
+        "section_id": "CV_001:technical_skills",
+        "original_text": "Cloud Platforms: AWS, GCP, Databricks",
+        "text": "Cloud Platforms: AWS, GCP, Databricks"
+      }
+    ],
+    "warnings": [
+      "Each nonempty entry line is treated as one bullet; verify OCR line grouping.",
+      "Skill matching uses known aliases or exact JD names; negation and proficiency are not assessed."
+    ]
+  },
+  "skill_scores": {
+    "scoring_version": "skills-2",
+    "job_id": "JD_001",
+    "document_id": "CV_001",
+    "document_version": 1,
+    "provisional": true,
+    "coverage": {
+      "required": {
+        "matched": 0,
+        "requested": 0,
+        "percent": null
+      },
+      "preferred": {
+        "matched": 0,
+        "requested": 2,
+        "percent": 0.0
+      },
+      "unspecified": {
+        "matched": 4,
+        "requested": 11,
+        "percent": 36.36
+      }
+    },
+    "skills": [
+      {
+        "requirement_id": "JD_001:skill:001",
+        "skill": "Python",
+        "importance": "unspecified",
+        "matched": true,
+        "jd_name": "Python",
+        "matching_method": "exact_name_with_known_aliases",
+        "aliases_used": [],
+        "matches": [
+          {
+            "skill": "Python",
+            "mention": "Python",
+            "start": 6,
+            "end": 12,
+            "evidence_id": "CV_001:work_experience:003:bullet:001",
+            "original_text": "-​ Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia.",
+            "text": "Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia."
+          },
+          {
+            "skill": "Python",
+            "mention": "Python",
+            "start": 20,
+            "end": 26,
+            "evidence_id": "CV_001:project_experience:004:bullet:001",
+            "original_text": "-​ Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data into a standardized workflow cutting manual processing time by 80% across East Asia.",
+            "text": "Developed a modular Python ETL pipeline to automate regional SIP reporting, consolidating multi-source commercial data into a standardized workflow cutting manual processing time by 80% across East Asia."
+          },
+          {
+            "skill": "Python",
+            "mention": "Python",
+            "start": 13,
+            "end": 19,
+            "evidence_id": "CV_001:technical_skills:line:001",
+            "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+            "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+          }
+        ],
+        "evidence_ids": [
+          "CV_001:project_experience:004:bullet:001",
+          "CV_001:technical_skills:line:001",
+          "CV_001:work_experience:003:bullet:001"
+        ],
+        "finding": "explicit_mention_found"
+      },
+      {
+        "requirement_id": "JD_001:skill:002",
+        "skill": "PyTorch",
+        "importance": "unspecified",
+        "matched": false,
+        "jd_name": "PyTorch",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      },
+      {
+        "requirement_id": "JD_001:skill:003",
+        "skill": "scikit-learn",
+        "importance": "unspecified",
+        "matched": true,
+        "jd_name": "scikit-learn",
+        "matching_method": "exact_name_with_known_aliases",
+        "aliases_used": [
+          "sklearn"
+        ],
+        "matches": [
+          {
+            "skill": "scikit-learn",
+            "mention": "Scikit-Learn",
+            "start": 18,
+            "end": 30,
+            "evidence_id": "CV_001:technical_skills:line:003",
+            "original_text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace",
+            "text": "AI/ML Frameworks: Scikit-Learn, LangChain, HuggingFace"
+          }
+        ],
+        "evidence_ids": [
+          "CV_001:technical_skills:line:003"
+        ],
+        "finding": "explicit_mention_found"
+      },
+      {
+        "requirement_id": "JD_001:skill:004",
+        "skill": "pandas",
+        "importance": "unspecified",
+        "matched": true,
+        "jd_name": "pandas",
+        "matching_method": "exact_name_with_known_aliases",
+        "aliases_used": [],
+        "matches": [
+          {
+            "skill": "pandas",
+            "mention": "Pandas",
+            "start": 21,
+            "end": 27,
+            "evidence_id": "CV_001:technical_skills:line:001",
+            "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+            "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+          }
+        ],
+        "evidence_ids": [
+          "CV_001:technical_skills:line:001"
+        ],
+        "finding": "explicit_mention_found"
+      },
+      {
+        "requirement_id": "JD_001:skill:005",
+        "skill": "SQL",
+        "importance": "unspecified",
+        "matched": true,
+        "jd_name": "SQL",
+        "matching_method": "exact_name_with_known_aliases",
+        "aliases_used": [],
+        "matches": [
+          {
+            "skill": "SQL",
+            "mention": "SQL",
+            "start": 31,
+            "end": 34,
+            "evidence_id": "CV_001:work_experience:003:bullet:001",
+            "original_text": "-​ Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia.",
+            "text": "Built Python, Informatica, and SQL ETL pipelines to establish a regional single source of truth, cutting manual reporting effort by 80% across East Asia."
+          },
+          {
+            "skill": "SQL",
+            "mention": "SQL",
+            "start": 45,
+            "end": 48,
+            "evidence_id": "CV_001:work_experience:003:bullet:002",
+            "original_text": "-​ Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams.",
+            "text": "Designed 10+ Tableau dashboards and reusable SQL frameworks to standardize operational reporting and KPI visibility across regional business teams."
+          },
+          {
+            "skill": "SQL",
+            "mention": "SQL",
+            "start": 47,
+            "end": 50,
+            "evidence_id": "CV_001:technical_skills:line:001",
+            "original_text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)",
+            "text": "Programming: Python (Pandas, Polars, pySpark), SQL (Postgres, BigQuery, MySQL)"
+          }
+        ],
+        "evidence_ids": [
+          "CV_001:technical_skills:line:001",
+          "CV_001:work_experience:003:bullet:001",
+          "CV_001:work_experience:003:bullet:002"
+        ],
+        "finding": "explicit_mention_found"
+      },
+      {
+        "requirement_id": "JD_001:skill:006",
+        "skill": "LLMs",
+        "importance": "unspecified",
+        "matched": false,
+        "jd_name": "LLMs",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      },
+      {
+        "requirement_id": "JD_001:skill:007",
+        "skill": "NLP",
+        "importance": "unspecified",
+        "matched": false,
+        "jd_name": "NLP",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      },
+      {
+        "requirement_id": "JD_001:skill:008",
+        "skill": "Recommendation systems",
+        "importance": "unspecified",
+        "matched": false,
+        "jd_name": "Recommendation systems",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      },
+      {
+        "requirement_id": "JD_001:skill:009",
+        "skill": "APIs",
+        "importance": "preferred",
+        "matched": false,
+        "jd_name": "APIs",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      },
+      {
+        "requirement_id": "JD_001:skill:010",
+        "skill": "Batch/real-time inference",
+        "importance": "preferred",
+        "matched": false,
+        "jd_name": "Batch/real-time inference",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      },
+      {
+        "requirement_id": "JD_001:skill:011",
+        "skill": "Embeddings",
+        "importance": "unspecified",
+        "matched": false,
+        "jd_name": "Embeddings",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      },
+      {
+        "requirement_id": "JD_001:skill:012",
+        "skill": "Vector databases",
+        "importance": "unspecified",
+        "matched": false,
+        "jd_name": "Vector databases",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      },
+      {
+        "requirement_id": "JD_001:skill:013",
+        "skill": "Retrieval systems",
+        "importance": "unspecified",
+        "matched": false,
+        "jd_name": "Retrieval systems",
+        "matching_method": "exact_name",
+        "aliases_used": [],
+        "matches": [],
+        "evidence_ids": [],
+        "finding": "not_evidenced_in_cv"
+      }
+    ],
+    "warnings": [
+      "Each nonempty entry line is treated as one bullet; verify OCR line grouping.",
+      "Skill matching uses known aliases or exact JD names; negation and proficiency are not assessed.",
+      "Alternatives for LLMs, NLP, or recommendation systems require manual review."
+    ]
+  }
+}

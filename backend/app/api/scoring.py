@@ -5,7 +5,7 @@ from typing import Any
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
-from mycareerai.module.scoring import ScoringError, analyze
+from app.module.scoring import ScoringError, analyze
 
 MAX_TEXT_CHARS = 50_000
 

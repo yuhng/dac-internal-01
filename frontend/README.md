@@ -24,7 +24,9 @@ npm run build
 Pages only talk to `api` from `src/api/client.ts`. PDF uploads call FastAPI through `src/api/http.ts`. Start the
 backend from the repo root with `uv run uvicorn mycareerai.main:app --reload`; `npm run dev` proxies `/api` to it.
 
-Every other module still uses the mock, because those endpoints are not designed yet. Remove the demo-mode copy in
+PDF uploads use `ocr_v2` (GPT-4o), requiring `OPENAI_API_KEY` and the `PG*` database settings in the backend environment. The full v2 response is stored in `documents.row` as JSONB; the UI uses its `text` for editing and scoring. The legacy OCR extraction and legacy `resumes` projection are not used for uploads. Each upload gets a new document ID.
+
+Scoring also uses FastAPI. Other modules still use the mock, because those endpoints are not designed yet. Remove the demo-mode copy in
 `Layout`, `OverviewPage`, `ResultPanel`, `ImprovePage` and `ChatPage` when the mock goes away.
 
 Authentication is not built, because the identity provider and session model are still open decisions.

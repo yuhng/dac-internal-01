@@ -43,7 +43,7 @@ export function ResumeDropzone({ busy, onFile }: { busy: boolean; onFile(file: F
         {busy ? 'Reading your resume…' : dragging ? 'Drop to upload' : 'Drag and drop your resume here'}
       </span>
       <span className="mt-1 block text-[13px] text-muted">
-        {busy ? 'Scanned PDFs can take a little longer.' : <>or <span className="font-medium text-primary underline">browse for a file</span> · PDF up to 10 MB</>}
+        {busy ? 'Reading and organizing your resume. This may take a moment.' : <>or <span className="font-medium text-primary underline">browse for a file</span> · PDF up to 10 MB</>}
       </span>
       <input type="file" accept=".pdf,application/pdf" aria-label="Upload your resume as a PDF" className="sr-only" disabled={busy} onChange={handleChange} />
     </label>

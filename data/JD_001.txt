@@ -1,0 +1,69 @@
+What The Role Entails
+
+We are looking for an Associate Data Scientist to help build AI-powered capabilities for our influencer marketing platform. This role focuses on turning data and machine learning into practical product features—from creator discovery and content understanding to campaign optimization and performance prediction.
+
+You will work at the intersection of data science, product, and engineering, helping bring intelligent systems into real world use cases that drive measurable business impact.
+
+Applied AI & Model Development
+- Develop and deploy machine learning / AI models to enhance platform capabilities.
+- Work on use cases such as:
+  - Creator segmentation and recommendation.
+  - Creator Content labeling and data analysis.
+  - Campaign performance prediction and optimization.
+  - Agentic Systems Developing.
+
+Problem Framing & Experimentation
+- Translate business and product problems into data science solutions.
+- Design experiments to validate hypotheses and measure impact.
+- Iterate on models based on performance, feedback, and real-world usage.
+
+Data Pipeline & Feature Engineering
+- Work with data engineers to define and build scalable data pipelines.
+- Clean, process, and structure large datasets (creator data, content metadata, campaign performance).
+- Design meaningful features that improve model performance.
+
+Product Integration
+- Collaborate closely with product managers and engineers to integrate models into the platform.
+- Ensure models are production-ready, reliable, and scalable.
+- Contribute to API design, model serving, and inference workflows.
+
+Monitoring & Continuous Improvement
+- Track model performance using appropriate metrics (accuracy, precision, recall, business KPIs).
+- Maintain documentation and ensure reproducibility.
+
+Who We Look For
+
+Core Values
+- Integrity – You prioritize correctness, transparency, and responsible use of data.
+- Gamer Native – You understand gaming ecosystems and player/content dynamics.
+- Pop Culture Fluent – You are familiar with creators, platforms, and digital trends.
+- Tech-Savvy – You are curious and hands-on with emerging AI technologies.
+
+Technical Skills
+- Strong foundation in machine learning and statistics.
+- Proficiency in Python and common ML libraries (e.g., PyTorch,scikit-learn).
+- Experience with data processing (e.g., pandas, SQL).
+- Familiarity with LLMs, NLP, or recommendation systems is a strong plus.
+- Understanding of model deployment (APIs, batch/real-time inference) is preferred.
+
+Data & Product Thinking
+- Ability to translate ambiguous business problems into data science solutions.
+- Strong analytical thinking and hypothesis-driven approach.
+- Understanding of how models create value in a product context (not just offline metrics).
+
+Execution & Collaboration
+- Ability to work cross-functionally with product, engineering, and business teams.
+- Good communication skills—able to explain complex models in simple terms.
+- Strong ownership and ability to iterate quickly.
+
+Nice to Have
+- Experience in influencer marketing, advertising, or creator platforms.
+- Familiarity with social media data (e.g., YouTube, Twitch, TikTok ecosystems).
+- Experience with embeddings, vector databases, or retrieval systems.
+- Basic knowledge of data engineering or MLOps workflows.
+
+Example Projects You Might Work On
+- Build a creator discovery engine using embeddings + similarity search.
+- Develop a content understanding pipeline (tags, sentiment, brand safety).
+- Train a campaign ROI prediction model to guide budget allocation.
+- Integrate LLMs to improve tool efficiency and automate workflows.

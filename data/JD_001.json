@@ -1,0 +1,88 @@
+{
+  "job_id": "JD_001",
+  "skills": [
+    {
+      "requirement_id": "JD_001:skill:001",
+      "name": "Python",
+      "importance": "unspecified",
+      "source_quote": "Proficiency in Python and common ML libraries (e.g., PyTorch,scikit-learn)."
+    },
+    {
+      "requirement_id": "JD_001:skill:002",
+      "name": "PyTorch",
+      "importance": "unspecified",
+      "source_quote": "Proficiency in Python and common ML libraries (e.g., PyTorch,scikit-learn)."
+    },
+    {
+      "requirement_id": "JD_001:skill:003",
+      "name": "scikit-learn",
+      "importance": "unspecified",
+      "source_quote": "Proficiency in Python and common ML libraries (e.g., PyTorch,scikit-learn)."
+    },
+    {
+      "requirement_id": "JD_001:skill:004",
+      "name": "pandas",
+      "importance": "unspecified",
+      "source_quote": "Experience with data processing (e.g., pandas, SQL)."
+    },
+    {
+      "requirement_id": "JD_001:skill:005",
+      "name": "SQL",
+      "importance": "unspecified",
+      "source_quote": "Experience with data processing (e.g., pandas, SQL)."
+    },
+    {
+      "requirement_id": "JD_001:skill:006",
+      "name": "LLMs",
+      "importance": "unspecified",
+      "source_quote": "Familiarity with LLMs, NLP, or recommendation systems is a strong plus."
+    },
+    {
+      "requirement_id": "JD_001:skill:007",
+      "name": "NLP",
+      "importance": "unspecified",
+      "source_quote": "Familiarity with LLMs, NLP, or recommendation systems is a strong plus."
+    },
+    {
+      "requirement_id": "JD_001:skill:008",
+      "name": "Recommendation systems",
+      "importance": "unspecified",
+      "source_quote": "Familiarity with LLMs, NLP, or recommendation systems is a strong plus."
+    },
+    {
+      "requirement_id": "JD_001:skill:009",
+      "name": "APIs",
+      "importance": "preferred",
+      "source_quote": "Understanding of model deployment (APIs, batch/real-time inference) is preferred."
+    },
+    {
+      "requirement_id": "JD_001:skill:010",
+      "name": "Batch/real-time inference",
+      "importance": "preferred",
+      "source_quote": "Understanding of model deployment (APIs, batch/real-time inference) is preferred."
+    },
+    {
+      "requirement_id": "JD_001:skill:011",
+      "name": "Embeddings",
+      "importance": "unspecified",
+      "source_quote": "Experience with embeddings, vector databases, or retrieval systems."
+    },
+    {
+      "requirement_id": "JD_001:skill:012",
+      "name": "Vector databases",
+      "importance": "unspecified",
+      "source_quote": "Experience with embeddings, vector databases, or retrieval systems."
+    },
+    {
+      "requirement_id": "JD_001:skill:013",
+      "name": "Retrieval systems",
+      "importance": "unspecified",
+      "source_quote": "Experience with embeddings, vector databases, or retrieval systems."
+    }
+  ],
+  "source_text": "What The Role Entails\n\nWe are looking for an Associate Data Scientist to help build AI-powered capabilities for our influencer marketing platform. This role focuses on turning data and machine learning into practical product features—from creator discovery and content understanding to campaign optimization and performance prediction.\n\nYou will work at the intersection of data science, product, and engineering, helping bring intelligent systems into real world use cases that drive measurable business impact.\n\nApplied AI & Model Development\n- Develop and deploy machine learning / AI models to enhance platform capabilities.\n- Work on use cases such as:\n  - Creator segmentation and recommendation.\n  - Creator Content labeling and data analysis.\n  - Campaign performance prediction and optimization.\n  - Agentic Systems Developing.\n\nProblem Framing & Experimentation\n- Translate business and product problems into data science solutions.\n- Design experiments to validate hypotheses and measure impact.\n- Iterate on models based on performance, feedback, and real-world usage.\n\nData Pipeline & Feature Engineering\n- Work with data engineers to define and build scalable data pipelines.\n- Clean, process, and structure large datasets (creator data, content metadata, campaign performance).\n- Design meaningful features that improve model performance.\n\nProduct Integration\n- Collaborate closely with product managers and engineers to integrate models into the platform.\n- Ensure models are production-ready, reliable, and scalable.\n- Contribute to API design, model serving, and inference workflows.\n\nMonitoring & Continuous Improvement\n- Track model performance using appropriate metrics (accuracy, precision, recall, business KPIs).\n- Maintain documentation and ensure reproducibility.\n\nWho We Look For\n\nCore Values\n- Integrity – You prioritize correctness, transparency, and responsible use of data.\n- Gamer Native – You understand gaming ecosystems and player/content dynamics.\n- Pop Culture Fluent – You are familiar with creators, platforms, and digital trends.\n- Tech-Savvy – You are curious and hands-on with emerging AI technologies.\n\nTechnical Skills\n- Strong foundation in machine learning and statistics.\n- Proficiency in Python and common ML libraries (e.g., PyTorch,scikit-learn).\n- Experience with data processing (e.g., pandas, SQL).\n- Familiarity with LLMs, NLP, or recommendation systems is a strong plus.\n- Understanding of model deployment (APIs, batch/real-time inference) is preferred.\n\nData & Product Thinking\n- Ability to translate ambiguous business problems into data science solutions.\n- Strong analytical thinking and hypothesis-driven approach.\n- Understanding of how models create value in a product context (not just offline metrics).\n\nExecution & Collaboration\n- Ability to work cross-functionally with product, engineering, and business teams.\n- Good communication skills—able to explain complex models in simple terms.\n- Strong ownership and ability to iterate quickly.\n\nNice to Have\n- Experience in influencer marketing, advertising, or creator platforms.\n- Familiarity with social media data (e.g., YouTube, Twitch, TikTok ecosystems).\n- Experience with embeddings, vector databases, or retrieval systems.\n- Basic knowledge of data engineering or MLOps workflows.\n\nExample Projects You Might Work On\n- Build a creator discovery engine using embeddings + similarity search.\n- Develop a content understanding pipeline (tags, sentiment, brand safety).\n- Train a campaign ROI prediction model to guide budget allocation.\n- Integrate LLMs to improve tool efficiency and automate workflows.\n",
+  "review_status": "needs_review",
+  "parsing_warnings": [
+    "Alternatives for LLMs, NLP, or recommendation systems require manual review."
+  ]
+}
