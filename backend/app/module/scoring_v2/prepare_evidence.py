@@ -53,6 +53,7 @@ def skill_mentions(text, names=None):
 
 
 def prepare_evidence(document: ResumeDocument):
+    print("Preparing Evidence...")
     bullets, mentions, sources = [], [], []
     warnings = list(document.parsing_warnings)
     for section in document.sections:

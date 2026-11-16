@@ -1,11 +1,13 @@
-"""Extract a PDF resume with GPT-4o, then build the application-owned envelope."""
+"""Extract a PDF resume with Claude Sonnet 5.5, then build the application-owned envelope."""
 import argparse
 import base64
 from pathlib import Path
-from typing import Literal
-from backend.app.core.llm.llm import create_llm_client
+
+import anthropic
+from backend.app.core.llm.client import create_claude_client
+from backend.app.core.llm.models import effort_for, model_for
 from pydantic import Field
-from ...schema.schema import ResumeDocument, StrictModel
+from ...schema.schema import ResumeDocument, SectionName, StrictModel
 
 class ExtractedEntry(StrictModel):
     project_name: str | None = None
@@ -17,10 +19,7 @@ class ExtractedEntry(StrictModel):
 
 
 class ExtractedSection(StrictModel):
-    section_name: Literal[
-        "contact", "summary", "work_experience", "project_experience",
-        "technical_skills", "certifications", "education", "other"
-    ]
+    section_name: SectionName
     entries: list[ExtractedEntry]
     content: str | None
 
@@ -84,13 +83,15 @@ def build_document(extracted: ExtractedResume, document_id: str, version: int):
         "schema_version": "2", "document_id": document_id,
         "document_version": version, "document_type": "resume",
         "text": extracted.text,
-        "metadata": {"collection_method": "gpt4o_pdf",
+        "metadata": {"collection_method": "claude_pdf",
                      "review_status": "needs_review" if extracted.parsing_warnings else "pending"},
         "sections": sections, "parsing_warnings": extracted.parsing_warnings,
     })
 
 
 def extract_resume(pdf_path: Path, document_id: str, version: int = 1, *, client=None):
+
+    # Value Checks
     if not document_id.strip() or version < 1:
         raise ValueError("Provide a nonempty document ID and a positive version")
     if pdf_path.suffix.lower() != ".pdf":
@@ -101,25 +102,27 @@ def extract_resume(pdf_path: Path, document_id: str, version: int = 1, *, client
     data = pdf_path.read_bytes()
     if b"%PDF-" not in data[:1024]:
         raise ValueError("File does not have a PDF header")
+
     if client is None:
-        client = create_llm_client()
-    response = client.responses.parse(
-        model="gpt-4o-2024-08-06",
-        store=False,
-        input=[
-            {"role": "system", "content": PROMPT},
-            {"role": "user", "content": [
-                {"type": "input_file", "filename": pdf_path.name,
-                 "file_data": "data:application/pdf;base64," + base64.b64encode(data).decode("ascii")},
-                {"type": "input_text", "text": "Extract this resume using the supplied schema."},
-            ]},
-        ],
-        text_format=ExtractedResume,
-        max_output_tokens=12000,
+        client = create_claude_client()
+    effort = effort_for("ocr_v2")
+    response = client.beta.messages.parse(
+        model=model_for("ocr_v2"),
+        max_tokens=16000,
+        output_config={"effort": effort} if effort else anthropic.omit,
+        betas=["server-side-fallback-2026-07-01"],
+        fallbacks="default",
+        system=PROMPT,
+        messages=[{"role": "user", "content": [
+            {"type": "document", "source": {"type": "base64", "media_type": "application/pdf",
+                                            "data": base64.standard_b64encode(data).decode("ascii")}},
+            {"type": "text", "text": "Extract this resume using the supplied schema."},
+        ]}],
+        output_format=ExtractedResume,
     )
-    if response.status != "completed" or response.output_parsed is None:
-        raise ValueError("Extraction was refused, incomplete or unparseable; no output saved")
-    return build_document(response.output_parsed, document_id, version)
+    if response.stop_reason != "end_turn" or response.parsed_output is None:
+        raise ValueError(f"Extraction stopped ({response.stop_reason}) or was unparseable; no output saved")
+    return build_document(response.parsed_output, document_id, version)
 
 # python src/mycareerai/module/ocr_v2/extractor.py 'data/Wang_Ming_Feng_One_Page_CV.pdf' --document-id CV_002 --output CV_002.json
 def main():

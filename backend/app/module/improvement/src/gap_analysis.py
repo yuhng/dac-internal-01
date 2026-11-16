@@ -7,7 +7,8 @@ from openai import OpenAI
 from pydantic import BaseModel, Field
 
 from .usage import record as record_usage
-from backend.app.core.llm.llm import create_llm_client
+from backend.app.core.llm.client import create_openai_client
+from backend.app.core.llm.models import model_for
 
 logger = logging.getLogger(__name__)
 
@@ -104,8 +105,8 @@ Instructions:
 Return the required structured assessment.
 """
 
-    def __init__(self, model_name: str = "gpt-4o-mini", client: Optional[OpenAI] = None):
-        self.client = client if client is not None else create_llm_client()
+    def __init__(self, model_name: str = model_for("gap_analysis"), client: Optional[OpenAI] = None):
+        self.client = client if client is not None else create_openai_client()
         self.model_name = model_name
 
     def assess(self, requirement: str, evidence: list[dict]) -> LLMAssessment:

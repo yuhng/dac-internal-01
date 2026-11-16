@@ -2,7 +2,7 @@
 
 How an uploaded resume gets from the frontend into the Postgres database running in Docker.
 
-Code: `src/mycareerai/core/postgre/ingest.py`, `src/mycareerai/api/documents.py`  
+Code: `backend/app/core/postgre/ingest.py`, `backend/app/api/ocr.py`
 Tests: `tests/core/postgre/`
 
 ## Flow
@@ -25,28 +25,23 @@ core/postgre/ingest.py
   │  psycopg connects to 127.0.0.1:5433 (settings come from the PG* variables)
   ▼
 Docker container "db" (postgres:18), port 5432 inside the container
-  tables: documents, resumes
+  table: documents
 ```
 
 1. **Frontend**: `frontend/src/api/http.ts` `extractText()` sends PDFs to `/api/documents/extract`. Plain-text files never leave the browser, so they are not stored.
 2. **Proxy**: `frontend/vite.config.ts` forwards `/api` to `http://127.0.0.1:8000`, where the backend runs.
-3. **API**: `src/mycareerai/api/documents.py` validates the upload, calls `build_record()` from the OCR module (see `docs/readme_ocr.md`), then calls the save function in `ingest.py`.
-4. **Database**: `ingest.py` opens one connection and, in a single transaction:
-   - creates both tables if they don't exist yet (so no migration step is needed)
-   - upserts the whole record into `documents`
-   - upserts the resume fields into `resumes`
-
-   Both rows commit together, or neither does.
+3. **API**: `backend/app/api/ocr.py` validates the upload, calls `extract_resume()` from OCR v2 (`backend/app/module/ocr_v2/extractor.py`), then calls `save_document()` in `ingest.py`.
+4. **Database**: `save_document()` first validates the record as a `ResumeDocument` (`backend/app/schema/schema.py`) and rejects anything that does not match. It then:
+   - creates the `documents` table if it doesn't exist yet (so no migration step is needed)
+   - upserts the whole document into `documents`
 
 ## Tables
 
 | Table | Key | Holds |
 |-------|-----|-------|
-| `documents` | `id` | The full record as `jsonb` in the `row` column, plus `created_at` |
-| `resumes` | `document_id` → `documents.id` | The resume fields as columns (`email`, `skills`, `hard_skills`, `occupation`, `industry`, …) so they can be filtered and joined. `work_experience` and `education` are `jsonb`, the skill lists are `text[]` |
+| `documents` | `id` (the `document_id`) | The full `ResumeDocument` as `jsonb` in the `row` column, plus `created_at` (time of the last save) |
 
-Uploading the same file again replaces its rows instead of adding duplicates, because both inserts are `ON CONFLICT ... DO UPDATE`.
-Deleting a `documents` row also deletes its `resumes` row (`ON DELETE CASCADE`).
+Saving a document with an existing `id` replaces its row (`ON CONFLICT ... DO UPDATE`). Each upload gets a new `id`, so in practice uploads are never overwritten.
 
 ## Configuration
 
@@ -61,7 +56,7 @@ PGDATABASE=mycareerai_dev
 PGPASSWORD=${POSTGRES_PASSWORD}
 ```
 
-`src/mycareerai/main.py` loads `.env` at startup with `load_dotenv()`, and `psycopg.connect()` reads the `PG*` variables from there. Variables that are already set (for example in a deployment) take priority over `.env`.
+`backend/app/main.py` loads `.env` at startup with `load_dotenv()`, and `psycopg.connect()` reads the `PG*` variables from there. Variables that are already set (for example in a deployment) take priority over `.env`.
 
 ## Running it
 
@@ -76,13 +71,13 @@ docker compose up -d db
 Start the backend:
 
 ```sh
-uv run uvicorn mycareerai.main:app --reload
+uv run uvicorn backend.app.main:app --reload
 ```
 
 Start the frontend:
 
 ```sh
-cd frontend && npm run dev
+npm run dev
 ```
 
 Then drop a PDF on the Overview page.
@@ -94,10 +89,10 @@ Then drop a PDF on the Overview page.
 docker compose exec db psql -U dac -d mycareerai_dev -c '\dt'
 
 # latest uploads
-docker compose exec db psql -U dac -d mycareerai_dev -c 'select document_id, occupation, skills from resumes order by created_at desc limit 5'
+docker compose exec db psql -U dac -d mycareerai_dev -c "select id, row->>'schema_version', created_at from documents order by created_at desc limit 5"
 ```
 
-`src/mycareerai/core/postgre/query.py` shows how to read rows from Python.
+`backend/app/core/postgre/query.sql` is a starting query for reading rows.
 
 ## Errors
 

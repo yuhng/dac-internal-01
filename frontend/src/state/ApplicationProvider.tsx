@@ -4,7 +4,7 @@ import { api } from '../api/client'
 import type { Analysis, ScoreInput } from '../api/types'
 import { ApplicationContext, trimInput, type ApplicationState, type ChatMessage } from './useApplication'
 
-const EMPTY_DRAFT: ScoreInput = { title: '', company: '', jd: '', cv: '' }
+const EMPTY_DRAFT: ScoreInput = { title: '', company: '', jd: '', cv: '', document: null }
 
 /** Session state shared across pages, so nothing is lost when navigating between them. */
 export function ApplicationProvider({ children }: { children: ReactNode }) {

@@ -10,6 +10,7 @@ export const trimInput = (input: ScoreInput): ScoreInput => ({
   company: input.company.trim(),
   jd: input.jd.trim(),
   cv: input.cv.trim(),
+  document: input.document ?? null,
 })
 
 export interface ApplicationState {

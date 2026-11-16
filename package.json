@@ -1,14 +1,15 @@
 {
-  "name": "applyassist-frontend",
+  "name": "mycareerai",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "npm runs from the repo root only. The frontend's source and configs live in frontend/.",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint",
-    "test": "vitest run",
-    "preview": "vite preview"
+    "dev": "vite frontend",
+    "build": "tsc -b frontend && vite build frontend",
+    "lint": "oxlint -c frontend/.oxlintrc.json frontend",
+    "test": "vitest run --root frontend",
+    "preview": "vite preview frontend"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.105.0",

@@ -4,7 +4,7 @@ import re
 from dataclasses import dataclass
 
 from ..ocr.resume import split_sections
-from ..terms import BULLET
+from ...backend.app.module.terms import BULLET
 from .match import Match
 
 # Starting values, to be calibrated against labelled CV and job pairs.

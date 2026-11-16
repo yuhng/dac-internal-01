@@ -1,10 +1,19 @@
 /** Contract between the UI and the backend modules in the architecture reference. */
 
+/** The structured CV from /api/documents/extract. The backend validates it, so the UI only reads a few fields. */
+export interface ResumeDocument {
+  document_id: string
+  text: string
+  [field: string]: unknown
+}
+
 export interface ScoreInput {
   title: string
   company: string
   jd: string
   cv: string
+  /** Required by the scoring API; only an uploaded PDF produces one. */
+  document?: ResumeDocument | null
 }
 
 export type Band = 'strong' | 'good' | 'fair' | 'weak'
@@ -46,11 +55,9 @@ export interface Analysis extends ScoreInput {
   matched: string[]
   missing: string[]
   recommendations: Recommendation[]
-  /** Only the mock falls back to frequent job terms. */
-  usedFallback?: boolean
   requirements: RequirementResult[]
-  /** How well the CV is written, separate from how well it fits the job. */
-  quality: { score: number; parts: ScorePart[] }
+  /** How well the CV is written, separate from how well it fits the job. Not produced by scoring v2. */
+  quality?: { score: number; parts: ScorePart[] }
   confidence: { level: 'high' | 'medium' | 'low'; reasons: string[] }
   /** The limit that lowered the score, if one did. */
   cap: number | null
@@ -103,8 +110,8 @@ export type NewTrackerEntry = Pick<TrackerEntry, 'role' | 'company' | 'score'>
 
 export interface ApiClient {
   documents: {
-    /** Resolves to the document's text. Rejects with ApiError if it can't be read. */
-    extractText(file: File): Promise<string>
+    /** Resolves to the CV's text and, for PDFs, its structured document. Rejects with ApiError if it can't be read. */
+    extract(file: File): Promise<{ text: string; document: ResumeDocument | null }>
   }
   scoring: {
     analyze(input: ScoreInput): Promise<Analysis>

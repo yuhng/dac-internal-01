@@ -3,7 +3,7 @@
 import re
 from typing import Any
 
-from ..terms import BULLET, HARD_SKILLS, SOFT_SKILLS, Term, canonical_names, load_headings
+from ...backend.app.module.terms import BULLET, HARD_SKILLS, SOFT_SKILLS, Term, canonical_names, load_headings
 
 HEADINGS = load_headings()
 _HARD_NAMES = canonical_names(HARD_SKILLS)

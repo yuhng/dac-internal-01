@@ -2,10 +2,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from mycareerai.core import llm
-from mycareerai.module.improvement.src.cv_improvement import CVRecommendationEngine
-from mycareerai.module.improvement.src.gap_analysis import EvidenceAssessor
-from mycareerai.module.ocr_v2 import extractor
+from backend.app.core.llm import client as llm
+from backend.app.module.improvement.src.cv_improvement import CVRecommendationEngine
+from backend.app.module.improvement.src.gap_analysis import EvidenceAssessor
+from backend.app.module.ocr_v2 import extractor
 
 
 @pytest.fixture(autouse=True)
@@ -17,9 +17,9 @@ def test_shared_client_configuration(monkeypatch):
     monkeypatch.setenv("OPENAI_API_KEY", "test-key")
     constructor = Mock()
     monkeypatch.setattr(llm.openai, "OpenAI", constructor)
-    assert llm.create_llm_client() is constructor.return_value
+    assert llm.create_openai_client() is constructor.return_value
     constructor.assert_called_once_with(api_key="test-key", timeout=120.0, max_retries=2)
-    llm.create_llm_client(timeout=30, max_retries=0)
+    llm.create_openai_client(timeout=30, max_retries=0)
     constructor.assert_called_with(api_key="test-key", timeout=30, max_retries=0)
     assert llm.load_dotenv.call_count == 2
 
@@ -32,14 +32,14 @@ def test_missing_key_fails_before_sdk_construction(monkeypatch, key):
     constructor = Mock()
     monkeypatch.setattr(llm.openai, "OpenAI", constructor)
     with pytest.raises(RuntimeError, match="OPENAI_API_KEY"):
-        llm.create_llm_client()
+        llm.create_openai_client()
     constructor.assert_not_called()
 
 
 @pytest.mark.parametrize("engine", [EvidenceAssessor, CVRecommendationEngine])
 def test_improvement_uses_shared_factory_and_accepts_injection(monkeypatch, engine):
     factory = Mock()
-    monkeypatch.setattr(f"{engine.__module__}.create_llm_client", factory)
+    monkeypatch.setattr(f"{engine.__module__}.create_openai_client", factory)
     assert engine().client is factory.return_value
     factory.assert_called_once_with()
     injected = Mock()
@@ -56,11 +56,34 @@ def test_ocr_uses_factory_and_accepts_injection(monkeypatch, tmp_path):
         ], "parsing_warnings": [],
     })
     client = Mock()
-    client.responses.parse.return_value.status = "completed"
-    client.responses.parse.return_value.output_parsed = extracted
+    client.beta.messages.parse.return_value.stop_reason = "end_turn"
+    client.beta.messages.parse.return_value.parsed_output = extracted
     factory = Mock(return_value=client)
-    monkeypatch.setattr(extractor, "create_llm_client", factory)
+    monkeypatch.setattr(extractor, "create_claude_client", factory)
     assert extractor.extract_resume(pdf, "CV_001").text == "Python"
     factory.assert_called_once_with()
     assert extractor.extract_resume(pdf, "CV_002", client=client).text == "Python"
     factory.assert_called_once_with()
+
+
+def test_claude_client_configuration(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
+    constructor = Mock()
+    monkeypatch.setattr(llm.anthropic, "Anthropic", constructor)
+    assert llm.create_claude_client() is constructor.return_value
+    constructor.assert_called_once_with(api_key="test-key", timeout=120.0, max_retries=2)
+    llm.create_claude_client(timeout=30, max_retries=0)
+    constructor.assert_called_with(api_key="test-key", timeout=30, max_retries=0)
+    assert llm.load_dotenv.call_count == 2
+
+
+@pytest.mark.parametrize("key", [None, "", "  "])
+def test_claude_missing_key_fails_before_sdk_construction(monkeypatch, key):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    if key is not None:
+        monkeypatch.setenv("ANTHROPIC_API_KEY", key)
+    constructor = Mock()
+    monkeypatch.setattr(llm.anthropic, "Anthropic", constructor)
+    with pytest.raises(RuntimeError, match="ANTHROPIC_API_KEY"):
+        llm.create_claude_client()
+    constructor.assert_not_called()

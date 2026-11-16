@@ -1,11 +1,12 @@
 from typing import List, Any
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
+from backend.app.core.llm.models import model_for
 from improvement.src.data_loader import load_documents, data_path
 
 # Embed using Bi-encoder
 class EmbeddingPipeline:
-    def __init__(self, model_name: str = "jinaai/jina-embeddings-v5-text-nano", chunk_size: int = 500, chunk_overlap: int = 75):
+    def __init__(self, model_name: str = model_for("embedding"), chunk_size: int = 500, chunk_overlap: int = 75):
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.model = SentenceTransformer(

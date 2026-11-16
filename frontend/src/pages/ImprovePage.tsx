@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { api } from '../api/client'
 import type { Analysis, Change, ChangeType } from '../api/types'
 import { Badge, EmptyState, ErrorAlert, PageHead } from '../components/ui'
@@ -44,9 +44,8 @@ function Preview({ original, improved }: { original: string; improved: string })
 }
 
 function Improvements({ analysis, changes }: { analysis: Analysis; changes: Change[] }) {
-  const { selection, setSelection, updateDraft, runAnalysis } = useApplication()
+  const { selection, setSelection } = useApplication()
   const toast = useToast()
-  const navigate = useNavigate()
 
   const isAccepted = (c: Change) => selection[c.id] ?? c.acceptedByDefault
   const accepted = changes.filter(isAccepted)
@@ -70,16 +69,6 @@ function Improvements({ analysis, changes }: { analysis: Analysis; changes: Chan
     link.click()
     setTimeout(() => URL.revokeObjectURL(url), 1000)
     toast('Download started')
-  }
-
-  const rescore = () => {
-    if (improved === analysis.cv) {
-      toast('Select at least one edit first')
-      return
-    }
-    updateDraft({ cv: improved })
-    navigate('/score')
-    runAnalysis({ title: analysis.title, company: analysis.company, jd: analysis.jd, cv: improved }, analysis.overall)
   }
 
   return (
@@ -121,8 +110,9 @@ function Improvements({ analysis, changes }: { analysis: Analysis; changes: Chan
           <div className="mt-[18px] flex flex-wrap justify-end gap-2">
             <button type="button" className="btn" onClick={copy}>Copy text</button>
             <button type="button" className="btn" onClick={download}>Download .txt</button>
-            <button type="button" className="btn btn-primary" onClick={rescore}>Use this CV &amp; re-score</button>
           </div>
+          {/* Scoring needs a structured CV, which only a PDF upload produces. */}
+          <p className="mt-2.5 text-right text-[13px] text-muted">To re-score, update your CV and upload it again as a PDF.</p>
         </div>
       </div>
     </>

@@ -9,7 +9,8 @@ from pydantic import BaseModel
 from langchain_core.documents import Document
 
 from .usage import record as record_usage
-from backend.app.core.llm.llm import create_llm_client
+from backend.app.core.llm.client import create_openai_client
+from backend.app.core.llm.models import model_for
 
 logger = logging.getLogger(__name__)
 
@@ -108,8 +109,8 @@ Return an empty recommendations list if no
 evidence-grounded recommendation can be made.
 """
 
-    def __init__(self, model_name: str = "gpt-4o-mini", client: Optional[OpenAI] = None):
-        self.client = client if client is not None else create_llm_client()
+    def __init__(self, model_name: str = model_for("cv_improvement"), client: Optional[OpenAI] = None):
+        self.client = client if client is not None else create_openai_client()
         self.model_name = model_name
 
     def generate(self, requirement: str, fit_label: str, gap_analysis: dict, cv_evidence: list[dict]) -> LLMImprovementResponse:
@@ -143,9 +144,7 @@ evidence-grounded recommendation can be made.
         parsed = response.choices[0].message.parsed
 
         if parsed is None:
-            raise ValueError(
-                "LLM did not return a valid response."
-            )
+            raise ValueError("LLM did not return a valid response.")
 
         return parsed
 
@@ -361,12 +360,7 @@ class CVImprovementPipeline:
                 results.append(result.model_dump())
 
             except Exception:
-                logger.exception(
-                    "CV improvement failed for %s",
-                    gap["requirement_id"]
-                )
-                results.append(
-                    self._make_review_result(gap)
-                )
+                logger.exception("CV improvement failed for %s", gap["requirement_id"])
+                results.append(self._make_review_result(gap))
 
         return results

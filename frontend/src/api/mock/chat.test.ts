@@ -1,9 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { SAMPLES } from '../../lib/samples'
 import { reply } from './chat'
-import { analyze } from './scoring'
+import { sampleAnalysis } from './fixtures'
 
-const analysis = analyze(SAMPLES[0])
+const analysis = sampleAnalysis()
 const flatten = (message: string, a = analysis as typeof analysis | null) => JSON.stringify(reply(message, a))
 
 describe('reply', () => {

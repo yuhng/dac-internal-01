@@ -5,5 +5,10 @@
 # Folders
 data/*.pdf
 data/processed/
-
+.pytest_cache
 __pycache__/
+
+# Node (npm runs from the repo root)
+node_modules/
+dist
+

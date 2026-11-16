@@ -1,10 +1,11 @@
 from typing import List, Dict, Any
 from sentence_transformers import CrossEncoder
+from backend.app.core.llm.models import model_for
 
 
 class RerankingPipeline:
     # bge-reranker-v2-m3 is a pointwise cross-encoder: scores each (JD, CV) pair independently, 0-1 via sigmoid
-    def __init__(self, model_name: str = "BAAI/bge-reranker-v2-m3", top_n: int = 3, batch_size: int = 8):
+    def __init__(self, model_name: str = model_for("reranker"), top_n: int = 3, batch_size: int = 8):
         self.model = CrossEncoder(model_name, device="cpu")
         self.top_n = top_n
         self.batch_size = batch_size

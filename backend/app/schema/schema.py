@@ -10,8 +10,14 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_valida
 
 class StrictModel(BaseModel):
     """OCR v2 and scoring v2: shared strict validation for resume and JD models."""
-
     model_config = ConfigDict(extra="forbid", strict=True)
+
+
+# The only section names OCR v2 may produce; scoring v2 reads work, project and technical-skills sections by name.
+SectionName = Literal[
+    "contact", "summary", "work_experience", "project_experience",
+    "technical_skills", "certifications", "education", "other"
+]
 
 
 class Entry(StrictModel):
@@ -30,7 +36,7 @@ class EntriesSection(StrictModel):
     """OCR v2 groups jobs/projects; scoring v2 and OCR review iterate the entries."""
 
     section_id: str = Field(min_length=1)
-    section_name: str = Field(min_length=1)
+    section_name: SectionName
     entries: list[Entry]
 
 
@@ -38,14 +44,14 @@ class TextSection(StrictModel):
     """OCR v2 preserves plain sections; scoring v2 reads technical-skills content."""
 
     section_id: str = Field(min_length=1)
-    section_name: str = Field(min_length=1)
+    section_name: SectionName
     content: str
 
 
 class Metadata(StrictModel):
     """OCR v2 records extraction/review status; scoring v2 uses status to flag provisional scores."""
 
-    collection_method: Literal["pdf_text_layer", "gpt4o_pdf", "gpt4o_image"]
+    collection_method: Literal["pdf_text_layer", "gpt4o_pdf", "gpt4o_image", "claude_pdf"]
     review_status: Literal["pending", "approved", "needs_review"]
 
 
@@ -79,3 +85,43 @@ class ResumeDocument(StrictModel):
                 seen.add(identifier)
         return self
 
+
+
+class SkillRequirement(StrictModel):
+    """JD extraction produces one required/preferred skill; scoring v2 matches it against CV evidence."""
+
+    requirement_id: str = Field(min_length=1)
+    name: str = Field(min_length=1)
+    importance: Literal["required", "preferred", "unspecified"]
+    source_quote: str | None = Field(default=None, min_length=1)
+
+
+class JobDescription(StrictModel):
+    """JD extraction output and scoring v2 input: validates skills against the JD text."""
+
+    job_id: str = Field(min_length=1)
+    skills: list[SkillRequirement]
+    source_text: str | None = Field(default=None, min_length=1)
+    review_status: Literal["pending", "approved", "needs_review"] = "pending"
+    parsing_warnings: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def unique_requirements(self):
+        # Imported here: prepare_evidence imports this module, so a top-level import would be circular.
+        from backend.app.module.scoring_v2.prepare_evidence import canonical_skill
+
+        ids, skills = set(), set()
+        for requirement in self.skills:
+            if self.source_text is not None:
+                if not requirement.source_quote or requirement.source_quote not in self.source_text:
+                    raise ValueError(f"Skill {requirement.name!r}: source_quote must be an exact excerpt of source_text")
+                name = " ".join(requirement.name.split()).casefold()
+                quote = " ".join(requirement.source_quote.split()).casefold()
+                if not name or name not in quote:
+                    raise ValueError(f"Skill name must appear in its source_quote: {requirement.name!r}")
+            skill = canonical_skill(requirement.name).casefold()
+            if requirement.requirement_id in ids or skill in skills:
+                raise ValueError("JD requirement IDs and canonical skills must be unique")
+            ids.add(requirement.requirement_id)
+            skills.add(skill)
+        return self

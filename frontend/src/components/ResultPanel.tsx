@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import type { Analysis, RequirementResult, Severity, Tier } from '../api/types'
+import type { Analysis, RequirementResult, Tier } from '../api/types'
 import { useAddTrackerEntry } from '../hooks/useTracker'
 import { BAND_BADGE } from '../lib/bands'
 import { useApplication } from '../state/useApplication'
@@ -8,14 +8,8 @@ import { useToast } from '../state/useToast'
 import { InlineText } from './RichText'
 import { Badge, EmptyState, SimulatedBadge } from './ui'
 
-const STEPS = ['Parsing documents', 'Extracting job requirements', 'Matching skills and keywords', 'Scoring impact and structure']
+const STEPS = ['Reading your CV', 'Extracting job requirements', 'Matching skills', 'Assessing experience relevance']
 const STEP_MS = 350
-
-const SEVERITY: Record<Severity, { label: string; className: string }> = {
-  high: { label: 'High', className: 'bg-danger-weak text-danger' },
-  med: { label: 'Medium', className: 'bg-warn-weak text-warn' },
-  low: { label: 'Low', className: 'bg-primary-weak text-primary' },
-}
 
 const TIER: Record<Tier, { label: string; className: string }> = {
   demonstrated: { label: 'Shown in your work', className: 'text-success' },
@@ -136,7 +130,7 @@ function Result({ analysis }: { analysis: Analysis }) {
         <ScoreRing analysis={analysis} />
         <div>
           <Badge className={BAND_BADGE[analysis.band]}>{analysis.bandLabel}</Badge>{' '}
-          <SimulatedBadge>Rule-based score</SimulatedBadge>
+          {analysis.engineVersion !== 'scoring-v2' && <SimulatedBadge>Rule-based score</SimulatedBadge>}
           <h3 className="mt-2 text-lg font-semibold">
             {analysis.title || 'Untitled role'}{analysis.company && ` · ${analysis.company}`}
           </h3>
@@ -174,20 +168,12 @@ function Result({ analysis }: { analysis: Analysis }) {
         {analysis.requirements.map(requirement => <RequirementRow key={`${requirement.kind}:${requirement.text}`} requirement={requirement} />)}
       </ul>
 
-      <SectionTitle>{`CV quality: ${analysis.quality.score} / 100`}</SectionTitle>
-      <Parts parts={analysis.quality.parts} />
-
-      <SectionTitle>Recommendations</SectionTitle>
-      <ul className="grid gap-2">
-        {analysis.recommendations.map(rec => (
-          <li key={rec.text} className="flex gap-2.5 rounded-lg bg-surface-2 px-3 py-2.5 text-sm">
-            <span className={`h-fit flex-none rounded px-1.5 py-0.5 text-[11px] font-bold uppercase ${SEVERITY[rec.severity].className}`}>
-              {SEVERITY[rec.severity].label}
-            </span>
-            <span><InlineText text={rec.text} /></span>
-          </li>
-        ))}
-      </ul>
+      {analysis.quality && (
+        <>
+          <SectionTitle>{`CV quality: ${analysis.quality.score} / 100`}</SectionTitle>
+          <Parts parts={analysis.quality.parts} />
+        </>
+      )}
 
       <div className="mt-[18px] flex flex-wrap justify-end gap-2">
         <button type="button" className="btn" onClick={saveToTracker}>Save to tracker</button>
@@ -224,11 +210,11 @@ export function ResultPanel({ onLoadSample }: { onLoadSample(): void }) {
     content = (
       <EmptyState icon="◎" title="No analysis yet">
         <p className="text-[13px]">
-          Add a job description and your CV, then click <b>Analyze match</b>.
+          Add a job description and upload your CV as a PDF, then click <b>Analyze match</b>.
           <br />
-          No documents handy? Load a sample.
+          No job description handy? Load a sample job.
         </p>
-        <button type="button" className="btn mt-4" onClick={onLoadSample}>Load sample data</button>
+        <button type="button" className="btn mt-4" onClick={onLoadSample}>Load sample job</button>
       </EmptyState>
     )
   }

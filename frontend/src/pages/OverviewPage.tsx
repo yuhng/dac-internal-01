@@ -11,18 +11,10 @@ import { useToast } from '../state/useToast'
 import type { ScoreFocus } from './ScorePage'
 
 const FLOW = [
-  { to: '/score', title: 'Score', text: 'Paste a job description and CV. Get a match score with a breakdown.' },
+  { to: '/score', title: 'Score', text: 'Paste a job description and upload your CV as a PDF. Get a match score with a breakdown.' },
   { to: '/improve', title: 'Improve', text: 'Review grammar fixes, stronger wording and keyword alignment. Accept what fits.' },
   { to: '/assistant', title: 'Ask', text: 'Ask the assistant about your gaps, cover letter openings or interview prep.' },
   { to: '/tracker', title: 'Track', text: 'Save scored applications and move them through your pipeline.' },
-]
-
-const CAPABILITIES = [
-  ['Match scoring', 'Keyword dictionary, term-overlap similarity and rule checks', 'Trained NLP / embedding model, validated against hiring outcomes'],
-  ['CV improvements', 'Regex grammar and wording rules, keyword insertion', 'LLM rewriting with a factual-consistency check'],
-  ['Assistant', 'Scripted intents using your latest analysis', 'LLM chat grounded in your documents'],
-  ['File upload', 'PDF (with OCR for scans) and .txt', 'DOCX parsing and stored uploads'],
-  ['Tracker', 'Saved in this browser (localStorage)', 'User accounts and a database'],
 ]
 
 function Activity() {
@@ -60,24 +52,26 @@ export function OverviewPage() {
 
   const goToScore = (focus: ScoreFocus) => navigate('/score', { state: { focus } })
   const startWithSample = () => {
-    updateDraft(SAMPLES[0])
+    const { title, company, jd } = SAMPLES[0]
+    updateDraft({ title, company, jd })
     goToScore('analyze')
-    toast('Sample loaded. Click “Analyze match”.')
+    toast('Sample job loaded. Upload your CV as a PDF to score it.')
   }
 
   const parseResume = async (file: File) => {
     if (!/\.pdf$/i.test(file.name)) {
-      setError(`${file.name} isn't a PDF. Upload a PDF, or paste your CV instead.`)
+      setError(`${file.name} isn't a PDF. Upload your CV as a PDF.`)
       return
     }
     setParsing(true)
     setError(null)
     try {
-      updateDraft({ cv: await api.documents.extractText(file) })
+      const { text, document } = await api.documents.extract(file)
+      updateDraft({ cv: text, document })
       goToScore('title')
       toast(`Loaded ${file.name}. Now add the job you're targeting.`)
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'The file could not be read. Try pasting the text instead.')
+      setError(err instanceof ApiError ? err.message : 'The file could not be read. Try another PDF.')
     } finally {
       setParsing(false)
     }
@@ -90,8 +84,7 @@ export function OverviewPage() {
         <ResumeDropzone busy={parsing} onFile={parseResume} />
         {error && <div className="mt-3"><ErrorAlert>{error}</ErrorAlert></div>}
         <div className="mt-3 flex flex-wrap gap-2">
-          <button type="button" className="btn btn-sm" onClick={() => goToScore('title')}>Paste my CV instead</button>
-          <button type="button" className="btn btn-sm" onClick={startWithSample}>Try with sample data</button>
+          <button type="button" className="btn btn-sm" onClick={startWithSample}>Try a sample job</button>
         </div>
       </div>
 
@@ -105,30 +98,6 @@ export function OverviewPage() {
             <p className="text-[13px] text-muted">{text}</p>
           </Link>
         ))}
-      </div>
-
-      <div className="card mt-5">
-        <h2 className="font-semibold">What's real and what's simulated in this demo</h2>
-        <div className="mt-2.5 overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
-            <thead>
-              <tr>
-                <th className="table-head">Capability</th>
-                <th className="table-head">In this demo</th>
-                <th className="table-head">In production</th>
-              </tr>
-            </thead>
-            <tbody>
-              {CAPABILITIES.map(([capability, demo, production]) => (
-                <tr key={capability}>
-                  <td className="table-cell font-medium">{capability}</td>
-                  <td className="table-cell">{demo}</td>
-                  <td className="table-cell">{production}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
       </div>
     </>
   )

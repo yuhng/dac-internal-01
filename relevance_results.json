@@ -1,0 +1,36 @@
+{
+  "relevance_scores": {
+    "scoring_version": "relevance-3",
+    "rubric_version": "fit-3-level-v1",
+    "job_id": "JD_001",
+    "document_id": "CV_001",
+    "document_version": 1,
+    "provisional": true,
+    "requested_model": "jev-latest",
+    "rubric": [
+      "No Fit: Little to no relevant experience or evidence of required competencies.",
+      "Potential Fit: Partially relevant experience or transferable skills, but notable gaps remain.",
+      "Good Fit: Strong alignment with job requirements supported by relevant experience."
+    ],
+    "aggregation": "whole_cv_jd",
+    "excluded_sections": [
+      "technical_skills"
+    ],
+    "model": "jev-1.14.0",
+    "jev_score": 1.12,
+    "jev_score_100": 56.00000000000001,
+    "jev_confidence": 0.76,
+    "jev_probabilities": {
+      "0": 0.02,
+      "1": 0.84,
+      "2": 0.14
+    },
+    "input_tokens": 2450,
+    "output_tokens": 20,
+    "total_tokens": 2470,
+    "warnings": [
+      "Alternatives for LLMs, NLP, or recommendation systems require manual review.",
+      "Confidence is returned by JEV; it is not a measured extraction or matching accuracy."
+    ]
+  }
+}

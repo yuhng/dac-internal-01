@@ -7,7 +7,7 @@ from typing import Any, Literal
 
 from ..ocr import parse_resume
 from ..ocr.resume import evidence_lines
-from ..terms import HARD_SKILLS, SOFT_SKILLS
+from ...backend.app.module.terms import HARD_SKILLS, SOFT_SKILLS
 from .encoder import Encoder
 from .job import Requirement, degree_levels
 

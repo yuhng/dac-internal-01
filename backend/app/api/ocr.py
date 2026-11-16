@@ -7,12 +7,12 @@ from typing import Any
 
 import psycopg
 from fastapi import APIRouter, HTTPException, UploadFile, status
-from openai import OpenAIError
+from anthropic import AnthropicError
 from uuid import uuid4
 
-from app.module.ocr_v2.extractor import extract_resume
+from backend.app.module.ocr_v2.extractor import extract_resume
 from backend.app.schema.schema import ResumeDocument
-from app.core.postgre.ingest import save_document
+from backend.app.core.postgre.ingest import save_document
 
 MAX_UPLOAD_BYTES = 10_000_000
 logger = logging.getLogger(__name__)
@@ -39,7 +39,7 @@ def extract(file: UploadFile) -> dict[str, Any]:
             record = document.model_dump()
         except ValueError as err:
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "The resume could not be read. Upload a readable resume PDF and try again.") from err
-        except (OpenAIError, RuntimeError) as err:
+        except (AnthropicError, RuntimeError) as err:
             logger.exception("Resume extraction service failed")
             raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "The resume extraction service is unavailable. Try again in a moment.") from err
 

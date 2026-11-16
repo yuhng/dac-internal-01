@@ -1,10 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { applyChanges } from '../../lib/applyChanges'
-import { SAMPLES } from '../../lib/samples'
+import { sampleAnalysis } from './fixtures'
 import { buildChanges } from './improvement'
-import { analyze } from './scoring'
 
-const analysis = analyze(SAMPLES[0])
+const analysis = sampleAnalysis()
 const changes = buildChanges(analysis)
 
 describe('buildChanges', () => {
@@ -14,7 +13,7 @@ describe('buildChanges', () => {
 
   it('adds a Skills section when the CV has none', () => {
     const cv = analysis.cv.replace(/SKILLS[\s\S]*$/, '').trim()
-    const result = buildChanges(analyze({ ...SAMPLES[0], cv })).find(c => c.id === 'skills')
+    const result = buildChanges(sampleAnalysis(cv)).find(c => c.id === 'skills')
     expect(result?.edit.kind).toBe('appendLines')
   })
 })
@@ -32,10 +31,5 @@ describe('applyChanges', () => {
 
   it('gives the same result regardless of change order', () => {
     expect(applyChanges(analysis.cv, [...changes].reverse())).toBe(applyChanges(analysis.cv, changes))
-  })
-
-  it('raises the score when all edits are applied', () => {
-    const improved = analyze({ ...SAMPLES[0], cv: applyChanges(analysis.cv, changes) })
-    expect(improved.overall).toBeGreaterThan(analysis.overall)
   })
 })

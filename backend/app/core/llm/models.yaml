@@ -1,0 +1,28 @@
+ocr_v2:            # Resume PDF -> structured ResumeDocument (extractor.py)
+  provider: anthropic
+  model: claude-sonnet-5-5
+  effort: low      
+
+scoring_jd:        # Job description -> structured skills (extract_jd.py)
+  provider: openai
+  model: gpt-4o-2024-08-06
+
+scoring_relevance: # CV vs JD experience relevance score (score_relevance.py)
+  provider: typesafe
+  model: jev-latest
+
+embedding:         # Chunk embeddings for retrieval (embedding.py)
+  provider: huggingface
+  model: jinaai/jina-embeddings-v5-text-nano
+
+reranker:          # Cross-encoder reranking (reranker.py)
+  provider: huggingface
+  model: BAAI/bge-reranker-v2-m3
+
+gap_analysis:      # Evidence assessment per competency (gap_analysis.py)
+  provider: openai
+  model: gpt-4o-mini
+
+cv_improvement:    # CV rewrite recommendations (cv_improvement.py)
+  provider: openai
+  model: gpt-4o-mini

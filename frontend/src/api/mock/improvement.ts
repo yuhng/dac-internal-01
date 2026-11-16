@@ -1,6 +1,6 @@
 import type { Analysis, Change } from '../types'
 import { listJoin } from '../../lib/text'
-import { computeLineChanges } from './scoring'
+import { computeLineChanges } from './lineChanges'
 
 const SKILLS_NOTE = 'Only accept skills you genuinely have. Recruiters will ask about them.'
 
@@ -34,7 +34,7 @@ export function buildChanges(a: Analysis): Change[] {
   }
 
   const add = a.missing.slice(0, 5)
-  if (add.length && !a.usedFallback) {
+  if (add.length) {
     const skillsHead = lines.findIndex(l => /^\s*(skills|technical skills|core skills)\b/i.test(l))
     if (skillsHead >= 0) {
       const line = /:\s*\S/.test(lines[skillsHead]) ? skillsHead : lines.findIndex((l, i) => i > skillsHead && l.trim())

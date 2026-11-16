@@ -5,8 +5,9 @@ from typing import Literal
 
 from pydantic import Field, ValidationError
 from backend.app.schema.schema import StrictModel
-from backend.app.core.llm.llm import create_llm_client
-from ...scoring_v2.score_skills import JobDescription
+from backend.app.core.llm.client import create_openai_client
+from backend.app.core.llm.models import model_for
+from backend.app.schema.schema import JobDescription
 
 
 class ExtractedSkill(StrictModel):
@@ -55,19 +56,21 @@ def build_jd(extracted: ExtractedJD, source_text: str, job_id: str):
 
 
 def extract_jd(text: str, job_id: str, *, client=None):
+    print("Extracting JD...")
     if not text.strip() or not job_id.strip():
         raise ValueError('JD text and job ID must be nonempty')
     # shortcut: plain text up to 100,000 characters; add document ingestion when needed.
     if len(text) > 100000:
         raise ValueError('JD exceeds the 100,000 character limit')
     if client is None:
-        client = create_llm_client()
+        client = create_openai_client()
     messages = [{'role': 'system', 'content': PROMPT},
                 {'role': 'user', 'content': text}]
+    
     # One correction attempt for valid JSON whose evidence fails local validation.
     for attempt in range(2):
         response = client.responses.parse(
-            model='gpt-4o-2024-08-06', store=False, input=messages,
+            model=model_for('scoring_jd'), store=False, input=messages,
             text_format=ExtractedJD, max_output_tokens=10000,
         )
         if response.status != 'completed' or response.output_parsed is None:

@@ -2,10 +2,11 @@ from types import SimpleNamespace
 
 import pytest
 
-from mycareerai.module.ocr_v2.schema import ResumeDocument
-from mycareerai.module.scoring_v2.extract_jd import ExtractedJD, build_jd, extract_jd
-from mycareerai.module.scoring_v2.prepare_evidence import prepare_evidence, skill_mentions
-from mycareerai.scoring_v2.score_skills import JobDescription, score_skills
+from backend.app.schema.schema import ResumeDocument
+from backend.app.module.scoring_v2.extract_jd import ExtractedJD, build_jd, extract_jd
+from backend.app.module.scoring_v2.prepare_evidence import prepare_evidence, skill_mentions
+from backend.app.module.scoring_v2.score_skills import score_skills
+from backend.app.schema.schema import JobDescription
 
 
 SOURCE = 'Required: Python, PyTorch and PostgreSQL.'
@@ -103,3 +104,15 @@ def test_invalid_correction_stops_with_skill_name():
     with pytest.raises(ValueError, match='after correction:.*Invented skill'):
         extract_jd(SOURCE, 'JD', client=SimpleNamespace(responses=SimpleNamespace(parse=parse)))
     assert parse.call_count == 2
+
+
+def test_unknown_section_name_is_rejected():
+    # Scoring reads sections by name, so a misspelt name must fail loudly instead of scoring 0%.
+    from pydantic import ValidationError
+    from backend.app.schema.schema import ResumeDocument
+    from test_relevance import document
+
+    record = document().model_dump()
+    record["sections"][0]["section_name"] = "skills"
+    with pytest.raises(ValidationError):
+        ResumeDocument.model_validate(record)

@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+from backend.app.core.llm.models import model_for
 from pathlib import Path
 from dotenv import load_dotenv
 from improvement.src.data_loader import load_documents, data_path
@@ -14,7 +15,7 @@ from improvement.src.cv_improvement import CVImprovementPipeline, CVRecommendati
 OUTPUT_PATH = Path(__file__).resolve().parent / "output" / "reranked_results.json"
 GAP_OUTPUT_PATH = OUTPUT_PATH.with_name("gap_analysis.json")
 CV_OUTPUT_PATH = OUTPUT_PATH.with_name("cv_improvements.json")
-model_name = os.getenv("LLM_MODEL", "gpt-4o-mini")
+model_name = os.getenv("LLM_MODEL")  # optional override for both stages; else models.yaml
 
 def main(model_name,top_k: int = 20, top_n: int = 10):
 
@@ -46,13 +47,13 @@ def main(model_name,top_k: int = 20, top_n: int = 10):
     print(f"[INFO] Saved {len(reranked_results)} JD chunks to {OUTPUT_PATH}")
 
     # 6. LLM gap analysis
-    assessor = EvidenceAssessor(model_name=model_name)
+    assessor = EvidenceAssessor(model_name=model_name or model_for("gap_analysis"))
     gap_results = GapAnalysisPipeline(assessor=assessor).analyze(reranked_results)
     GAP_OUTPUT_PATH.write_text(json.dumps(gap_results, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"[INFO] Saved {len(gap_results)} gap assessments to {GAP_OUTPUT_PATH}")
 
     # 7. CV improvement recommendations
-    engine = CVRecommendationEngine(model_name=model_name)
+    engine = CVRecommendationEngine(model_name=model_name or model_for("cv_improvement"))
     cv_results = CVImprovementPipeline(engine).generate(gap_results, cv_chunks)
     CV_OUTPUT_PATH.write_text(json.dumps(cv_results, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"[INFO] Saved {len(cv_results)} CV improvement results to {CV_OUTPUT_PATH}")

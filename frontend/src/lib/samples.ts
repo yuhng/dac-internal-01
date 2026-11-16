@@ -1,5 +1,6 @@
 import type { ScoreInput } from '../api/types'
 
+/** Sample jobs with CVs. Only the job is loaded into the form: scoring needs a CV uploaded as a PDF. */
 export const SAMPLES: ScoreInput[] = [
   {
     title: 'Data Analyst',
@@ -45,44 +46,87 @@ SKILLS
 Excel, SQL, Power BI, Python, pandas, Communication`,
   },
   {
-    title: 'Frontend Engineer',
-    company: 'Lumen Health',
-    jd: `Lumen Health is hiring a Frontend Engineer to build the patient-facing web app used by over 200,000 people each month.
+    title: 'Data Scientist',
+    company: 'Tidewater Insurance',
+    jd: `Tidewater Insurance is looking for a Data Scientist to join our Pricing and Claims Analytics team. You will build machine learning models that help us price policies fairly and spot fraudulent claims earlier.
 
-What you'll do:
-- Build accessible, responsive interfaces with React and TypeScript
-- Work closely with designers to extend our design system in Figma and code
-- Integrate REST APIs and manage client-side state
-- Write unit tests with Jest and keep our CI/CD pipeline green
-- Improve web performance and Core Web Vitals
+Responsibilities:
+- Develop, validate and monitor predictive models for claims fraud and customer churn
+- Write Python and SQL to explore large claims and policy datasets
+- Design experiments and use statistical analysis to measure model impact
+- Track experiments and deploy models with MLflow on Databricks
+- Explain model results and limitations to underwriters and product managers
 
-What we're looking for:
-- 3+ years of professional experience with JavaScript, HTML and CSS
-- Strong React and TypeScript skills
-- Understanding of accessibility standards (WCAG)
-- Comfortable with Git and code review in an agile team
-- Experience in healthcare or regulated industries is a bonus`,
-    cv: `JORDAN LEE
-jordan.lee@email.com | Kuala Lumpur | github.com/jordanlee
+Requirements:
+- 3+ years of experience building machine learning models in production
+- Strong Python skills, including pandas and scikit-learn
+- Solid grounding in statistics, hypothesis testing and model evaluation
+- Experience with SQL and large datasets; PySpark is a strong plus
+- Familiarity with cloud platforms (AWS or Azure) and Docker
+- Experience with NLP or insurance data is a bonus`,
+    cv: `PRIYA NAIR
+priya.nair@email.com | Singapore | github.com/priyanair
 
-PROFILE
-Frontend developer with 3 years experiance building web apps for e-commerce clients.
+SUMMARY
+Data scientist with 3 years experiance building predictive models for retail banking. i enjoy turning messy data into models people trust.
 
 EXPERIENCE
-Frontend Developer, ShopWave (2022 – Present)
-- responsible for building the checkout flow in React used by 50,000 customers a month
-- Worked on migrating 30 components from JavaScript to TypeScript
-- Integrated REST APIs for payments and order tracking
-- helped with code reviews on GitHub using Git
+Data Scientist, Orchard Bank (2022 – Present)
+- responsible for building a credit default model in Python with scikit-learn, improving recall by 18%
+- Worked on a customer churn model now used by the retention team for 1.2 million customers
+- Wrote SQL and PySpark jobs to prepare features from transaction data
+- helped with deploying models as Docker containers on AWS
 
-Junior Web Developer, Pixel Studio (2021 – 2022)
-- Built marketing websites with HTML, CSS and JavaScript
-- Was involved in improving page load speed by 40%
+Analytics Intern, Lattice Research (2021 – 2022)
+- Was involved in survey analysis for 8 clients using pandas
+- Ran hypothesis tests and presented results to the research leads
 
 EDUCATION
-B.Comp. Computer Science, Universiti Malaya, 2021
+M.Sc. Statistics, National University of Singapore, 2021
 
 SKILLS
-JavaScript, React, TypeScript, HTML, CSS, Git`,
+Python, pandas, scikit-learn, SQL, PySpark, Docker, AWS, Statistics`,
+  },
+  {
+    title: 'Data Engineer',
+    company: 'Kestrel Mobility',
+    jd: `Kestrel Mobility runs ride-hailing and delivery services across Southeast Asia. We are hiring a Data Engineer to build the pipelines that power our pricing, dispatch and finance reporting.
+
+What you'll do:
+- Design and build reliable batch and streaming data pipelines
+- Orchestrate workflows with Airflow and model data with dbt
+- Process large datasets with PySpark on Databricks and Delta Lake
+- Manage cloud infrastructure on AWS with Terraform
+- Set up CI/CD with GitHub Actions and monitor data quality
+
+What we're looking for:
+- 3+ years of experience as a data engineer
+- Strong Python and SQL skills
+- Hands-on experience with Airflow, dbt and PySpark
+- Experience with PostgreSQL and a cloud data warehouse such as BigQuery
+- Familiarity with Docker and infrastructure as code (Terraform)
+- Experience with Kafka or other streaming tools is a plus`,
+    cv: `DANIEL WONG
+daniel.wong@email.com | Kuala Lumpur | github.com/danielwong
+
+PROFILE
+Data engineer with 4 years experiance building data platforms for e-commerce and fintech.
+
+EXPERIENCE
+Data Engineer, Paylane (2022 – Present)
+- responsible for building Airflow pipelines that load 50 million payment events a day
+- Worked on moving reporting tables from PostgreSQL to BigQuery, cutting query costs by 35%
+- Built dbt models for finance reporting used by 6 teams
+- helped with setting up GitHub Actions to test pipelines before deployment
+
+Junior Data Engineer, Cartly (2020 – 2022)
+- Was involved in writing Python ETL jobs for product and order data
+- Containerised batch jobs with Docker and scheduled them on AWS
+
+EDUCATION
+B.Eng. Software Engineering, Universiti Teknologi Malaysia, 2020
+
+SKILLS
+Python, SQL, Airflow, dbt, PostgreSQL, BigQuery, Docker, AWS, GitHub Actions`,
   },
 ]

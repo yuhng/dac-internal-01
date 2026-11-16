@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { useLocation } from 'react-router-dom'
 import { api } from '../api/client'
+import { NEEDS_PDF } from '../api/http'
 import { ApiError, type ScoreInput } from '../api/types'
 import { ResultPanel } from '../components/ResultPanel'
 import { ErrorAlert, Field, PageHead } from '../components/ui'
@@ -12,14 +13,12 @@ import { useToast } from '../state/useToast'
 export type ScoreFocus = 'analyze' | 'title'
 
 const MIN_JD_WORDS = 30
-const MIN_CV_WORDS = 50
 
-function validate({ jd, cv }: ScoreInput) {
+function validate({ jd, document }: ScoreInput) {
   const errors: string[] = []
   if (!jd) errors.push('Paste a job description.')
   else if (countWords(jd) < MIN_JD_WORDS) errors.push(`The job description is too short (${countWords(jd)} words). Paste at least ${MIN_JD_WORDS} words so requirements can be extracted.`)
-  if (!cv) errors.push('Paste your CV or upload a PDF or .txt file.')
-  else if (countWords(cv) < MIN_CV_WORDS) errors.push(`Your CV is too short to score (${countWords(cv)} words, minimum ${MIN_CV_WORDS}).`)
+  if (!document) errors.push(NEEDS_PDF)
   return errors
 }
 
@@ -36,8 +35,8 @@ function UploadButton({ busy, onFile }: { busy: boolean; onFile(file: File): voi
   }
   return (
     <label className="btn btn-sm focus-within:outline-2 focus-within:outline-primary">
-      {busy ? 'Reading…' : 'Upload PDF or .txt'}
-      <input type="file" accept=".pdf,application/pdf,.txt,text/plain" className="sr-only" disabled={busy} onChange={handleChange} />
+      {busy ? 'Reading…' : 'Upload PDF'}
+      <input type="file" accept=".pdf,application/pdf" className="sr-only" disabled={busy} onChange={handleChange} />
     </label>
   )
 }
@@ -59,19 +58,21 @@ export function ScorePage() {
   }, [focus])
 
   const loadSample = () => {
-    updateDraft(SAMPLES[sample])
+    const { title, company, jd } = SAMPLES[sample]
+    updateDraft({ title, company, jd })
     setErrors([])
-    toast('Sample loaded. Click “Analyze match”.')
+    toast('Sample job loaded. Upload your CV as a PDF, then click “Analyze match”.')
   }
 
   const upload = async (file: File) => {
     setUploading(true)
     try {
-      updateDraft({ cv: await api.documents.extractText(file) })
+      const { text, document } = await api.documents.extract(file)
+      updateDraft({ cv: text, document })
       setErrors([])
       toast(`Loaded ${file.name}`)
     } catch (err) {
-      setErrors([err instanceof ApiError ? err.message : 'The file could not be read. Try pasting the text instead.'])
+      setErrors([err instanceof ApiError ? err.message : 'The file could not be read. Try another PDF.'])
     } finally {
       setUploading(false)
     }
@@ -101,7 +102,7 @@ export function ScorePage() {
             <select aria-label="Sample job" className="input !w-auto" value={sample} onChange={e => setSample(Number(e.target.value))}>
               {SAMPLES.map((s, i) => <option key={s.title} value={i}>Sample: {s.title}</option>)}
             </select>
-            <button type="button" className="btn" onClick={loadSample}>Load sample</button>
+            <button type="button" className="btn" onClick={loadSample}>Load sample job</button>
           </>
         }
       />
@@ -126,7 +127,8 @@ export function ScorePage() {
               <h2 className="font-semibold">2. Your CV <WordCount text={draft.cv} /></h2>
               <UploadButton busy={uploading} onFile={upload} />
             </div>
-            <textarea aria-label="Your CV" className="input" rows={10} placeholder="Paste your CV as plain text." value={draft.cv} onChange={e => updateDraft({ cv: e.target.value })} />
+            {/* Read-only: scoring uses the structured CV from the PDF, so edited text would not be scored. */}
+            <textarea aria-label="Your CV" className="input" rows={10} readOnly placeholder="Upload your CV as a PDF. Its text appears here." value={draft.cv} />
             {errors.length > 0 && <ErrorAlert>{errors.map(error => <div key={error}>{error}</div>)}</ErrorAlert>}
             <div className="flex flex-wrap justify-end gap-2">
               <button type="button" className="btn" onClick={clear}>Clear</button>
