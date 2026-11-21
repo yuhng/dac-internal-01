@@ -21,9 +21,7 @@ def _norm(text: str) -> str:
     return " ".join(text.split())
 
 
-# -----------------------------------------
-# 1. Structured Output
-# -----------------------------------------
+# ----------Structured Output--------------
 
 class CVRecommendation(BaseModel):
     source_chunk_id: Optional[str]
@@ -52,9 +50,7 @@ class CVImprovementResult(BaseModel):
     recommendations: list[CVRecommendation]
 
 
-# -----------------------------------------
-# 2. LLM Recommendation Engine
-# -----------------------------------------
+# ----------LLM Recommendation Engine--------------
 
 class CVRecommendationEngine:
 
@@ -149,9 +145,7 @@ evidence-grounded recommendation can be made.
         return parsed
 
 
-# -----------------------------------------
-# 3. CV Improvement Pipeline
-# -----------------------------------------
+# ----------CV Improvement Pipeline--------------
 
 class CVImprovementPipeline:
 
@@ -220,7 +214,6 @@ class CVImprovementPipeline:
 
         return valid
 
-    @staticmethod
     def _find_problem(recommendation: CVRecommendation, cv_lookup: dict, fit_label: str, allowed_ids: set,
                       evidence_numbers: set) -> Optional[str]:
         source_id = recommendation.source_chunk_id

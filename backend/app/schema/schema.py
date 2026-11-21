@@ -1,9 +1,3 @@
-"""Shared OCR v2 output and scoring v2 input models.
-
-Improvement consumes serialized section data rather than importing these models.
-Legacy OCR uses its separate YAML schema. Requires pydantic>=2,<3.
-"""
-
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
@@ -13,12 +7,11 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
 
 
-# The only section names OCR v2 may produce; scoring v2 reads work, project and technical-skills sections by name.
+# --------------------------------- OCR + Scoring -------------------------------------------
 SectionName = Literal[
     "contact", "summary", "work_experience", "project_experience",
     "technical_skills", "certifications", "education", "other"
 ]
-
 
 class Entry(StrictModel):
     """OCR v2 produces one job/project; scoring v2 reads its content as evidence."""
@@ -86,6 +79,7 @@ class ResumeDocument(StrictModel):
         return self
 
 
+# --------------------------------- Scoring -------------------------------------------
 
 class SkillRequirement(StrictModel):
     """JD extraction produces one required/preferred skill; scoring v2 matches it against CV evidence."""
@@ -94,7 +88,6 @@ class SkillRequirement(StrictModel):
     name: str = Field(min_length=1)
     importance: Literal["required", "preferred", "unspecified"]
     source_quote: str | None = Field(default=None, min_length=1)
-
 
 class JobDescription(StrictModel):
     """JD extraction output and scoring v2 input: validates skills against the JD text."""

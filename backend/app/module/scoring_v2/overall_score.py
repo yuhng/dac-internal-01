@@ -1,4 +1,3 @@
-"""Combine skill coverage and experience relevance into one overall score."""
 from .prepare_evidence import prepare_evidence
 from .score_relevance import score_relevance
 from .score_skills import score_skills
@@ -6,7 +5,6 @@ from .score_skills import score_skills
 
 def calculate_overall_score(skill_scores, relevance_scores):
 
-    # Checks
     for key in ("job_id", "document_id", "document_version"):
         if skill_scores[key] != relevance_scores[key]:
             raise ValueError(f"Score inputs disagree on {key}")

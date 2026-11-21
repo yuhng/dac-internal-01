@@ -1,6 +1,4 @@
-"""Prepare versioned resume evidence without changing the extraction JSON."""
 import re
-
 from backend.app.schema.schema import EntriesSection, ResumeDocument
 
 SKILLS = {

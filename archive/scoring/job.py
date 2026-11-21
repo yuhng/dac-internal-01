@@ -4,7 +4,7 @@ import re
 from dataclasses import dataclass
 from typing import Literal
 
-from ...backend.app.module.terms import BULLET, HARD_SKILLS, SOFT_SKILLS, load_headings
+from ...backend.app.module.scoring_v2.terms import BULLET, HARD_SKILLS, SOFT_SKILLS, load_headings
 
 Importance = Literal["must", "preferred"]
 Kind = Literal["skill", "experience", "education"]

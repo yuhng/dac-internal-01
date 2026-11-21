@@ -63,6 +63,20 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
+/* Intro splash (components/Intro.tsx): the mascot fades in, "MyCareer" slides in from the left, "AI" rises from below. */
+@keyframes intro-fade {
+  from { opacity: 0 }
+}
+@keyframes intro-slide {
+  from { opacity: 0; transform: translateX(-48px) }
+}
+@keyframes intro-rise {
+  from { transform: translateY(110%) }
+}
+@keyframes intro-out {
+  to { opacity: 0; visibility: hidden }
+}
+
 @layer base {
   body {
     background: var(--bg);

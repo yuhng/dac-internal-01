@@ -26,8 +26,6 @@ class ScoreInput(BaseModel):
     # The structured CV returned by /api/documents/extract; FastAPI validates it against schema.py.
     document: ResumeDocument
 
-
-# Not async: this makes slow, blocking model calls, so FastAPI runs it in its thread pool.
 @router.post("/analyze")
 def analyze_match(data: ScoreInput) -> dict[str, Any]:
     try:

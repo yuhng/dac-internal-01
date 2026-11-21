@@ -1,4 +1,3 @@
-"""Score explicit skill coverage against a manually reviewed structured JD."""
 from .prepare_evidence import SKILLS as SKILL_ALIASES
 from .prepare_evidence import canonical_skill, skill_mentions
 

@@ -2,6 +2,7 @@ ocr_v2:            # Resume PDF -> structured ResumeDocument (extractor.py)
   provider: anthropic
   model: claude-sonnet-5-5
   effort: low      
+# try haiku
 
 scoring_jd:        # Job description -> structured skills (extract_jd.py)
   provider: openai
